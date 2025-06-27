@@ -1,33 +1,33 @@
 import os
 
 class Config:
-    SECRET_KEY = 'a_very_secret_key'  # Change this to a random, long string in production
-    DEBUG = True  # Enable debug mode for development
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'a_very_secret_key'  # Use env var in production
+    DEBUG = os.environ.get('FLASK_ENV') != 'production'  # Disable debug in production
 
-    # Database configuration
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///E:/reposits/Hospital-Equipment-System/instance/app.db'
+    # Database configuration - use relative paths or memory for Vercel
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     DATA_DIR = 'data'
 
-    SCHEDULER_ENABLED = False
-    # ADMIN_USERNAME = "admin"
-    # ADMIN_PASSWORD = "password"
+    # Disable scheduler for serverless deployment (can be overridden by env var)
+    SCHEDULER_ENABLED = os.environ.get('SCHEDULER_ENABLED', 'false').lower() == 'true'
 
-    PPM_JSON_PATH = 'data/ppm.json'
-    OCM_JSON_PATH = 'data/ocm.json'
-    TRAINING_JSON_PATH = 'data/training.json'
-    SETTINGS_JSON_PATH = 'data/settings.json'
-    AUDIT_LOG_JSON_PATH = 'data/audit_log.json'
-    PUSH_SUBSCRIPTIONS_JSON_PATH = 'data/push_subscriptions.json'
+    # Use relative paths for data files
+    PPM_JSON_PATH = os.path.join('app', 'data', 'ppm.json')
+    OCM_JSON_PATH = os.path.join('app', 'data', 'ocm.json')
+    TRAINING_JSON_PATH = os.path.join('app', 'data', 'training.json')
+    SETTINGS_JSON_PATH = os.path.join('app', 'data', 'settings.json')
+    AUDIT_LOG_JSON_PATH = os.path.join('app', 'data', 'audit_log.json')
+    PUSH_SUBSCRIPTIONS_JSON_PATH = os.path.join('app', 'data', 'push_subscriptions.json')
 
-    # Session Configuration
-    SESSION_TYPE = 'filesystem'
-    SESSION_FILE_DIR = './flask_session_data'
-    SESSION_PERMANENT = True # Sessions will be permanent until they expire
-    PERMANENT_SESSION_LIFETIME = 86400 # 24 hours in seconds
-    SESSION_USE_SIGNER = True # Sign the session cookie for extra security
+    # Session Configuration - use secure cookies for serverless
+    SESSION_TYPE = 'null'  # Use null session for serverless (stateless)
+    SESSION_PERMANENT = False  # Don't use permanent sessions in serverless
+    SESSION_USE_SIGNER = True  # Sign the session cookie for extra security
+    SESSION_COOKIE_SECURE = True  # Use secure cookies in production
+    SESSION_COOKIE_HTTPONLY = True  # Prevent XSS
+    SESSION_COOKIE_SAMESITE = 'Lax'  # CSRF protection
 
 
 

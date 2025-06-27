@@ -1,0 +1,27 @@
+# Core Flask dependencies (minimal for Vercel)
+Flask==3.1.1
+Flask-Login==0.6.3
+Flask-Session==0.8.0
+Flask-WTF==1.2.2
+Werkzeug==3.1.3
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+WTForms==3.2.1
+itsdangerous==2.2.0
+blinker==1.9.0
+click==8.2.1
+
+# Authentication and security (essential)
+bcrypt==4.3.0
+
+# Basic utilities (essential)
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
+six==1.17.0
+certifi==2025.6.15
+
+# HTTP requests (if needed)
+requests==2.32.4
+
+# Email validation (if needed)
+email_validator==2.2.0 
