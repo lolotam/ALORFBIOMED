@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit PPM Equipment{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Edit PPM Equipment ({{ entry.SERIAL }})</h2>
+    <form action="{{ url_for('views.edit_ppm_equipment', SERIAL=entry.SERIAL) }}" method="post">
+        {# Common Fields - Values from entry or form_data if validation failed #}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="Department" class="form-label">Department <span class="text-danger">*</span></label>
+                <select class="form-select" id="Department" name="Department" required>
+                    <option value="">Select Department</option>
+                    {% for dept in departments %}
+                        <option value="{{ dept }}" {% if (request.form.Department if request.form else entry.Department) == dept %}selected{% endif %}>{{ dept }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="MODEL" class="form-label">Model <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="MODEL" name="MODEL" value="{{ request.form.MODEL if request.form else entry.MODEL }}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="Name" class="form-label">Display Name (Optional)</label>
+                <input type="text" class="form-control" id="Name" name="Name" value="{{ request.form.Name if request.form else entry.Name or '' }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="SERIAL" class="form-label">MFG Serial <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="SERIAL" name="SERIAL" value="{{ entry.SERIAL }}" readonly required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="MANUFACTURER" class="form-label">Manufacturer <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="MANUFACTURER" name="MANUFACTURER" value="{{ request.form.MANUFACTURER if request.form else entry.MANUFACTURER }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="LOG_Number" class="form-label">Log No <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="LOG_Number" name="LOG_Number" value="{{ request.form.LOG_Number if request.form else entry.LOG_Number }}" required>
+            </div>
+        <hr>
+        <h5 class="mt-4 mb-3">Dates (Optional)</h5>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="Installation_Date" class="form-label">
+                    <i class="fas fa-calendar-alt text-primary me-2"></i>Installation Date
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar"></i>
+                    </span>
+                    <input type="text" class="form-control modern-date-picker" id="Installation_Date" name="Installation_Date" 
+                           value="{{ request.form.Installation_Date if request.form.Installation_Date is defined else entry.Installation_Date or '' }}"
+                           placeholder="dd/mm/yyyy" 
+                           pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                           title="Please enter date in dd/mm/yyyy format">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Warranty_End" class="form-label">
+                    <i class="fas fa-shield-alt text-warning me-2"></i>Warranty End Date
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-calendar-times"></i>
+                    </span>
+                    <input type="text" class="form-control modern-date-picker" id="Warranty_End" name="Warranty_End" 
+                           value="{{ request.form.Warranty_End if request.form.Warranty_End is defined else entry.Warranty_End or '' }}"
+                           placeholder="dd/mm/yyyy" 
+                           pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                           title="Please enter date in dd/mm/yyyy format">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h5 class="mt-4 mb-3">Quarterly Engineer Assignments & Status</h5>
+        <div class="row align-items-end"> {# Q1 and Q2 #}
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_I_date" class="form-label">
+                    <i class="fas fa-calendar text-primary me-1"></i>Q1 Date
+                </label>
+                <input type="text" class="form-control modern-date-picker" id="PPM_Q_I_date" name="PPM_Q_I_date" 
+                       value="{{ request.form['PPM_Q_I.quarter_date'] if request.form else (entry.PPM_Q_I.quarter_date or '') }}"
+                       placeholder="dd/mm/yyyy" 
+                       pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                       title="Please enter date in dd/mm/yyyy format">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_I_engineer" class="form-label">Q1 Engineer</label>
+                <input type="text" class="form-control" id="PPM_Q_I_engineer" name="PPM_Q_I_engineer" value="{{ request.form['PPM_Q_I.engineer'] if request.form else (entry.PPM_Q_I.engineer or '') }}">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_I_status" class="form-label">Q1 Status</label>
+                <select class="form-select" id="PPM_Q_I_status" name="PPM_Q_I_status">
+                    <option value="">Select Status</option>
+                    <option value="Upcoming" {% if (request.form['PPM_Q_I.status'] if request.form else (entry.PPM_Q_I.status or '')) == 'Upcoming' %}selected{% endif %}>Upcoming</option>
+                    <option value="Overdue" {% if (request.form['PPM_Q_I.status'] if request.form else (entry.PPM_Q_I.status or '')) == 'Overdue' %}selected{% endif %}>Overdue</option>
+                    <option value="Maintained" {% if (request.form['PPM_Q_I.status'] if request.form else (entry.PPM_Q_I.status or '')) == 'Maintained' %}selected{% endif %}>Maintained</option>
+                </select>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_II_date" class="form-label">
+                    <i class="fas fa-calendar text-success me-1"></i>Q2 Date
+                </label>
+                <input type="text" class="form-control modern-date-picker" id="PPM_Q_II_date" name="PPM_Q_II_date" 
+                       value="{{ request.form['PPM_Q_II.quarter_date'] if request.form else (entry.PPM_Q_II.quarter_date or '') }}"
+                       placeholder="dd/mm/yyyy" 
+                       pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                       title="Please enter date in dd/mm/yyyy format">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_II_engineer" class="form-label">Q2 Engineer</label>
+                <input type="text" class="form-control" id="PPM_Q_II_engineer" name="PPM_Q_II_engineer" value="{{ request.form['PPM_Q_II.engineer'] if request.form else (entry.PPM_Q_II.engineer or '') }}">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_II_status" class="form-label">Q2 Status</label>
+                <select class="form-select" id="PPM_Q_II_status" name="PPM_Q_II_status">
+                    <option value="">Select Status</option>
+                    <option value="Upcoming" {% if (request.form['PPM_Q_II.status'] if request.form else (entry.PPM_Q_II.status or '')) == 'Upcoming' %}selected{% endif %}>Upcoming</option>
+                    <option value="Overdue" {% if (request.form['PPM_Q_II.status'] if request.form else (entry.PPM_Q_II.status or '')) == 'Overdue' %}selected{% endif %}>Overdue</option>
+                    <option value="Maintained" {% if (request.form['PPM_Q_II.status'] if request.form else (entry.PPM_Q_II.status or '')) == 'Maintained' %}selected{% endif %}>Maintained</option>
+                </select>
+            </div>
+        </div>
+        <div class="row align-items-end"> {# Q3 and Q4 #}
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_III_date" class="form-label">
+                    <i class="fas fa-calendar text-warning me-1"></i>Q3 Date
+                </label>
+                <input type="text" class="form-control modern-date-picker" id="PPM_Q_III_date" name="PPM_Q_III_date" 
+                       value="{{ request.form['PPM_Q_III.quarter_date'] if request.form else (entry.PPM_Q_III.quarter_date or '') }}"
+                       placeholder="dd/mm/yyyy" 
+                       pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                       title="Please enter date in dd/mm/yyyy format">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_III_engineer" class="form-label">Q3 Engineer</label>
+                <input type="text" class="form-control" id="PPM_Q_III_engineer" name="PPM_Q_III_engineer" value="{{ request.form['PPM_Q_III.engineer'] if request.form else (entry.PPM_Q_III.engineer or '') }}">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_III_status" class="form-label">Q3 Status</label>
+                <select class="form-select" id="PPM_Q_III_status" name="PPM_Q_III_status">
+                    <option value="">Select Status</option>
+                    <option value="Upcoming" {% if (request.form['PPM_Q_III.status'] if request.form else (entry.PPM_Q_III.status or '')) == 'Upcoming' %}selected{% endif %}>Upcoming</option>
+                    <option value="Overdue" {% if (request.form['PPM_Q_III.status'] if request.form else (entry.PPM_Q_III.status or '')) == 'Overdue' %}selected{% endif %}>Overdue</option>
+                    <option value="Maintained" {% if (request.form['PPM_Q_III.status'] if request.form else (entry.PPM_Q_III.status or '')) == 'Maintained' %}selected{% endif %}>Maintained</option>
+                </select>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_IV_date" class="form-label">
+                    <i class="fas fa-calendar text-danger me-1"></i>Q4 Date
+                </label>
+                <input type="text" class="form-control modern-date-picker" id="PPM_Q_IV_date" name="PPM_Q_IV_date" 
+                       value="{{ request.form['PPM_Q_IV.quarter_date'] if request.form else (entry.PPM_Q_IV.quarter_date or '') }}"
+                       placeholder="dd/mm/yyyy" 
+                       pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                       title="Please enter date in dd/mm/yyyy format">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_IV_engineer" class="form-label">Q4 Engineer</label>
+                <input type="text" class="form-control" id="PPM_Q_IV_engineer" name="PPM_Q_IV_engineer" value="{{ request.form['PPM_Q_IV.engineer'] if request.form else (entry.PPM_Q_IV.engineer or '') }}">
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="PPM_Q_IV_status" class="form-label">Q4 Status</label>
+                <select class="form-select" id="PPM_Q_IV_status" name="PPM_Q_IV_status">
+                    <option value="">Select Status</option>
+                    <option value="Upcoming" {% if (request.form['PPM_Q_IV.status'] if request.form else (entry.PPM_Q_IV.status or '')) == 'Upcoming' %}selected{% endif %}>Upcoming</option>
+                    <option value="Overdue" {% if (request.form['PPM_Q_IV.status'] if request.form else (entry.PPM_Q_IV.status or '')) == 'Overdue' %}selected{% endif %}>Overdue</option>
+                    <option value="Maintained" {% if (request.form['PPM_Q_IV.status'] if request.form else (entry.PPM_Q_IV.status or '')) == 'Maintained' %}selected{% endif %}>Maintained</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        {# PPM Engineer Work Done (Actual) section removed #}
+
+        <button type="submit" class="btn btn-primary mt-3">Update PPM Equipment</button>
+        <a href="{{ url_for('views.list_equipment', data_type='ppm') }}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation can be added here if needed
+    console.log('PPM Edit form loaded with individual quarter status fields');
+});
+</script>
+{% endblock %}
