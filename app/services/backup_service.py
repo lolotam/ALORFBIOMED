@@ -21,8 +21,8 @@ logger = logging.getLogger(__name__)
 class BackupService:
     """Service for managing application backups."""
     
-    # Backup paths
-    BACKUPS_DIR = os.path.join(Config.DATA_DIR, "backups")
+    # Backup paths - use absolute paths to avoid confusion
+    BACKUPS_DIR = os.path.abspath(os.path.join(Config.DATA_DIR, "backups"))
     FULL_BACKUPS_DIR = os.path.join(BACKUPS_DIR, "full")
     SETTINGS_BACKUPS_DIR = os.path.join(BACKUPS_DIR, "settings")
     
@@ -57,33 +57,63 @@ class BackupService:
             backup_filename = f"full_backup_{timestamp}.zip"
             backup_path = os.path.join(cls.FULL_BACKUPS_DIR, backup_filename)
             
-            # Files and directories to backup
+            # Files and directories to backup (optimized for smaller size)
             backup_items = [
                 "data/",
-                "app/templates/",
-                "app/static/",
-                "app/services/",
-                "app/models/",
-                "app/routes/",
+                # Only backup essential config files, not entire directories
                 "app/config.py",
                 "app/constants.py",
                 "app/__init__.py",
                 "app/main.py"
             ]
             
-            with zipfile.ZipFile(backup_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            # Files to exclude for smaller backup size
+            exclude_patterns = [
+                '*.pyc', '__pycache__', '*.log', '*.log.*', 
+                'backups/', 'logs/', '.git/', '.venv/', 
+                '*.tmp', '*.temp', 'cache/', 'sessions/'
+            ]
+            
+            def should_exclude_file(file_path):
+                """Check if file should be excluded from backup."""
+                file_name = os.path.basename(file_path)
+                dir_name = os.path.dirname(file_path)
+                
+                for pattern in exclude_patterns:
+                    if pattern.endswith('/'):
+                        # Directory pattern
+                        if pattern[:-1] in dir_name:
+                            return True
+                    elif '*' in pattern:
+                        # Wildcard pattern
+                        import fnmatch
+                        if fnmatch.fnmatch(file_name, pattern):
+                            return True
+                    elif pattern in file_path:
+                        return True
+                return False
+            
+            with zipfile.ZipFile(backup_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zipf:
+                files_added = 0
                 for item in backup_items:
                     if os.path.exists(item):
                         if os.path.isdir(item):
-                            # Add directory recursively
+                            # Add directory recursively with filtering
                             for root, dirs, files in os.walk(item):
+                                # Skip excluded directories
+                                dirs[:] = [d for d in dirs if not any(pattern[:-1] in d for pattern in exclude_patterns if pattern.endswith('/'))]
+                                
                                 for file in files:
                                     file_path = os.path.join(root, file)
-                                    arcname = os.path.relpath(file_path)
-                                    zipf.write(file_path, arcname)
+                                    if not should_exclude_file(file_path):
+                                        arcname = os.path.relpath(file_path)
+                                        zipf.write(file_path, arcname)
+                                        files_added += 1
                         else:
-                            # Add single file
-                            zipf.write(item, item)
+                            # Add single file if not excluded
+                            if not should_exclude_file(item):
+                                zipf.write(item, item)
+                                files_added += 1
             
             # Get backup file size
             backup_size = os.path.getsize(backup_path)
@@ -99,7 +129,8 @@ class BackupService:
                     "backup_type": "full",
                     "filename": backup_filename,
                     "size_mb": backup_size_mb,
-                    "items_backed_up": len(backup_items)
+                    "files_backed_up": files_added,
+                    "compression_level": 9
                 }
             )
             
@@ -216,6 +247,184 @@ class BackupService:
                 "success": False,
                 "error": str(e),
                 "message": f"Failed to create settings backup: {str(e)}"
+            }
+    
+    @classmethod
+    def restore_settings_backup(cls, backup_file_path: str) -> Dict[str, Any]:
+        """
+        Restore settings from a backup file.
+        
+        Args:
+            backup_file_path: Path to the settings backup JSON file
+            
+        Returns:
+            Dict containing restore result information
+        """
+        try:
+            # Read and validate backup file
+            with open(backup_file_path, 'r', encoding='utf-8') as f:
+                backup_data = json.load(f)
+            
+            # Validate backup structure
+            if 'backup_info' not in backup_data or 'settings' not in backup_data:
+                return {
+                    "success": False,
+                    "error": "Invalid backup file format",
+                    "message": "The backup file is not a valid settings backup"
+                }
+            
+            if backup_data['backup_info'].get('backup_type') != 'settings':
+                return {
+                    "success": False,
+                    "error": "Wrong backup type",
+                    "message": "This is not a settings backup file"
+                }
+            
+            # Restore settings
+            from app.services.data_service import DataService
+            settings = backup_data['settings']
+            
+            # Save the restored settings
+            DataService.save_settings(settings)
+            
+            # Log audit event
+            AuditService.log_event(
+                event_type=AuditService.EVENT_TYPES['BACKUP_RESTORED'],
+                performed_by="User",
+                description="Settings backup restored successfully",
+                status=AuditService.STATUS_SUCCESS,
+                details={
+                    "backup_type": "settings",
+                    "backup_created_at": backup_data['backup_info'].get('created_at'),
+                    "settings_count": len(settings)
+                }
+            )
+            
+            logger.info("Settings backup restored successfully")
+            
+            return {
+                "success": True,
+                "message": "Settings backup restored successfully",
+                "restored_items": len(settings)
+            }
+            
+        except FileNotFoundError:
+            return {
+                "success": False,
+                "error": "Backup file not found",
+                "message": "The specified backup file could not be found"
+            }
+        except json.JSONDecodeError:
+            return {
+                "success": False,
+                "error": "Invalid JSON format",
+                "message": "The backup file is corrupted or not a valid JSON file"
+            }
+        except Exception as e:
+            logger.error(f"Error restoring settings backup: {str(e)}")
+            
+            # Log audit event for failure
+            AuditService.log_event(
+                event_type=AuditService.EVENT_TYPES['BACKUP_RESTORED'],
+                performed_by="User",
+                description="Settings backup restore failed",
+                status=AuditService.STATUS_FAILED,
+                details={
+                    "backup_type": "settings",
+                    "error": str(e)
+                }
+            )
+            
+            return {
+                "success": False,
+                "error": str(e),
+                "message": f"Failed to restore settings backup: {str(e)}"
+            }
+    
+    @classmethod
+    def restore_full_backup(cls, backup_file_path: str) -> Dict[str, Any]:
+        """
+        Restore a full application backup.
+        
+        Args:
+            backup_file_path: Path to the full backup ZIP file
+            
+        Returns:
+            Dict containing restore result information
+        """
+        try:
+            import tempfile
+            import shutil
+            
+            # Create temporary directory for extraction
+            with tempfile.TemporaryDirectory() as temp_dir:
+                # Extract backup file
+                with zipfile.ZipFile(backup_file_path, 'r') as zipf:
+                    zipf.extractall(temp_dir)
+                
+                restored_items = 0
+                
+                # Restore data directory
+                data_backup_path = os.path.join(temp_dir, "data")
+                if os.path.exists(data_backup_path):
+                    # Create backup of current data before restoration
+                    current_data_backup = f"data_before_restore_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                    shutil.move("data", current_data_backup)
+                    
+                    # Restore data from backup
+                    shutil.copytree(data_backup_path, "data")
+                    restored_items += len(os.listdir("data"))
+                    logger.info(f"Data directory restored. Current data backed up as: {current_data_backup}")
+                
+                # Note: For full restoration of application files, we would need to restart the application
+                # This is a simplified version that only restores data files
+                
+                # Log audit event
+                AuditService.log_event(
+                    event_type=AuditService.EVENT_TYPES['BACKUP_RESTORED'],
+                    performed_by="User",
+                    description="Full application backup restored successfully",
+                    status=AuditService.STATUS_SUCCESS,
+                    details={
+                        "backup_type": "full",
+                        "restored_items": restored_items,
+                        "previous_data_backup": current_data_backup
+                    }
+                )
+                
+                logger.info(f"Full backup restored successfully. {restored_items} items restored.")
+                
+                return {
+                    "success": True,
+                    "message": f"Full backup restored successfully. Previous data backed up as: {current_data_backup}",
+                    "restored_items": restored_items
+                }
+                
+        except zipfile.BadZipFile:
+            return {
+                "success": False,
+                "error": "Invalid ZIP file",
+                "message": "The backup file is corrupted or not a valid ZIP file"
+            }
+        except Exception as e:
+            logger.error(f"Error restoring full backup: {str(e)}")
+            
+            # Log audit event for failure
+            AuditService.log_event(
+                event_type=AuditService.EVENT_TYPES['BACKUP_RESTORED'],
+                performed_by="User",
+                description="Full application backup restore failed",
+                status=AuditService.STATUS_FAILED,
+                details={
+                    "backup_type": "full",
+                    "error": str(e)
+                }
+            )
+            
+            return {
+                "success": False,
+                "error": str(e),
+                "message": f"Failed to restore full backup: {str(e)}"
             }
     
     @classmethod

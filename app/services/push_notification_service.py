@@ -2,6 +2,7 @@
 Push Notification service for sending summarized maintenance reminders.
 """
 import asyncio
+import base64
 import logging
 import json # For constructing the push payload
 from datetime import datetime
@@ -24,6 +25,44 @@ class PushNotificationService:
     logger.info("PushNotificationService class loading.")
     _scheduler_running = False
     _scheduler_lock = threading.Lock()
+
+    @staticmethod
+    def convert_vapid_key_format(standard_b64_key: str) -> str:
+        """
+        Convert standard base64 VAPID key to URL-safe base64 format required by pywebpush.
+
+        The pywebpush library expects VAPID keys in URL-safe base64 format without padding,
+        but our keys are stored in standard base64 format.
+
+        Args:
+            standard_b64_key: VAPID key in standard base64 format
+
+        Returns:
+            VAPID key in URL-safe base64 format without padding
+        """
+        try:
+
+
+            # Fix base64 padding if needed
+            key_to_decode = standard_b64_key
+            padding_needed = 4 - (len(key_to_decode) % 4)
+            if padding_needed != 4:
+                key_to_decode += '=' * padding_needed
+
+            # Decode from standard base64
+            key_bytes = base64.b64decode(key_to_decode)
+
+            # Re-encode as URL-safe base64
+            url_safe_key = base64.urlsafe_b64encode(key_bytes).decode('utf-8')
+            # Remove padding (pywebpush expects no padding)
+            final_key = url_safe_key.rstrip('=')
+
+            return final_key
+        except Exception as e:
+            logger.error(f"Failed to convert VAPID key format: {e}")
+            logger.error(f"Original key length: {len(standard_b64_key)}")
+            logger.error(f"Original key full: '{standard_b64_key}'")
+            raise
 
     @staticmethod
     async def run_scheduler_async_loop():
@@ -174,10 +213,14 @@ class PushNotificationService:
             logger.debug(f"Processing subscription with endpoint starting: {endpoint_short}...")
             try:
                 logger.info(f"Sending push notification to: {endpoint_short}...")
+
+                # Convert VAPID private key to URL-safe base64 format required by pywebpush
+                vapid_private_key_urlsafe = PushNotificationService.convert_vapid_key_format(Config.VAPID_PRIVATE_KEY)
+
                 webpush(
                     subscription_info=sub_info,
                     data=payload_json_str,
-                    vapid_private_key=Config.VAPID_PRIVATE_KEY,
+                    vapid_private_key=vapid_private_key_urlsafe,
                     vapid_claims={"sub": Config.VAPID_SUBJECT}
                 )
                 logger.info(f"Successfully sent push notification to: {endpoint_short}.")

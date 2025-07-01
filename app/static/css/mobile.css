@@ -1,0 +1,575 @@
+/* Mobile-First Responsive Design for Hospital Equipment Management System */
+
+/* === MOBILE-FIRST BASE STYLES === */
+:root {
+  --primary-color: #667eea;
+  --primary-dark: #5a67d8;
+  --secondary-color: #764ba2;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --light-bg: #f8fafc;
+  --white: #ffffff;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+}
+
+/* Mobile-first body and layout */
+body {
+  font-size: 16px; /* Ensure minimum font size for mobile */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === MOBILE NAVIGATION === */
+.mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-toggle:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+@media (max-width: 991px) {
+  .mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Enhanced mobile navbar */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 8px 15px;
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .navbar-collapse {
+    background: rgba(102, 126, 234, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    margin: 10px -15px -8px -15px;
+    padding: 20px 15px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .navbar-nav {
+    gap: 8px;
+  }
+  
+  .nav-item .nav-link {
+    padding: 12px 16px !important;
+    margin: 4px 0;
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+  }
+}
+
+/* === MOBILE TABLES === */
+@media (max-width: 768px) {
+  /* Hide table on mobile, show card layout */
+  .table-responsive table {
+    display: none;
+  }
+  
+  /* Mobile card layout for equipment */
+  .mobile-equipment-cards {
+    display: block;
+  }
+  
+  .equipment-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+  }
+  
+  .equipment-card-header {
+    display: flex;
+    justify-content: between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .equipment-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .equipment-status {
+    flex-shrink: 0;
+  }
+  
+  .equipment-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .equipment-detail {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .equipment-detail-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    font-weight: 500;
+  }
+  
+  .equipment-detail-value {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+  
+  .equipment-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .equipment-actions .btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* === MOBILE FORMS === */
+@media (max-width: 768px) {
+  form {
+    padding: 20px 16px;
+    margin: 0 -15px;
+    border-radius: 0;
+  }
+  
+  .form-group,
+  .mb-3,
+  .mb-4 {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .form-control,
+  .form-select {
+    padding: 12px 16px;
+    font-size: 16px; /* Prevent zoom on iOS */
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    min-height: 48px; /* Touch-friendly minimum */
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  .btn {
+    min-height: 44px; /* Touch-friendly minimum */
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+  }
+  
+  .btn-group .btn {
+    min-height: 40px;
+  }
+}
+
+/* === MOBILE DASHBOARD === */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px 0;
+  }
+  
+  .px-3 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  /* Stack dashboard header elements */
+  .d-flex.justify-content-between.align-items-center {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .text-end {
+    align-self: stretch;
+    text-align: left !important;
+  }
+  
+  #live-clock {
+    font-size: 1.2rem !important;
+  }
+  
+  /* Dashboard cards stack properly */
+  .row.g-4 .col-lg-3,
+  .row.g-4 .col-md-6 {
+    margin-bottom: 16px;
+  }
+  
+  .card-body {
+    padding: 20px 16px;
+  }
+  
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-wrapper i {
+    font-size: 20px;
+  }
+  
+  /* Timeline cards responsive */
+  .col-lg-2,
+  .col-md-4,
+  .col-6 {
+    margin-bottom: 12px;
+  }
+  
+  .text-center.p-3 {
+    padding: 16px 12px !important;
+  }
+}
+
+/* === MOBILE FILTERS === */
+@media (max-width: 768px) {
+  .card-header .d-flex {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .form-control-sm,
+  .form-select-sm {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    width: 100% !important;
+  }
+  
+  .d-flex.gap-2 {
+    flex-direction: column;
+    gap: 8px !important;
+  }
+  
+  #advancedFiltersPanel .row.g-3 {
+    --bs-gutter-x: 0.75rem;
+  }
+  
+  #advancedFiltersPanel .col-md-6,
+  #advancedFiltersPanel .col-lg-4,
+  #advancedFiltersPanel .col-xl-3 {
+    margin-bottom: 16px;
+  }
+}
+
+/* === MOBILE ACTION BUTTONS === */
+@media (max-width: 768px) {
+  .row.mb-3 {
+    --bs-gutter-x: 0.5rem;
+  }
+  
+  .col-md-auto {
+    flex: 1;
+    margin-bottom: 8px;
+  }
+  
+  .col-md-auto .btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+  
+  .ms-auto {
+    margin-left: 0 !important;
+  }
+}
+
+/* === MOBILE MODALS === */
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 20px 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .modal-content {
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .modal-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .modal-body {
+    padding: 20px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+  
+  .modal-footer {
+    padding: 16px 20px 20px;
+    border-top: 1px solid var(--border-color);
+    gap: 8px;
+  }
+  
+  .modal-footer .btn {
+    flex: 1;
+  }
+}
+
+/* === MOBILE UTILITIES === */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block !important;
+  }
+  
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  
+  .mobile-center {
+    text-align: center !important;
+  }
+  
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  .mobile-gap {
+    gap: 8px !important;
+  }
+  
+  /* Touch-friendly spacing */
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* === MOBILE BADGES AND STATUS === */
+@media (max-width: 768px) {
+  .badge {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  
+  .record-counter {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+  
+  .history-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}
+
+/* === MOBILE SEARCH AND FILTERS === */
+@media (max-width: 768px) {
+  #searchInput {
+    margin-bottom: 12px;
+    width: 100% !important;
+  }
+  
+  #statusFilter,
+  #typeFilter {
+    width: 100% !important;
+    margin-bottom: 8px;
+  }
+  
+  #resetFilters {
+    width: 100%;
+  }
+}
+
+/* === SWIPE GESTURES (Optional Enhancement) === */
+.swipe-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.swipe-actions {
+  position: absolute;
+  top: 0;
+  right: -100px;
+  height: 100%;
+  width: 100px;
+  background: var(--danger-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: right 0.3s ease;
+}
+
+.swipe-item.swiped .swipe-actions {
+  right: 0;
+}
+
+/* === MOBILE LOADING STATES === */
+@media (max-width: 768px) {
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--border-radius);
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* === MOBILE PULL-TO-REFRESH === */
+.pull-to-refresh {
+  position: relative;
+  overflow: hidden;
+}
+
+.pull-to-refresh-indicator {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: top 0.3s ease;
+  z-index: 10;
+}
+
+.pull-to-refresh.pulling .pull-to-refresh-indicator {
+  top: 20px;
+}
+
+/* === TABLET OPTIMIZATIONS === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  
+  .navbar-nav {
+    gap: 4px;
+  }
+  
+  .nav-item .nav-link {
+    padding: 8px 12px !important;
+    font-size: 0.85rem;
+  }
+}
+
+/* === MOBILE IMPROVEMENTS FOR EXISTING COMPONENTS === */
+@media (max-width: 768px) {
+  /* Improve button groups */
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-group .btn {
+    border-radius: var(--border-radius) !important;
+    margin-bottom: 4px;
+  }
+  
+  /* Better dropdown menus */
+  .dropdown-menu {
+    width: 100%;
+    border-radius: var(--border-radius-lg);
+    border: none;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .dropdown-item {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+  
+  /* Improve pagination */
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .page-link {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    margin: 0 2px;
+  }
+} 

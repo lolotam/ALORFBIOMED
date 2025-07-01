@@ -9597,7 +9597,8 @@
       "quarter_date": "17/10/2026",
       "status": null
     },
-    "Status": "Upcoming"
+    "Status": "Upcoming",
+    "has_history": true
   },
   {
     "NO": 301,

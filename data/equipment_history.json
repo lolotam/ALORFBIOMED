@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ab0b75f1-74da-465c-8788-8e715cc7e708",
+    "equipment_id": "111632045",
+    "equipment_type": "ppm",
+    "author_id": "admin",
+    "author_name": "admin",
+    "note_text": "1-The ENT Workstation is having a medical failure .(low or weak water pressure)",
+    "created_at": "2025-06-29 22:47:46",
+    "updated_at": "2025-06-29 22:47:46",
+    "last_modified_by": null,
+    "last_modified_by_name": null,
+    "is_edited": false,
+    "attachments": [
+      {
+        "id": "a2641a88-38bc-4e75-b7aa-2ae5b5d54554",
+        "note_id": "ab0b75f1-74da-465c-8788-8e715cc7e708",
+        "original_filename": "incident_related_medical_device.pdf",
+        "stored_filename": "6b46183f-1651-4bdc-a458-b87e66c017ef.pdf",
+        "file_path": "app/static/uploads/history\\6b46183f-1651-4bdc-a458-b87e66c017ef.pdf",
+        "mime_type": "application/pdf",
+        "file_size": 2708815,
+        "upload_date": "2025-06-29 22:47:46"
+      }
+    ]
+  },
+  {
+    "id": "f12423f1-9294-4190-baab-6aea86ddb2c5",
+    "equipment_id": "34234",
+    "equipment_type": "ocm",
+    "author_id": "admin",
+    "author_name": "admin",
+    "note_text": "sadcsadasdasdasda",
+    "created_at": "2025-06-29 23:27:39",
+    "updated_at": "2025-06-29 23:27:39",
+    "last_modified_by": null,
+    "last_modified_by_name": null,
+    "is_edited": false,
+    "attachments": [
+      {
+        "id": "9c2cad76-ed70-4e7f-a249-5f78c0db8a6f",
+        "note_id": "f12423f1-9294-4190-baab-6aea86ddb2c5",
+        "original_filename": "incident_related_medical_device.pdf",
+        "stored_filename": "a256b7a0-92f3-476d-97ee-ee111f8f75f1.pdf",
+        "file_path": "app/static/uploads/history\\a256b7a0-92f3-476d-97ee-ee111f8f75f1.pdf",
+        "mime_type": "application/pdf",
+        "file_size": 2708815,
+        "upload_date": "2025-06-29 23:27:39"
+      }
+    ]
+  }
+]

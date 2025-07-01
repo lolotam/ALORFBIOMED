@@ -1,0 +1,20 @@
+# Mailjet Configuration
+MAILJET_API_KEY=afa838608e297960da796dc4df511
+MAILJET_SECRET_KEY=cea9cd8af752a7461c0a7ff16bb992c3
+EMAIL_SENDER=alorfbiomed@gmail.com
+EMAIL_RECEIVER=alorfbiomed@gmail.com
+
+# VAPID Push Notifications
+VAPID_SUBJECT=mailto:alorfbiomed@gmail.com
+VAPID_PRIVATE_KEY=MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgDSNXJiQrLgELS4CMlJJudk3gxrsoF8AgiiLxVFP9olehRANCAASHFQbYQLVjEMMWY/O7uxuarAbCJYJg+clVmI2OPV6bLFv2Uifxp5x2zxEUVTi0adiFkHq9r0HGhc0kM+s1Ocim
+VAPID_PUBLIC_KEY=MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEhxUG2EC1YxDDFmPzu7sbmqwGwiWCYPnJVZiNjj1emyxb9lIn8aecds8RFFU4tGnYhZB6va9BxoXNJDPrNTnIpg==
+
+# Flask Configuration
+FLASK_ENV=development
+FLASK_DEBUG=True
+# IMPORTANT: Replace with a real secret key. You can generate one using: python -c "import os; print(os.urandom(24).hex())"
+SECRET_KEY=your_secret_key_here
+DATABASE_URL=sqlite:///data/hospital_equipment_dev.db
+
+# Scheduler Configuration
+SCHEDULER_ENABLED=true

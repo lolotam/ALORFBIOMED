@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Background Image</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            width: 300px;
+            height: 200px;
+            border: 2px solid #ccc;
+            margin: 20px 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .test1 {
+            background-image: url('app/static/images/login-background.jpg');
+        }
+        .test2 {
+            background-image: url('/static/images/login-background.jpg');
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Background Image Path Test</h1>
+    
+    <div class="info">
+        <strong>Image Location:</strong> app/static/images/login-background.jpg
+    </div>
+    
+    <div class="info">
+        <strong>Test 1:</strong> Relative path (app/static/images/login-background.jpg)
+    </div>
+    <div class="test-container test1"></div>
+    
+    <div class="info">
+        <strong>Test 2:</strong> Flask static path (/static/images/login-background.jpg)
+    </div>
+    <div class="test-container test2"></div>
+    
+    <div class="info">
+        <strong>Direct Image Test:</strong>
+        <br><img src="/static/images/login-background.jpg" style="max-width: 300px; max-height: 200px;" alt="Background Image">
+    </div>
+    
+    <script>
+        // Test if image loads
+        const img = new Image();
+        img.onload = function() {
+            console.log('✅ Image loaded successfully!');
+            document.body.innerHTML += '<div class="info" style="background: #d4edda; color: #155724;">✅ Image loads successfully!</div>';
+        };
+        img.onerror = function() {
+            console.log('❌ Image failed to load!');
+            document.body.innerHTML += '<div class="info" style="background: #f8d7da; color: #721c24;">❌ Image failed to load!</div>';
+        };
+        img.src = '/static/images/login-background.jpg';
+    </script>
+</body>
+</html>

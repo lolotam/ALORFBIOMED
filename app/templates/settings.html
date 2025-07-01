@@ -157,6 +157,9 @@
                         <button type="button" class="btn-modern btn-test" id="sendTestEmail">
                             <i class="fas fa-paper-plane me-2"></i>Send Test
                         </button>
+                        <button type="button" class="btn-modern btn-send-now" id="sendMessageNow">
+                            <i class="fas fa-rocket me-2"></i>Send Message Now
+                        </button>
                     </div>
                 </div>
             </div>
@@ -201,41 +204,77 @@
                                         </div>
                                     </div>
 
-                                    <!-- Email Send Time -->
-                                    <div class="form-group-modern mb-3">
-                                        <label class="modern-label">
-                                            <i class="fas fa-clock me-2"></i>
-                                            Daily Send Time
-                                        </label>
-                                        <div class="input-group-modern">
-                                            <span class="input-prefix">
-                                                <i class="fas fa-sun"></i>
-                                            </span>
-                                                                                         <select class="form-control-modern" id="emailSendTime" name="email_send_time_hour" title="Select daily email send time">
-                                                {% for hour in range(24) %}
-                                                <option value="{{ hour }}" {% if settings.email_send_time_hour == hour %}selected{% endif %}>
-                                                    {{ "%02d:00"|format(hour) }} ({{ "AM" if hour < 12 else "PM" }})
-                                                </option>
-                                                {% endfor %}
-                                            </select>
+                                    <!-- Email Scheduling Mode Selection -->
+                                    <div class="scheduling-mode-section mb-4">
+                                        <div class="panel-header mb-3">
+                                            <i class="fas fa-calendar-alt me-2"></i>
+                                            <span>Notification Scheduling</span>
                                         </div>
-                                        <small class="form-hint">Emails sent daily at this time</small>
-                                    </div>
+                                        
+                                        <!-- Daily Send Time Mode -->
+                                        <div class="toggle-group mb-3">
+                                            <div class="toggle-card">
+                                                <div class="toggle-info">
+                                                    <div class="toggle-title">Daily Send Time</div>
+                                                    <div class="toggle-desc">Send notifications at specific time daily</div>
+                                                </div>
+                                                <div class="modern-switch">
+                                                    <input class="switch-input" type="checkbox" id="dailySendTimeToggle" 
+                                                           name="use_daily_send_time" 
+                                                           {% if settings.use_daily_send_time %}checked{% endif %}>
+                                                    <label class="switch-label" for="dailySendTimeToggle"></label>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <!-- Email Interval (Legacy) -->
-                                    <div class="form-group-modern mb-3">
-                                        <label class="modern-label">
-                                            <i class="fas fa-history me-2"></i>
-                                            Legacy Interval
-                                        </label>
-                                        <div class="input-group-modern">
-                                            <input type="number" class="form-control-modern" id="emailInterval" 
-                                                   name="email_reminder_interval_minutes" 
-                                                   value="{{ settings.email_reminder_interval_minutes | default(1440) }}" 
-                                                   placeholder="1440" min="1" readonly>
-                                            <span class="input-suffix">minutes</span>
+                                        <!-- Daily Send Time Picker -->
+                                        <div class="form-group-modern mb-3" id="dailySendTimeSection">
+                                            <label class="modern-label">
+                                                <i class="fas fa-clock me-2"></i>
+                                                Send Time
+                                            </label>
+                                            <div class="input-group-modern">
+                                                <span class="input-prefix">
+                                                    <i class="fas fa-sun"></i>
+                                                </span>
+                                                <input type="time" class="form-control-modern" id="emailSendTime" 
+                                                       name="email_send_time" 
+                                                       value="{{ settings.email_send_time | default('07:00') }}">
+                                            </div>
+                                            <small class="form-hint">Choose exact time for daily email notifications</small>
                                         </div>
-                                        <small class="form-hint">Legacy setting - now uses daily schedule</small>
+
+                                        <!-- Legacy Interval Mode -->
+                                        <div class="toggle-group mb-3">
+                                            <div class="toggle-card">
+                                                <div class="toggle-info">
+                                                    <div class="toggle-title">Legacy Interval</div>
+                                                    <div class="toggle-desc">Use interval-based scheduling (legacy)</div>
+                                                </div>
+                                                <div class="modern-switch">
+                                                    <input class="switch-input" type="checkbox" id="legacyIntervalToggle"
+                                                           name="use_legacy_interval"
+                                                           {% if settings.use_legacy_interval %}checked{% endif %}>
+                                                    <label class="switch-label" for="legacyIntervalToggle"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Legacy Interval Input -->
+                                        <div class="form-group-modern mb-3" id="legacyIntervalSection">
+                                            <label class="modern-label">
+                                                <i class="fas fa-history me-2"></i>
+                                                Check Interval
+                                            </label>
+                                            <div class="input-group-modern">
+                                                <input type="number" class="form-control-modern" id="emailInterval" 
+                                                       name="email_reminder_interval_minutes" 
+                                                       value="{{ settings.email_reminder_interval_minutes | default(1440) }}" 
+                                                       placeholder="1440" min="60" max="10080">
+                                                <span class="input-suffix">minutes</span>
+                                            </div>
+                                            <small class="form-hint">How often to check for reminders (60-10080 minutes)</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -407,9 +446,52 @@
                         </div>
                     </div>
                     
+                    <!-- Restore Section -->
+                    <div class="restore-section mb-4">
+                        <div class="section-divider"></div>
+                        <div class="settings-panel restore-panel">
+                            <div class="panel-header">
+                                <i class="fas fa-upload me-2"></i>
+                                <span>Restore from Backup</span>
+                            </div>
+                            
+                            <div class="restore-upload">
+                                <div class="restore-info mb-3">
+                                    <div class="restore-title">
+                                        <i class="fas fa-file-archive me-2"></i>
+                                        Upload Backup File
+                                    </div>
+                                    <div class="restore-desc">Select a backup file to restore (Full Application Backup .zip or Settings Backup .json)</div>
+                                </div>
+                                
+                                <div class="file-upload-section">
+                                    <input type="file" id="restoreFileInput" accept=".zip,.json" style="display: none;">
+                                    <div class="file-drop-zone" id="fileDropZone">
+                                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                                        <h5>Drop backup file here or click to browse</h5>
+                                        <p class="text-muted">Supports .zip (full backup) and .json (settings backup) files</p>
+                                        <button type="button" class="btn-modern btn-browse" onclick="document.getElementById('restoreFileInput').click()">
+                                            <i class="fas fa-folder-open me-2"></i>Browse Files
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="file-selected-info" id="fileSelectedInfo" style="display: none;">
+                                        <div class="file-info">
+                                            <i class="fas fa-file me-2"></i>
+                                            <span id="selectedFileName"></span>
+                                            <span class="file-type-badge" id="fileTypeBadge"></span>
+                                        </div>
+                                        <button type="button" class="btn-modern btn-restore" id="restoreButton" disabled>
+                                            <i class="fas fa-upload me-2"></i>Restore Backup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Backup List -->
                     <div class="backup-list-section">
-                        <div class="section-divider"></div>
                         <div class="backup-list-header">
                             <div class="backup-list-title">
                                 <i class="fas fa-list me-2"></i>
@@ -841,6 +923,21 @@
     font-size: 0.875rem;
 }
 
+.btn-send-now {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+}
+
+.btn-browse {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #2d3748;
+}
+
+.btn-restore {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
 .btn-modern:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -916,6 +1013,115 @@
 
 .backup-list-section {
     margin-top: 2rem;
+}
+
+/* Restore Section Styles */
+.restore-section {
+    margin-top: 2rem;
+}
+
+.restore-panel {
+    border: 2px solid #e2e8f0;
+}
+
+.restore-info {
+    text-align: center;
+}
+
+.restore-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.restore-desc {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.file-upload-section {
+    margin-top: 1rem;
+}
+
+.file-drop-zone {
+    border: 3px dashed #cbd5e0;
+    border-radius: var(--border-radius-small);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #f8fafc;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.dragover {
+    border-color: #667eea;
+    background: #edf2f7;
+    transform: scale(1.02);
+}
+
+.file-drop-zone i {
+    color: #a0aec0;
+    margin-bottom: 1rem;
+}
+
+.file-drop-zone h5 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.file-selected-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #e6fffa;
+    border: 2px solid #38b2ac;
+    border-radius: var(--border-radius-small);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.file-type-badge {
+    background: #38b2ac;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Scheduling Mode Section */
+.scheduling-mode-section {
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius-small);
+    padding: 1.5rem;
+    background: white;
+}
+
+#dailySendTimeSection,
+#legacyIntervalSection {
+    transition: all 0.3s ease;
+}
+
+#dailySendTimeSection.disabled,
+#legacyIntervalSection.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .section-divider {
@@ -1054,4 +1260,133 @@
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='js/settings.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <!-- Load the correct settings.js with email send time fixes -->
+    <script>
+        console.log('Settings page: Loading email send time fixes...');
+
+        // Email send time elements
+        const emailSendTime = document.getElementById('emailSendTime');
+        const enableAutomaticReminders = document.getElementById('enableAutomaticReminders');
+
+        // Function to load email send time with backward compatibility
+        function loadEmailSendTime(settings) {
+            if (!emailSendTime) return;
+
+            let emailSendTimeValue = '09:00'; // default
+            if (settings.email_send_time) {
+                // New format: HH:MM string
+                emailSendTimeValue = settings.email_send_time;
+                console.log('Loaded email_send_time from new format:', emailSendTimeValue);
+            } else if (settings.email_send_time_hour !== undefined) {
+                // Legacy format: convert hour integer to HH:MM string
+                const hour = settings.email_send_time_hour || 9;
+                const minute = settings.email_send_time_minute || 0;
+                emailSendTimeValue = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                console.log('Converted from legacy format - hour:', hour, 'minute:', minute, 'result:', emailSendTimeValue);
+            } else {
+                console.log('Using default email send time:', emailSendTimeValue);
+            }
+
+            emailSendTime.value = emailSendTimeValue;
+            console.log('Set emailSendTime input to:', emailSendTime.value);
+        }
+
+        // Function to load automatic reminders setting
+        function loadAutomaticReminders(settings) {
+            if (!enableAutomaticReminders) return;
+
+            const autoRemindersValue = !!settings.enable_automatic_reminders;
+            enableAutomaticReminders.checked = autoRemindersValue;
+            console.log('Set enableAutomaticReminders to:', autoRemindersValue);
+        }
+
+        // Override the settings loading when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Settings page: DOM loaded, fetching settings for email time...');
+
+            // Wait a bit for the main settings.js to load, then override
+            setTimeout(() => {
+                fetch('/api/settings')
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error('Failed to fetch settings for email time, status:', response.status);
+                            return;
+                        }
+                        return response.json();
+                    })
+                    .then(settings => {
+                        console.log('Email time fix: Received settings:', settings);
+                        loadEmailSendTime(settings);
+                        loadAutomaticReminders(settings);
+                    })
+                    .catch(error => {
+                        console.error('Error loading settings for email time:', error);
+                    });
+            }, 500);
+        });
+
+        // Add email send time save functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find save buttons and add email send time to their save logic
+            const saveEmailSettings = document.getElementById('saveEmailSettings');
+            const saveSettingsButton = document.getElementById('saveSettingsButton');
+
+            // Override the email settings save button
+            if (saveEmailSettings) {
+                console.log('Email time fix: Found saveEmailSettings button, adding override...');
+
+                // Remove existing event listeners by cloning the button
+                const newSaveEmailSettings = saveEmailSettings.cloneNode(true);
+                saveEmailSettings.parentNode.replaceChild(newSaveEmailSettings, saveEmailSettings);
+
+                newSaveEmailSettings.addEventListener('click', async function(event) {
+                    event.preventDefault();
+                    console.log('Email time fix: Save email settings clicked');
+
+                    // Get form values
+                    const receiverEmail = document.getElementById('receiverEmail');
+                    const ccEmails = document.getElementById('ccEmails');
+                    const dailySendTimeToggle = document.getElementById('dailySendTimeToggle');
+                    const legacyIntervalToggle = document.getElementById('legacyIntervalToggle');
+                    const emailSendTime = document.getElementById('emailSendTime');
+
+                    const emailData = {
+                        recipient_email: receiverEmail ? receiverEmail.value.trim() : '',
+                        cc_emails: ccEmails ? ccEmails.value.trim() : '',
+                        use_daily_send_time: dailySendTimeToggle ? dailySendTimeToggle.checked : true,
+                        use_legacy_interval: legacyIntervalToggle ? legacyIntervalToggle.checked : false,
+                        email_send_time: emailSendTime ? emailSendTime.value : '09:00'
+                    };
+
+                    console.log('Email time fix: Sending email data:', emailData);
+
+                    try {
+                        const response = await fetch('/settings/email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(emailData)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            alert('Email settings saved successfully! Email send time: ' + emailData.email_send_time);
+                            console.log('Email time fix: Settings saved successfully');
+                            // Reload page to show updated values
+                            setTimeout(() => window.location.reload(), 1000);
+                        } else {
+                            alert('Error saving email settings: ' + (result.error || result.message));
+                            console.error('Email time fix: Error saving settings:', result);
+                        }
+                    } catch (error) {
+                        alert('Failed to save email settings: ' + error.message);
+                        console.error('Email time fix: Fetch error:', error);
+                    }
+                });
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,505 @@
+{% extends "base.html" %}
+
+{% block title %}Edit History Note - {{ equipment.Name or equipment.EQUIPMENT or 'Unknown' }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Main Form Card -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-edit me-2"></i>
+                            Edit History Note
+                        </h4>
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('views.equipment_history', equipment_type=note.equipment_type, equipment_id=note.equipment_id) }}" 
+                               class="btn btn-outline-dark btn-sm">
+                                <i class="fas fa-arrow-left"></i> Back to History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Equipment Info Summary Bar -->
+                    <div class="alert alert-light border-start border-warning border-4 mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <div class="d-flex flex-wrap gap-3">
+                                    <span><strong>Serial:</strong> {{ equipment.SERIAL if note.equipment_type == 'ppm' else equipment.Serial }}</span>
+                                    <span><strong>Name:</strong> {{ equipment.Name or equipment.EQUIPMENT or 'N/A' }}</span>
+                                    <span><strong>Department:</strong> {{ equipment.Department }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <small class="text-muted">
+                                    <i class="fas fa-user me-1"></i>{{ current_user.username }} • 
+                                    <i class="fas fa-clock me-1"></i>{{ current_datetime }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Original Note Info -->
+                    <div class="alert alert-info border-start border-info border-4 mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-info mb-2">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Original Note Information
+                                </h6>
+                                <p class="mb-1"><strong>Created by:</strong> {{ note.author_name }}</p>
+                                <p class="mb-1"><strong>Created on:</strong> {{ note.created_at }}</p>
+                                {% if note.is_edited %}
+                                <p class="mb-0"><strong>Last edited by:</strong> {{ note.last_modified_by_name or note.last_modified_by }}</p>
+                                <p class="mb-0"><strong>Last edited on:</strong> {{ note.updated_at }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {% if note.attachments %}
+                                <h6 class="text-info mb-2">
+                                    <i class="fas fa-paperclip me-1"></i>
+                                    Current Attachments ({{ note.attachments|length }})
+                                </h6>
+                                <div class="small">
+                                    {% for attachment in note.attachments %}
+                                    <div class="d-flex align-items-center mb-1">
+                                        <i class="fas fa-file me-1 text-secondary"></i>
+                                        <span>{{ attachment.original_filename }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Form -->
+                    <form method="post" enctype="multipart/form-data" id="editHistoryForm">
+                        <div class="row">
+                            <!-- Note Text Section -->
+                            <div class="col-lg-8">
+                                <div class="mb-4">
+                                    <label for="note_text" class="form-label">
+                                        <strong><i class="fas fa-edit me-1"></i>History Note <span class="text-danger">*</span></strong>
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="note_text" 
+                                              name="note_text" 
+                                              rows="8" 
+                                              placeholder="Enter detailed history note about this equipment...&#10;&#10;Examples:&#10;• Maintenance performed&#10;• Issues found and resolved&#10;• Parts replaced&#10;• Performance observations"
+                                              required
+                                              minlength="10"
+                                              maxlength="5000">{{ form_data.note_text or note.note_text }}</textarea>
+                                    <div class="form-text d-flex justify-content-between">
+                                        <span><span id="charCount">0</span>/5000 characters (minimum 10 required)</span>
+                                        <span class="text-muted">Editing will mark this note as modified</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- File Attachments Section -->
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label for="attachments" class="form-label">
+                                        <strong><i class="fas fa-paperclip me-1"></i>Add New Attachments</strong>
+                                        <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <div class="file-upload-area border rounded p-3 text-center" 
+                                         id="fileUploadArea"
+                                         ondrop="handleDrop(event)" 
+                                         ondragover="handleDragOver(event)"
+                                         ondragleave="handleDragLeave(event)">
+                                        <i class="fas fa-cloud-upload-alt fa-lg text-muted mb-2"></i>
+                                        <p class="mb-2 small">Drag files here or click to browse</p>
+                                        <input type="file" 
+                                               class="form-control d-none" 
+                                               id="attachments" 
+                                               name="attachments" 
+                                               multiple 
+                                               accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt,.rtf">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('attachments').click()">
+                                            <i class="fas fa-folder-open me-1"></i>
+                                            Browse Files
+                                        </button>
+                                        <div class="mt-2">
+                                            <small class="text-muted">
+                                                Images, Documents<br>Max 10MB per file
+                                            </small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Selected Files Preview -->
+                                    <div id="selectedFiles" class="mt-3"></div>
+                                    
+                                    <!-- Note about existing attachments -->
+                                    {% if note.attachments %}
+                                    <div class="mt-3">
+                                        <small class="text-info">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Existing attachments will be preserved. New files will be added.
+                                        </small>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                            <button type="submit" class="btn btn-warning btn-lg" id="submitBtn">
+                                <i class="fas fa-save me-2"></i>
+                                Update History Note
+                            </button>
+                            <a href="{{ url_for('views.equipment_history', equipment_type=note.equipment_type, equipment_id=note.equipment_id) }}" 
+                               class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>
+                                Back to History
+                            </a>
+                            <a href="{{ url_for('views.list_equipment', data_type=note.equipment_type) }}" 
+                               class="btn btn-outline-secondary">
+                                <i class="fas fa-list me-1"></i>
+                                Equipment List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+/* Compact layout improvements */
+.container {
+    max-width: 1200px;
+}
+
+.alert {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Equipment info summary bar */
+.alert-light {
+    background-color: #f8f9fa;
+}
+
+/* Form layout improvements */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* File upload area */
+.file-upload-area {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #fafafa;
+    border: 2px dashed #dee2e6 !important;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.file-upload-area:hover {
+    background-color: #f0f8ff;
+    border-color: #007bff !important;
+    transform: translateY(-1px);
+}
+
+.file-upload-area.drag-over {
+    background-color: #e3f2fd;
+    border-color: #2196f3 !important;
+    border-style: dashed;
+    transform: scale(1.02);
+}
+
+.file-preview {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.file-preview .file-icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.file-preview .file-info {
+    flex-grow: 1;
+}
+
+.file-preview .file-name {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.file-preview .file-size {
+    font-size: 0.875em;
+    color: #6c757d;
+}
+
+.file-preview .remove-file {
+    color: #dc3545;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.file-preview .remove-file:hover {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+}
+
+.char-count-warning {
+    color: #ffc107 !important;
+}
+
+.char-count-error {
+    color: #dc3545 !important;
+}
+
+/* Responsive improvements */
+@media (max-width: 992px) {
+    .col-lg-8, .col-lg-4 {
+        margin-bottom: 1rem;
+    }
+    
+    .file-upload-area {
+        min-height: 100px;
+    }
+    
+    .d-flex.gap-2 {
+        flex-direction: column;
+        gap: 0.5rem !important;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Form section spacing */
+.row {
+    margin-bottom: 0;
+}
+
+.col-lg-8 {
+    padding-right: 2rem;
+}
+
+@media (max-width: 992px) {
+    .col-lg-8 {
+        padding-right: 15px;
+    }
+}
+
+/* Button improvements */
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+/* Character count styling */
+.form-text {
+    font-size: 0.875rem;
+}
+
+#charCount {
+    font-weight: 600;
+}
+
+/* Equipment summary improvements */
+.alert .d-flex {
+    align-items: center;
+}
+
+.alert span {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .alert .d-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .alert .col-md-4 {
+        text-align: left !important;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Reuse the same JavaScript from add_history.html
+document.addEventListener('DOMContentLoaded', function() {
+    const noteTextarea = document.getElementById('note_text');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const fileInput = document.getElementById('attachments');
+    const selectedFilesDiv = document.getElementById('selectedFiles');
+    
+    let selectedFiles = [];
+
+    // Character count functionality
+    function updateCharCount() {
+        const length = noteTextarea.value.length;
+        charCount.textContent = length;
+        
+        // Update styling based on character count
+        charCount.className = '';
+        if (length < 10) {
+            charCount.classList.add('char-count-error');
+            submitBtn.disabled = true;
+        } else if (length > 4500) {
+            charCount.classList.add('char-count-warning');
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = false;
+        }
+    }
+
+    noteTextarea.addEventListener('input', updateCharCount);
+    updateCharCount(); // Initial call
+
+    // File handling (same as add_history.html)
+    fileInput.addEventListener('change', function(e) {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        for (let file of files) {
+            if (validateFile(file)) {
+                selectedFiles.push(file);
+            }
+        }
+        updateFilePreview();
+    }
+
+    function validateFile(file) {
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        const allowedTypes = [
+            'image/jpeg', 'image/png', 'image/gif', 'image/webp',
+            'application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'text/plain', 'application/rtf'
+        ];
+
+        if (file.size > maxSize) {
+            alert(`File "${file.name}" is too large. Maximum size is 10MB.`);
+            return false;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+            alert(`File "${file.name}" has an unsupported format.`);
+            return false;
+        }
+
+        return true;
+    }
+
+    function updateFilePreview() {
+        selectedFilesDiv.innerHTML = '';
+        
+        if (selectedFiles.length === 0) {
+            return;
+        }
+
+        const title = document.createElement('h6');
+        title.textContent = `New Files to Add (${selectedFiles.length})`;
+        title.className = 'text-secondary mb-2';
+        selectedFilesDiv.appendChild(title);
+
+        selectedFiles.forEach((file, index) => {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'file-preview';
+            
+            const icon = getFileIcon(file.type);
+            const size = (file.size / 1024).toFixed(1) + ' KB';
+            
+            fileDiv.innerHTML = `
+                <div class="file-icon">${icon}</div>
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${size}</div>
+                </div>
+                <div class="remove-file" onclick="removeFile(${index})" title="Remove file">
+                    <i class="fas fa-times"></i>
+                </div>
+            `;
+            
+            selectedFilesDiv.appendChild(fileDiv);
+        });
+
+        // Update file input with selected files
+        updateFileInput();
+    }
+
+    function updateFileInput() {
+        const dt = new DataTransfer();
+        selectedFiles.forEach(file => dt.items.add(file));
+        fileInput.files = dt.files;
+    }
+
+    window.removeFile = function(index) {
+        selectedFiles.splice(index, 1);
+        updateFilePreview();
+    };
+
+    function getFileIcon(mimeType) {
+        if (mimeType.startsWith('image/')) {
+            return '<i class="fas fa-image text-success"></i>';
+        } else if (mimeType === 'application/pdf') {
+            return '<i class="fas fa-file-pdf text-danger"></i>';
+        } else if (mimeType.includes('word')) {
+            return '<i class="fas fa-file-word text-primary"></i>';
+        } else {
+            return '<i class="fas fa-file text-secondary"></i>';
+        }
+    }
+
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('fileUploadArea');
+
+    uploadArea.addEventListener('click', function() {
+        fileInput.click();
+    });
+});
+
+// Drag and drop handlers (same as add_history.html)
+function handleDragOver(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('drag-over');
+}
+
+function handleDragLeave(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+    
+    const files = e.dataTransfer.files;
+    handleFiles(files);
+}
+</script>
+{% endblock %}

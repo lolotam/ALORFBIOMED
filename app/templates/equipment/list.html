@@ -14,6 +14,14 @@
                 <span class="counter-label">records</span>
             </span>
         </div>
+        <div class="ms-auto">
+            <small class="text-muted">
+                <span class="badge bg-info history-badge me-1">
+                    <i class="fas fa-history"></i>
+                </span>
+                Equipment with history notes
+            </small>
+        </div>
     </div>
     <!-- Action Buttons Row -->
     <div class="row mb-3">
@@ -430,7 +438,16 @@
                                     <td>{{ entry.get('Department', 'N/A') if entry.get('Department') else 'N/A' }}</td>
                                     <td>{{ entry.get('Name', 'N/A') if entry.get('Name') else 'N/A' }}</td>
                                     <td>{{ entry.get('MODEL', 'N/A') if entry.get('MODEL') else 'N/A' }}</td>
-                                    <td>{{ entry.get('SERIAL', 'N/A') if entry.get('SERIAL') else 'N/A' }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ entry.get('SERIAL', 'N/A') if entry.get('SERIAL') else 'N/A' }}</span>
+                                            {% if entry.get('has_history', False) %}
+                                                <span class="badge bg-info ms-2 history-badge" title="Has history notes">
+                                                    <i class="fas fa-history"></i>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </td>
                                     <td>{{ entry.get('MANUFACTURER', 'N/A') if entry.get('MANUFACTURER') else 'N/A' }}</td>
                                     <td>{{ entry.get('LOG_Number', 'N/A') if entry.get('LOG_Number') else 'N/A' }}</td>
                                     <td>{{ entry.get('Installation_Date', 'N/A') if entry.get('Installation_Date') else 'N/A' }}</td>
@@ -439,7 +456,16 @@
                                     <td>{{ entry.get('Department', 'N/A') if entry.get('Department') else 'N/A' }}</td>
                                     <td>{{ entry.get('Name', 'N/A') if entry.get('Name') else 'N/A' }}</td>
                                     <td>{{ entry.get('Model', 'N/A') if entry.get('Model') else 'N/A' }}</td>
-                                    <td>{{ entry.get('Serial', 'N/A') if entry.get('Serial') else 'N/A' }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>{{ entry.get('Serial', 'N/A') if entry.get('Serial') else 'N/A' }}</span>
+                                            {% if entry.get('has_history', False) %}
+                                                <span class="badge bg-info ms-2 history-badge" title="Has history notes">
+                                                    <i class="fas fa-history"></i>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </td>
                                     <td>{{ entry.get('Manufacturer', 'N/A') if entry.get('Manufacturer') else 'N/A' }}</td>
                                     <td>{{ entry.get('Log_Number', 'N/A') if entry.get('Log_Number') else 'N/A' }}</td>
                                     <td>{{ entry.get('Installation_Date', 'N/A') if entry.get('Installation_Date') else 'N/A' }}</td>
@@ -468,9 +494,20 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         {% if data_type == 'ppm' %}
-                                            <a href="{{ url_for('views.edit_ppm_equipment', SERIAL=entry.SERIAL) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                            <a href="{{ url_for('views.edit_ppm_equipment', SERIAL=entry.SERIAL|url_safe_serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
                                         {% elif data_type == 'ocm' %}
-                                            <a href="{{ url_for('views.edit_ocm_equipment', Serial=entry.Serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                            <a href="{{ url_for('views.edit_ocm_equipment', Serial=entry.Serial|url_safe_serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                        {% endif %}
+                                        {% if data_type == 'ppm' %}
+                                            <a href="{{ url_for('views.equipment_history', equipment_type='ppm', equipment_id=entry.SERIAL|url_safe_serial) }}"
+                                               class="btn btn-sm btn-outline-secondary me-1" title="View History">
+                                                <i class="fas fa-history"></i>
+                                            </a>
+                                        {% elif data_type == 'ocm' %}
+                                            <a href="{{ url_for('views.equipment_history', equipment_type='ocm', equipment_id=entry.Serial|url_safe_serial) }}"
+                                               class="btn btn-sm btn-outline-secondary me-1" title="View History">
+                                                <i class="fas fa-history"></i>
+                                            </a>
                                         {% endif %}
                                         <a href="{{ url_for('views.generate_barcode', data_type=data_type, serial=entry.SERIAL if data_type == 'ppm' else entry.Serial) }}"
                                            class="btn btn-sm btn-info me-1">
@@ -1037,6 +1074,27 @@
 /* Tooltip for truncated text */
 .equipment-table thead th[title] {
     cursor: help;
+}
+
+/* History badge styling */
+.history-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.4rem;
+    border-radius: 0.375rem;
+    animation: pulse-glow 2s infinite;
+}
+
+.history-badge i {
+    font-size: 0.65rem;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(13, 202, 240, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(13, 202, 240, 0.8);
+    }
 }
 
 /* Better scrollbar for table */

@@ -1,15 +1,9 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
-env/
-.venv/
 build/
 develop-eggs/
 dist/
@@ -22,81 +16,93 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# PyInstaller
-#  Usually these files are written by a python application
-#  and should be excluded here, unless they are directly
-#  required for the application to work.
-*.manifest
-*.spec
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-
-# Flask stuff:
+# Flask
 instance/
 .webassets-cache
+flask_session/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Environments
+# Environment variables
 .env
-.venv
-venv/
-env/
+.env.*
 
-# MyPy
-.mypy_cache/
+# Database
+*.db
+*.sqlite
 
-# IDE/editor files
-.idea/
+# Logs
+*.log
+logs/
+
+# Data files (keep structure but exclude sensitive data)
+data/settings.json
+data/audit_log.json
+data/equipment_history.json
+data/training.json
+data/ppm.json
+data/ocm.json
+data/push_subscriptions.json
+data/backups/
+data_before_restore_*/
+
+# Uploads
+app/static/uploads/
+static/uploads/
+
+# IDE
 .vscode/
+.idea/
 *.swp
 *.swo
-*.sublime-project
-*.sublime-workspace
-# temporary files
 *~
-.DS_Store
 
-# System Files
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
 .Trashes
 ehthumbs.db
 Thumbs.db
 
-# Poetry
-poetry.lock
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
 
-# Logs
-logs/
-*.log
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Debug files
+debug_*.py
+test_*.py
+quick_test_*.py
+
+# Cookie files
+*.txt
+cookie.txt
+new_session_cookie.txt
+
+# Migration temporary files
+migrations/versions/*.py
+
+# Documentation drafts
+*.md
+!README.md
+
+# Backup files
+*.backup
+*.backup_*

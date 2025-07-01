@@ -12,7 +12,8 @@
     "Service_Date": "10/01/2025",
     "Engineer": "NIXON",
     "Next_Maintenance": "10/01/2026",
-    "Status": "Upcoming"
+    "Status": "Upcoming",
+    "has_history": false
   },
   {
     "NO": 2,

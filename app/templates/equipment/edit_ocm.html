@@ -119,8 +119,18 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Update OCM Equipment</button>
-        <a href="{{ url_for('views.list_equipment', data_type='ocm') }}" class="btn btn-secondary mt-3">Cancel</a>
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Update OCM Equipment</button>
+            <a href="{{ url_for('views.equipment_history', equipment_type='ocm', equipment_id=entry.Serial) }}"
+               class="btn btn-info">
+                <i class="fas fa-history"></i> View History
+            </a>
+            <a href="{{ url_for('views.add_equipment_history', equipment_type='ocm', equipment_id=entry.Serial) }}"
+               class="btn btn-success">
+                <i class="fas fa-plus"></i> Add History
+            </a>
+            <a href="{{ url_for('views.list_equipment', data_type='ocm') }}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
 </div>
 

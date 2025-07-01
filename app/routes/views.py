@@ -20,6 +20,8 @@ from app.services.email_service import EmailService
 from app.services.barcode_service import BarcodeService
 from app.services.backup_service import BackupService
 from app.services.import_export import ImportExportService
+from app.services.history_service import HistoryService
+from app.models.history import HistoryNoteCreate, HistoryNoteUpdate
 from app.constants import (
     DEPARTMENTS, TRAINING_MODULES, QUARTER_STATUS_OPTIONS, GENERAL_STATUS_OPTIONS,
     DEVICES_BY_DEPARTMENT, ALL_DEVICES, TRAINERS
@@ -739,7 +741,10 @@ def save_email_settings():
         current_settings = DataService.load_settings()
         current_settings.update({
             'recipient_email': data.get('recipient_email', '').strip(),
-            'cc_emails': data.get('cc_emails', '').strip()
+            'cc_emails': data.get('cc_emails', '').strip(),
+            'use_daily_send_time': data.get('use_daily_send_time', True),
+            'use_legacy_interval': data.get('use_legacy_interval', False),
+            'email_send_time': data.get('email_send_time', '09:00')
         })
         
         DataService.save_settings(current_settings)
@@ -1266,14 +1271,44 @@ def create_user():
             settings = DataService.load_settings()
             users = settings.get('users', [])
 
+            # Check if username already exists
+            for existing_user in users:
+                if existing_user.get('username') == username:
+                    flash('Username already exists. Please choose a different username.', 'danger')
+                    return render_template('create_user.html')
+
             # Hash the password
             logger.critical("Hashing the password")
             hashed_password = generate_password_hash(password)
 
+            # Handle profile image upload
+            profile_image_url = None
+            if 'profile_image' in request.files:
+                profile_image = request.files['profile_image']
+                if profile_image and profile_image.filename:
+                    logger.info(f"Processing profile image upload for user {username}")
+
+                    # Import file utilities
+                    from app.utils.file_utils import save_uploaded_file, ensure_upload_directories
+
+                    # Ensure upload directories exist
+                    ensure_upload_directories()
+
+                    # Save the profile image
+                    success, error_msg, file_info = save_uploaded_file(profile_image, 'profiles', 'image')
+                    if success:
+                        profile_image_url = file_info['relative_path']
+                        logger.info(f"Profile image saved successfully: {profile_image_url}")
+                    else:
+                        logger.warning(f"Failed to save profile image: {error_msg}")
+                        flash(f'Profile image upload failed: {error_msg}', 'warning')
+                        # Continue with user creation even if image upload fails
+
             new_user = {
                 'username': username,
                 'password': hashed_password,
-                'role': role
+                'role': role,
+                'profile_image_url': profile_image_url
             }
 
             logger.critical(f"New user: {new_user}")
@@ -1282,6 +1317,16 @@ def create_user():
             settings['users'] = users
             logger.critical("Saving settings")
             DataService.save_settings(settings)
+
+            # Log audit event
+            from app.services.audit_service import AuditService
+            AuditService.log_event(
+                event_type="User Created",
+                performed_by=current_user.username if current_user.is_authenticated else "System",
+                description=f"New user '{username}' created with role '{role}'",
+                status=AuditService.STATUS_SUCCESS,
+                details={"username": username, "role": role, "has_profile_image": profile_image_url is not None}
+            )
 
             logger.critical("User created successfully")
             flash('User created successfully!', 'success')
@@ -1292,4 +1337,197 @@ def create_user():
 
     logger.critical("Rendering create_user.html template")
     return render_template('create_user.html')
+
+
+@views_bp.route('/history/<note_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_history_note(note_id):
+    """Edit an existing history note."""
+    try:
+        # Get the existing note
+        note = HistoryService.get_history_note(note_id)
+        if not note:
+            flash('History note not found.', 'warning')
+            return redirect(url_for('views.index'))
+
+        # Check if user can modify this note
+        if not HistoryService.can_user_modify_note(note, current_user.username, getattr(current_user, 'role', None)):
+            flash('You do not have permission to edit this note.', 'danger')
+            return redirect(url_for('views.equipment_history',
+                                  equipment_type=note.equipment_type,
+                                  equipment_id=note.equipment_id))
+
+        # Get equipment details
+        equipment = DataService.get_entry(note.equipment_type, note.equipment_id)
+        if not equipment:
+            flash(f'Equipment with serial {note.equipment_id} not found.', 'warning')
+            return redirect(url_for('views.index'))
+
+        if request.method == 'POST':
+            note_text = request.form.get('note_text', '').strip()
+
+            if not note_text:
+                flash('Note text is required.', 'danger')
+                return render_template('equipment/edit_history.html',
+                                     note=note,
+                                     equipment=equipment,
+                                     form_data=request.form,
+                                     current_datetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+            # Create update data
+            try:
+                update_data = HistoryNoteUpdate(
+                    note_text=note_text,
+                    modified_by=current_user.username,
+                    modified_by_name=current_user.username
+                )
+            except ValueError as e:
+                flash(f'Validation error: {str(e)}', 'danger')
+                return render_template('equipment/edit_history.html',
+                                     note=note,
+                                     equipment=equipment,
+                                     form_data=request.form,
+                                     current_datetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+            # Update the note
+            updated_note = HistoryService.update_history_note(note_id, update_data)
+            if updated_note:
+                # Handle file uploads if any
+                uploaded_files = request.files.getlist('attachments')
+                for file in uploaded_files:
+                    if file and file.filename:
+                        attachment = HistoryService.add_attachment_to_note(
+                            note_id, file, current_user.username
+                        )
+                        if not attachment:
+                            flash(f'Failed to upload file: {file.filename}', 'warning')
+
+                flash('History note updated successfully!', 'success')
+                return redirect(url_for('views.equipment_history',
+                                      equipment_type=note.equipment_type,
+                                      equipment_id=note.equipment_id))
+            else:
+                flash('Failed to update history note.', 'danger')
+
+        return render_template('equipment/edit_history.html',
+                             note=note,
+                             equipment=equipment,
+                             form_data={'note_text': note.note_text},
+                             current_datetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    except Exception as e:
+        logger.error(f"Error editing history note: {e}")
+        flash('Error editing history note.', 'danger')
+        return redirect(url_for('views.index'))
+
+
+# Equipment History Routes
+
+@views_bp.route('/equipment/<equipment_type>/<equipment_id>/history')
+@login_required
+def equipment_history(equipment_type, equipment_id):
+    """Display equipment history page."""
+    try:
+        if equipment_type not in ['ppm', 'ocm']:
+            flash('Invalid equipment type.', 'danger')
+            return redirect(url_for('views.index'))
+
+        # Get equipment details
+        equipment = DataService.get_entry(equipment_type, equipment_id)
+        if not equipment:
+            flash(f'Equipment with serial {equipment_id} not found.', 'warning')
+            return redirect(url_for('views.list_equipment', data_type=equipment_type))
+
+        # Get equipment history
+        history_notes = HistoryService.get_equipment_history(equipment_id, equipment_type)
+
+        return render_template('equipment/history.html',
+                             equipment=equipment,
+                             equipment_type=equipment_type,
+                             equipment_id=equipment_id,
+                             history_notes=history_notes)
+
+    except Exception as e:
+        logger.error(f"Error loading equipment history: {e}")
+        flash('Error loading equipment history.', 'danger')
+        return redirect(url_for('views.list_equipment', data_type=equipment_type))
+
+
+@views_bp.route('/equipment/<equipment_type>/<equipment_id>/history/add', methods=['GET', 'POST'])
+@login_required
+def add_equipment_history(equipment_type, equipment_id):
+    """Add new history note to equipment."""
+    try:
+        if equipment_type not in ['ppm', 'ocm']:
+            flash('Invalid equipment type.', 'danger')
+            return redirect(url_for('views.index'))
+
+        # Get equipment details
+        equipment = DataService.get_entry(equipment_type, equipment_id)
+        if not equipment:
+            flash(f'Equipment with serial {equipment_id} not found.', 'warning')
+            return redirect(url_for('views.list_equipment', data_type=equipment_type))
+
+        if request.method == 'POST':
+            note_text = request.form.get('note_text', '').strip()
+
+            if not note_text:
+                flash('Note text is required.', 'danger')
+                return render_template('equipment/add_history.html',
+                                     equipment=equipment,
+                                     equipment_type=equipment_type,
+                                     equipment_id=equipment_id,
+                                     form_data=request.form,
+                                     current_datetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+            # Create history note
+            note_data = HistoryNoteCreate(
+                equipment_id=equipment_id,
+                equipment_type=equipment_type,
+                author_id=current_user.username,
+                author_name=current_user.username,
+                note_text=note_text
+            )
+
+            history_note = HistoryService.create_history_note(note_data)
+            if history_note:
+                # Handle file uploads if any
+                uploaded_files = request.files.getlist('attachments')
+                for file in uploaded_files:
+                    if file and file.filename:
+                        attachment = HistoryService.add_attachment_to_note(
+                            history_note.id, file, current_user.username
+                        )
+                        if not attachment:
+                            flash(f'Failed to upload file: {file.filename}', 'warning')
+
+                # Log audit event
+                from app.services.audit_service import log_equipment_action
+                log_equipment_action(
+                    'History Added',
+                    equipment_type.upper(),
+                    equipment_id,
+                    current_user.username
+                )
+
+                flash('History note added successfully!', 'success')
+                return redirect(url_for('views.equipment_history',
+                                      equipment_type=equipment_type,
+                                      equipment_id=equipment_id))
+            else:
+                flash('Failed to add history note.', 'danger')
+
+        return render_template('equipment/add_history.html',
+                             equipment=equipment,
+                             equipment_type=equipment_type,
+                             equipment_id=equipment_id,
+                             form_data={},
+                             current_datetime=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    except Exception as e:
+        logger.error(f"Error adding equipment history: {e}")
+        flash('Error adding equipment history.', 'danger')
+        return redirect(url_for('views.equipment_history',
+                              equipment_type=equipment_type,
+                              equipment_id=equipment_id))
 

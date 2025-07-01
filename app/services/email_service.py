@@ -73,36 +73,62 @@ class EmailService:
                 if email_enabled:
                     logger.info("Email notifications are ENABLED in settings. Processing reminders.")
                     
-                    # Check if it's time to send emails (configurable daily time)
+                    # Check scheduling mode
+                    use_daily_send_time = settings.get("use_daily_send_time", True)  # Default to daily send time
                     current_time = datetime.now()
-                    target_hour = settings.get("email_send_time_hour", 7)  # Default to 7 AM if not configured
                     
-                    # Calculate next scheduled time
-                    if current_time.hour >= target_hour:
-                        # If it's already past the target hour today, schedule for tomorrow
-                        next_run = current_time.replace(hour=target_hour, minute=0, second=0, microsecond=0) + timedelta(days=1)
+                    if use_daily_send_time:
+                        # Use daily send time mode
+                        email_send_time = settings.get("email_send_time", "07:00")  # Default to 7:00 AM
+                        
+                        try:
+                            # Parse time string (HH:MM format)
+                            time_parts = email_send_time.split(':')
+                            target_hour = int(time_parts[0])
+                            target_minute = int(time_parts[1]) if len(time_parts) > 1 else 0
+                        except (ValueError, IndexError):
+                            logger.warning(f"Invalid email_send_time format: {email_send_time}. Using default 07:00")
+                            target_hour, target_minute = 7, 0
+                        
+                        # Calculate next scheduled time
+                        if (current_time.hour > target_hour or 
+                            (current_time.hour == target_hour and current_time.minute >= target_minute)):
+                            # If it's already past the target time today, schedule for tomorrow
+                            next_run = current_time.replace(hour=target_hour, minute=target_minute, second=0, microsecond=0) + timedelta(days=1)
+                        else:
+                            # If it's before the target time today, schedule for today
+                            next_run = current_time.replace(hour=target_hour, minute=target_minute, second=0, microsecond=0)
+                        
+                        # Check if we should send emails now (within 5 minutes of target time)
+                        time_until_next = (next_run - current_time).total_seconds()
+                        
+                        if time_until_next <= 300:  # Within 5 minutes (300 seconds) of target time
+                            logger.info(f"It's time to send daily emails! Current time: {current_time.strftime('%H:%M:%S')}, Target: {target_hour:02d}:{target_minute:02d}")
+                            try:
+                                await EmailService.process_reminders()
+                                logger.info(f"Finished processing daily reminders at scheduled time ({target_hour:02d}:{target_minute:02d}).")
+                            except Exception as e:
+                                logger.error(f"Error during process_reminders call in scheduler loop: {str(e)}", exc_info=True)
+                            
+                            # Sleep until next day's target time
+                            sleep_seconds = max(time_until_next + 86400, 3600)  # At least 1 hour, or until next day
+                            logger.info(f"Daily emails sent. Sleeping until next {target_hour:02d}:{target_minute:02d} ({sleep_seconds/3600:.1f} hours).")
+                        else:
+                            # Not time yet, sleep until closer to target time
+                            sleep_seconds = min(time_until_next - 60, 3600)  # Check again 1 minute before target time, or in 1 hour max
+                            logger.info(f"Next email scheduled for {next_run.strftime('%Y-%m-%d %H:%M:%S')}. Sleeping for {sleep_seconds/60:.1f} minutes.")
+                    
                     else:
-                        # If it's before the target hour today, schedule for today
-                        next_run = current_time.replace(hour=target_hour, minute=0, second=0, microsecond=0)
-                    
-                    # Check if we should send emails now (within 5 minutes of target time)
-                    time_until_next = (next_run - current_time).total_seconds()
-                    
-                    if time_until_next <= 300:  # Within 5 minutes (300 seconds) of target time
-                        logger.info(f"It's time to send daily emails! Current time: {current_time.strftime('%H:%M:%S')}, Target: {target_hour:02d}:00")
+                        # Use legacy interval mode
+                        logger.info("Using legacy interval mode for email scheduling.")
                         try:
                             await EmailService.process_reminders()
-                            logger.info(f"Finished processing daily reminders at scheduled time ({target_hour:02d}:00).")
+                            logger.info("Finished processing reminders in legacy interval mode.")
                         except Exception as e:
                             logger.error(f"Error during process_reminders call in scheduler loop: {str(e)}", exc_info=True)
                         
-                        # Sleep until next day's target time
-                        sleep_seconds = max(time_until_next + 86400, 3600)  # At least 1 hour, or until next day
-                        logger.info(f"Daily emails sent. Sleeping until next {target_hour:02d}:00 ({sleep_seconds/3600:.1f} hours).")
-                    else:
-                        # Not time yet, sleep until closer to target time
-                        sleep_seconds = min(time_until_next - 60, 3600)  # Check again 1 minute before target time, or in 1 hour max
-                        logger.info(f"Next email scheduled for {next_run.strftime('%Y-%m-%d %H:%M:%S')}. Sleeping for {sleep_seconds/60:.1f} minutes.")
+                        sleep_seconds = interval_seconds
+                        logger.info(f"Legacy interval mode: sleeping for {sleep_seconds/60:.1f} minutes until next check.")
                 else:
                     logger.info("Email notifications are DISABLED in settings. Skipping reminder processing.")
                     sleep_seconds = 3600  # Check settings again in 1 hour
@@ -445,49 +471,121 @@ class EmailService:
         Returns:
             True if email was sent successfully, False otherwise.
         """
-        try:
-            api_key = Config.MAILJET_API_KEY
-            api_secret = Config.MAILJET_SECRET_KEY
-            
-            if not api_key or not api_secret:
-                logger.error("Mailjet API credentials not configured. Cannot send email.")
-                return False
-            
-            mailjet = Client(auth=(api_key, api_secret), version='v3.1')
-            
-            # Prepare recipients list
-            to_list = [{"Email": email.strip(), "Name": "Recipient"} for email in recipients if email.strip()]
-            
-            if not to_list:
-                logger.error("No valid recipients provided.")
-                return False
-            
-            data = {
-                "SandboxMode": False,
-                "Messages": [
-                    {
-                        "From": {"Email": Config.EMAIL_SENDER, "Name": "Hospital Equipment Maintenance System"},
-                        "To": to_list,
-                        "Subject": subject,
-                        "HTMLPart": html_content,
-                        "CustomID": "ImmediateEmail"
-                    }
-                ]
-            }
-            
-            logger.debug(f"Sending immediate email from: {Config.EMAIL_SENDER} to: {recipients}")
-            result = mailjet.send.create(data=data)
-            logger.debug(f"Mailjet API response: {result.status_code}, {result.json()}")
-            
-            if result.status_code == 200:
-                logger.info(f"Immediate email sent successfully to {recipients}")
-                return True
-            else:
-                logger.error(f"Failed to send immediate email: {result.status_code}, {result.json()}")
-                return False
+        # Try Mailjet first, fallback to SMTP
+        api_key = Config.MAILJET_API_KEY
+        api_secret = Config.MAILJET_SECRET_KEY
+        
+        if api_key and api_secret:
+            logger.info("Using Mailjet API for sending email")
+            try:
+                mailjet = Client(auth=(api_key, api_secret), version='v3.1')
                 
+                # Prepare recipients list
+                to_list = [{"Email": email.strip(), "Name": "Recipient"} for email in recipients if email.strip()]
+                
+                if not to_list:
+                    logger.error("No valid recipients provided.")
+                    return False
+                
+                data = {
+                    "SandboxMode": False,
+                    "Messages": [
+                        {
+                            "From": {"Email": Config.EMAIL_SENDER, "Name": "Hospital Equipment Maintenance System"},
+                            "To": to_list,
+                            "Subject": subject,
+                            "HTMLPart": html_content,
+                            "CustomID": "ImmediateEmail"
+                        }
+                    ]
+                }
+                
+                logger.debug(f"Sending immediate email from: {Config.EMAIL_SENDER} to: {recipients}")
+                result = mailjet.send.create(data=data)
+                logger.debug(f"Mailjet API response: {result.status_code}, {result.json()}")
+                
+                if result.status_code == 200:
+                    logger.info(f"Immediate email sent successfully via Mailjet to {recipients}")
+                    return True
+                else:
+                    logger.error(f"Failed to send email via Mailjet: {result.status_code}, {result.json()}")
+                    logger.info("Falling back to SMTP...")
+                    
+            except Exception as e:
+                logger.error(f"Mailjet failed: {str(e)}. Falling back to SMTP...")
+        else:
+            logger.info("Mailjet API credentials not configured. Using SMTP fallback.")
+        
+        # SMTP Fallback
+        return EmailService._send_smtp_email(recipients, subject, html_content)
+    
+    @staticmethod
+    def _send_smtp_email(recipients: List[str], subject: str, html_content: str) -> bool:
+        """Send email using SMTP as fallback method.
+        
+        Args:
+            recipients: List of email addresses to send to
+            subject: Email subject
+            html_content: HTML content of the email
+            
+        Returns:
+            True if email was sent successfully, False otherwise.
+        """
+        import smtplib
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        
+        logger.info(f"Attempting to send SMTP email to {len(recipients)} recipients")
+        
+        # Get SMTP configuration
+        smtp_server = Config.MAIL_SERVER
+        smtp_port = Config.MAIL_PORT
+        smtp_user = Config.MAIL_USERNAME
+        smtp_password = Config.MAIL_PASSWORD
+        use_tls = Config.MAIL_USE_TLS
+        default_sender = Config.MAIL_DEFAULT_SENDER or Config.EMAIL_SENDER
+        
+        # Check if SMTP configuration is complete
+        if not all([smtp_server, smtp_user, smtp_password]):
+            logger.error("SMTP configuration is incomplete. Please set the following environment variables:")
+            logger.error("- MAIL_USERNAME (your email address)")
+            logger.error("- MAIL_PASSWORD (your email password or app password)")
+            logger.error("- MAILJET_API_KEY and MAILJET_SECRET_KEY (for Mailjet API)")
+            logger.error(f"Current SMTP config: SERVER={smtp_server}, PORT={smtp_port}, USER={smtp_user}, PASSWORD={'***' if smtp_password else 'NOT SET'}")
+            return False
+        
+        try:
+            # Create message
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = subject
+            msg['From'] = default_sender
+            msg['To'] = ', '.join(recipients)
+            
+            # Add HTML content
+            html_part = MIMEText(html_content, 'html')
+            msg.attach(html_part)
+            
+            # Connect to server and send email
+            logger.info(f"Connecting to SMTP server: {smtp_server}:{smtp_port}")
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            
+            if use_tls:
+                server.starttls()  # Enable security
+                logger.debug("TLS enabled")
+            
+            server.login(smtp_user, smtp_password)
+            logger.debug("SMTP login successful")
+            
+            text = msg.as_string()
+            server.sendmail(default_sender, recipients, text)
+            server.quit()
+            
+            logger.info(f"Email sent successfully via SMTP to {len(recipients)} recipients")
+            return True
+            
         except Exception as e:
-            logger.exception(f"Failed to send immediate email: {str(e)}")
+            logger.error(f"Failed to send SMTP email: {str(e)}")
+            logger.error("Please check your email configuration and ensure you're using an App Password for Gmail")
             return False
     
     @staticmethod
@@ -727,13 +825,13 @@ class EmailService:
             logger.debug(f"Loaded settings in process_reminders: {settings}")
         except Exception as e:
             logger.error(f"Error loading settings in process_reminders: {str(e)}. Aborting reminder processing for this cycle.", exc_info=True)
-            return
+            return 0
 
         email_enabled = settings.get("email_notifications_enabled", False)
 
         if not email_enabled:
             logger.info("Email notifications are disabled in settings. Skipping reminder sending.")
-            return
+            return 0
 
         logger.info("Email notifications are ENABLED. Processing reminders with multiple thresholds.")
         
@@ -786,8 +884,11 @@ class EmailService:
                     logger.debug(f"No tasks found for {threshold_name} threshold - no email sent")
 
             logger.info(f"Enhanced reminder processing completed. Sent {emails_sent} emails for {total_tasks_found} total maintenance tasks.")
+            return emails_sent
 
         except Exception as e:
             logger.error(f"Error during enhanced reminder processing: {str(e)}", exc_info=True)
+            return 0
 
         logger.info("Finished enhanced process_reminders.")
+        return 0

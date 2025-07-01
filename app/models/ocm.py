@@ -25,6 +25,7 @@ class OCMEntry(BaseModel):
     Engineer: str
     Next_Maintenance: str = Field(..., alias="Next_Maintenance")
     Status: Literal["Upcoming", "Overdue", "Maintained"]
+    has_history: Optional[bool] = False  # Track if equipment has history notes
 
     @field_validator('Installation_Date', 'Warranty_End', 'Service_Date', 'Next_Maintenance')
     @classmethod
@@ -84,6 +85,7 @@ class OCMEntryCreate(BaseModel):
     Next_Maintenance: str
     ENGINEER: str
     Status: Literal["Upcoming", "Overdue", "Maintained"]
+    has_history: Optional[bool] = False  # Track if equipment has history notes
 
     @field_validator('Installation_Date', 'Warranty_End', 'Service_Date', 'Next_Maintenance')
     @classmethod

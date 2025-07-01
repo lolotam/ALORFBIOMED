@@ -1,0 +1,1384 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-06-22 10:15:30",
+    "event_type": "System Startup",
+    "performed_by": "System",
+    "description": "Hospital Equipment Management System started successfully",
+    "status": "Success",
+    "details": {
+      "version": "1.0.0",
+      "modules": [
+        "PPM",
+        "OCM",
+        "Training",
+        "Notifications"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "timestamp": "2025-06-22 10:30:45",
+    "event_type": "Equipment Added",
+    "performed_by": "Admin User",
+    "description": "New PPM equipment added: Ventilator (Serial: VNT-2025-001)",
+    "status": "Success",
+    "details": {
+      "equipment_type": "PPM",
+      "serial": "VNT-2025-001",
+      "department": "ICU"
+    }
+  },
+  {
+    "id": 3,
+    "timestamp": "2025-06-22 11:45:12",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 15 equipment maintenance tasks (7-day threshold)",
+    "status": "Success",
+    "details": {
+      "threshold": "7 days",
+      "equipment_count": 15,
+      "recipient": "maintenance@hospital.com"
+    }
+  },
+  {
+    "id": 4,
+    "timestamp": "2025-06-22 14:20:18",
+    "event_type": "Bulk Import",
+    "performed_by": "Maintenance Manager",
+    "description": "Bulk import of 25 OCM equipment records from CSV file",
+    "status": "Success",
+    "details": {
+      "file_type": "CSV",
+      "records_imported": 25,
+      "records_failed": 0,
+      "equipment_type": "OCM"
+    }
+  },
+  {
+    "id": 5,
+    "timestamp": "2025-06-22 15:10:33",
+    "event_type": "Setting Changed",
+    "performed_by": "Admin User",
+    "description": "Push notification interval changed from 60 to 5 minutes",
+    "status": "Success",
+    "details": {
+      "setting": "push_notification_interval_minutes",
+      "old_value": 60,
+      "new_value": 5
+    }
+  },
+  {
+    "id": 6,
+    "timestamp": "2025-06-22 16:31:05",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 2 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 2,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 7,
+    "timestamp": "2025-06-22 16:31:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 8,
+    "timestamp": "2025-06-22 16:31:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 9,
+    "timestamp": "2025-06-22 16:31:07",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 10,
+    "timestamp": "2025-06-22 16:34:14",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 11,
+    "timestamp": "2025-06-22 16:34:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 12,
+    "timestamp": "2025-06-22 16:34:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 13,
+    "timestamp": "2025-06-22 16:34:17",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 2 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 2,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 14,
+    "timestamp": "2025-06-22 16:34:18",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 15,
+    "timestamp": "2025-06-22 16:34:18",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 16,
+    "timestamp": "2025-06-22 16:34:19",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 17,
+    "timestamp": "2025-06-22 16:35:25",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Exported 16 audit log entries to CSV",
+    "status": "Success",
+    "details": {
+      "export_format": "CSV",
+      "record_count": 16
+    }
+  },
+  {
+    "id": 18,
+    "timestamp": "2025-06-22 16:35:50",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 2 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 2,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 19,
+    "timestamp": "2025-06-22 16:35:50",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 20,
+    "timestamp": "2025-06-22 16:35:51",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 21,
+    "timestamp": "2025-06-22 16:35:52",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 22,
+    "timestamp": "2025-06-22 16:36:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 2 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 2,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 23,
+    "timestamp": "2025-06-22 16:36:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 24,
+    "timestamp": "2025-06-22 16:36:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 25,
+    "timestamp": "2025-06-22 16:36:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 26,
+    "timestamp": "2025-06-22 16:38:54",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 27,
+    "timestamp": "2025-06-22 16:38:55",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 28,
+    "timestamp": "2025-06-22 16:38:56",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 29,
+    "timestamp": "2025-06-22 16:41:51",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 2 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 2,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 30,
+    "timestamp": "2025-06-22 16:41:52",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 31,
+    "timestamp": "2025-06-22 16:41:53",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 32,
+    "timestamp": "2025-06-22 16:41:53",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 33,
+    "timestamp": "2025-06-22 16:41:53",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "Alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 34,
+    "timestamp": "2025-06-22 16:41:54",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 35,
+    "timestamp": "2025-06-22 16:41:54",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 36,
+    "timestamp": "2025-06-22 16:42:09",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 37,
+    "timestamp": "2025-06-22 16:42:10",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 38,
+    "timestamp": "2025-06-22 16:42:10",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 39,
+    "timestamp": "2025-06-22 16:51:00",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 40,
+    "timestamp": "2025-06-22 16:51:01",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 41,
+    "timestamp": "2025-06-22 16:51:02",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 42,
+    "timestamp": "2025-06-22 17:06:24",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 43,
+    "timestamp": "2025-06-22 17:06:25",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 44,
+    "timestamp": "2025-06-22 17:06:26",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 45,
+    "timestamp": "2025-06-22 17:14:58",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 46,
+    "timestamp": "2025-06-22 17:14:59",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 47,
+    "timestamp": "2025-06-22 17:14:59",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 48,
+    "timestamp": "2025-06-22 17:39:56",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250622_173956.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250622_173956.json",
+      "size_kb": 0.71,
+      "settings_count": 12
+    }
+  },
+  {
+    "id": 50,
+    "timestamp": "2025-06-22 17:40:41",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup failed",
+    "status": "Failed",
+    "details": {
+      "backup_type": "full",
+      "error": "File size too large, try using force_zip64"
+    }
+  },
+  {
+    "id": 51,
+    "timestamp": "2025-06-22 18:58:14",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 52,
+    "timestamp": "2025-06-22 18:58:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 53,
+    "timestamp": "2025-06-22 18:58:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 54,
+    "timestamp": "2025-06-22 19:05:04",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250622_173956.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250622_173956.json"
+    }
+  },
+  {
+    "id": 55,
+    "timestamp": "2025-06-22 19:07:14",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 56,
+    "timestamp": "2025-06-22 19:07:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 57,
+    "timestamp": "2025-06-22 19:07:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 58,
+    "timestamp": "2025-06-23 11:18:45",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 59,
+    "timestamp": "2025-06-25 20:36:05",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 60,
+    "timestamp": "2025-06-26 14:39:23",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 61,
+    "timestamp": "2025-06-26 14:46:40",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 62,
+    "timestamp": "2025-06-26 15:02:38",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 63,
+    "timestamp": "2025-06-27 02:20:41",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_022040.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_022040.json",
+      "size_kb": 2.6,
+      "settings_count": 14
+    }
+  },
+  {
+    "id": 64,
+    "timestamp": "2025-06-27 02:20:47",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_022040.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_022040.json"
+    }
+  },
+  {
+    "id": 65,
+    "timestamp": "2025-06-27 02:30:47",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup failed",
+    "status": "Failed",
+    "details": {
+      "backup_type": "full",
+      "error": "[Errno 28] No space left on device"
+    }
+  },
+  {
+    "id": 66,
+    "timestamp": "2025-06-27 14:31:49",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 67,
+    "timestamp": "2025-06-27 14:31:50",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 68,
+    "timestamp": "2025-06-27 14:31:51",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 69,
+    "timestamp": "2025-06-27 16:46:55",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 70,
+    "timestamp": "2025-06-27 16:46:56",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 71,
+    "timestamp": "2025-06-27 16:46:56",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 72,
+    "timestamp": "2025-06-27 17:03:16",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_170316.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_170316.json",
+      "size_kb": 0.68,
+      "settings_count": 12
+    }
+  },
+  {
+    "id": 73,
+    "timestamp": "2025-06-27 17:16:10",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250627_171610.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171610.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 74,
+    "timestamp": "2025-06-27 17:16:14",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_171614.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171614.json",
+      "size_kb": 0.74,
+      "settings_count": 12
+    }
+  },
+  {
+    "id": 75,
+    "timestamp": "2025-06-27 17:18:10",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250627_171810.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171810.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 76,
+    "timestamp": "2025-06-27 17:18:15",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_171815.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171815.json",
+      "size_kb": 0.82,
+      "settings_count": 15
+    }
+  },
+  {
+    "id": 77,
+    "timestamp": "2025-06-27 21:06:42",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_171815.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171815.json"
+    }
+  },
+  {
+    "id": 78,
+    "timestamp": "2025-06-27 21:06:48",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250627_171810.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171810.zip"
+    }
+  },
+  {
+    "id": 79,
+    "timestamp": "2025-06-27 21:06:55",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_171614.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171614.json"
+    }
+  },
+  {
+    "id": 80,
+    "timestamp": "2025-06-27 21:07:00",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250627_171610.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171610.zip"
+    }
+  },
+  {
+    "id": 81,
+    "timestamp": "2025-06-27 21:07:05",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_170316.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_170316.json"
+    }
+  },
+  {
+    "id": 82,
+    "timestamp": "2025-06-27 21:07:10",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 83,
+    "timestamp": "2025-06-27 21:07:16",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_210716.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_210716.json",
+      "size_kb": 0.82,
+      "settings_count": 15
+    }
+  },
+  {
+    "id": 84,
+    "timestamp": "2025-06-27 21:07:25",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250627_210716.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_210716.json"
+    }
+  },
+  {
+    "id": 85,
+    "timestamp": "2025-06-27 21:07:33",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 86,
+    "timestamp": "2025-06-27 21:07:34",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 87,
+    "timestamp": "2025-06-27 21:08:02",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 88,
+    "timestamp": "2025-06-27 21:08:03",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 89,
+    "timestamp": "2025-06-27 23:40:20",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250627_210716.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_210716.json"
+    }
+  },
+  {
+    "id": 90,
+    "timestamp": "2025-06-27 23:40:27",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 91,
+    "timestamp": "2025-06-27 23:40:27",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 92,
+    "timestamp": "2025-06-27 23:44:12",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250627_210716.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_210716.json"
+    }
+  },
+  {
+    "id": 93,
+    "timestamp": "2025-06-27 23:44:49",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 94,
+    "timestamp": "2025-06-27 23:44:49",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 95,
+    "timestamp": "2025-06-27 23:44:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 4 equipment maintenance tasks (1-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "13e0ce15-eef8-4ddc-a937-79b6acd226d3",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 96,
+    "timestamp": "2025-06-27 23:44:59",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 12 equipment maintenance tasks (7-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "49081cbf-acac-4986-a6fc-ff7992af333d",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 97,
+    "timestamp": "2025-06-27 23:45:00",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 16 equipment maintenance tasks (15-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "4b490bdb-cd4d-4cc2-84a0-557422dd167f",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 98,
+    "timestamp": "2025-06-27 23:45:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 30 equipment maintenance tasks (30-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "6ef5adb3-93ea-4b29-980d-4472cfe00e70",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 99,
+    "timestamp": "2025-06-27 23:46:57",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 4 equipment maintenance tasks (1-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "4b6722cc-f8a4-49e4-9b90-6f8629c9300c",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 100,
+    "timestamp": "2025-06-27 23:46:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 12 equipment maintenance tasks (7-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "e922ed78-8c05-40a1-abf6-2eeaa96f96e4",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 101,
+    "timestamp": "2025-06-27 23:46:59",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 16 equipment maintenance tasks (15-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "ff58957e-2c64-4c66-a6af-618f9e5d6b95",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 102,
+    "timestamp": "2025-06-27 23:47:00",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 30 equipment maintenance tasks (30-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "6930b73e-53d8-438d-851a-df0a5d3e87a6",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 103,
+    "timestamp": "2025-06-27 23:55:10",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 4 equipment maintenance tasks (1-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "78f68f70-f8ab-49e0-b274-a836d47256d5",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 104,
+    "timestamp": "2025-06-27 23:55:11",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 12 equipment maintenance tasks (7-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "47b2eb46-bf51-4476-8d99-6882e9a40c15",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 105,
+    "timestamp": "2025-06-27 23:55:11",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 16 equipment maintenance tasks (15-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "00ab8efa-a79f-4d39-a8a9-3a290f68cf5e",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 106,
+    "timestamp": "2025-06-27 23:55:12",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 30 equipment maintenance tasks (30-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "8a84d161-259f-4dcf-b478-ac95be080c55",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 107,
+    "timestamp": "2025-06-27 23:55:56",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250627_210716.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_210716.json"
+    }
+  },
+  {
+    "id": 108,
+    "timestamp": "2025-06-27 23:55:59",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 109,
+    "timestamp": "2025-06-27 23:55:59",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 110,
+    "timestamp": "2025-06-27 23:55:59",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250627_210710.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_210710.zip"
+    }
+  },
+  {
+    "id": 111,
+    "timestamp": "2025-06-27 23:56:21",
+    "event_type": "Backup Restored",
+    "performed_by": "User",
+    "description": "Settings backup restored successfully",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "backup_created_at": "2025-06-27T21:07:16.494514",
+      "settings_count": 15
+    }
+  }
+]

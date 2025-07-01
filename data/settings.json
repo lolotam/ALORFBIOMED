@@ -1,10 +1,10 @@
 {
-  "email_notifications_enabled": false,
-  "email_reminder_interval_minutes": 1440,
+  "email_notifications_enabled": true,
+  "email_reminder_interval_minutes": 60,
   "recipient_email": "Alorfbiomed@gmail.com",
   "push_notifications_enabled": false,
   "push_notification_interval_minutes": 60,
-  "email_send_time_hour": 7,
+  "email_send_time_hour": 3,
   "reminder_timing": {
     "60_days_before": false,
     "14_days_before": false,
@@ -93,5 +93,9 @@
   },
   "daily_send_time_enabled": true,
   "legacy_interval_enabled": false,
-  "email_send_time_minute": 0
+  "email_send_time_minute": 38,
+  "email_send_time": "03:38",
+  "use_daily_send_time": true,
+  "use_legacy_interval": false,
+  "enable_automatic_reminders": true
 }

@@ -1,0 +1,81 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+### 3. Flask Development Server Restart Protocol
+
+**For New Routes/Services**:
+- Complete process kill required
+- Auto-reload is insufficient
+- Background threads interfere with reload
+
+**For Code Changes Only**:
+- Ctrl+C restart usually sufficient
+- Auto-reload works for logic changes
+
+->
+
+### 3. Flask Development Server Restart Protocol
+
+**For New Routes/Services**:
+- Complete process kill required
+- Auto-reload is insufficient
+- Background threads interfere with reload
+
+**For Code Changes Only**:
+- Ctrl+C restart usually sufficient
+- Auto-reload works for logic changes
+
+### 4. Flask Navigation Template Issues
+
+**Problem**: Navigation links to equipment lists return 302 redirects or "Template not found" errors
+
+**Symptoms**:
+```
+2025-06-23 23:51:21,868 - app - ERROR - Error loading ocm equipment list: ocm_list.html
+127.0.0.1 - - [23/Jun/2025 23:51:21] "GET /equipment/ocm/list HTTP/1.1" 302 -
+```
+
+**Root Cause**: Route handler using dynamic template names that don't match actual template file structure
+
+**❌ INCORRECT Code**:
+```python
+@views_bp.route('/equipment/<data_type>/list')
+def list_equipment(data_type):
+    template_name = f'{data_type}_list.html'  # Tries ocm_list.html, ppm_list.html
+    return render_template(template_name, ...)
+```
+
+**✅ CORRECT Fix**:
+```python
+@views_bp.route('/equipment/<data_type>/list')
+def list_equipment(data_type):
+    template_name = 'equipment/list.html'  # Use actual generic template
+    return render_template(template_name, ...)
+```
+
+**Template Structure**:
+```
+app/templates/
+├── equipment/
+│   ├── list.html          # ✅ Generic template for both PPM and OCM
+│   ├── add_ppm.html
+│   ├── add_ocm.html
+│   └── edit_ppm.html
+└── base.html
+```
+
+**MANDATORY Fix Protocol**:
+1. **Check Template Path**: Verify actual template file location
+2. **Fix Route Handler**: Use correct template path
+3. **Complete Restart**: Kill Python processes and restart Flask
+4. **Test Navigation**: Verify HTTP 200 responses for equipment lists
+
+**Prevention Checklist**:
+- [ ] Use `equipment/list.html` for generic equipment list template
+- [ ] Don't use dynamic template names unless templates actually exist
+- [ ] Check `app/templates/equipment/` directory for available templates
+- [ ] Test both PPM and OCM navigation links after changes
+
+- [ ] Always restart Flask after template path changes

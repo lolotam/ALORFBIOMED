@@ -17,27 +17,157 @@
                     </h5>
                 </div>
                 <div class="card-body p-4">
-                    <form method="POST" action="{{ url_for('views.create_user') }}">
+                    <form method="POST" action="{{ url_for('views.create_user') }}" enctype="multipart/form-data" id="createUserForm">
+                        <!-- Profile Image Upload -->
+                        <div class="mb-4">
+                            <label for="profile_image" class="form-label">
+                                Profile Image <span class="text-muted">(Optional)</span>
+                            </label>
+                            <div class="profile-image-upload text-center">
+                                <div class="profile-preview mb-3">
+                                    <img id="profilePreview"
+                                         src="/static/img/default-avatar.svg"
+                                         alt="Profile Preview"
+                                         class="rounded-circle border"
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                </div>
+                                <input type="file"
+                                       class="form-control d-none"
+                                       id="profile_image"
+                                       name="profile_image"
+                                       accept="image/*">
+                                <button type="button"
+                                        class="btn btn-outline-primary btn-sm"
+                                        onclick="document.getElementById('profile_image').click()">
+                                    <i class="fas fa-camera me-1"></i>
+                                    Choose Image
+                                </button>
+                                <div class="form-text">
+                                    Supported formats: JPG, PNG, GIF. Maximum size: 5MB
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="form-text">
+                                Password should be at least 8 characters long
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="role" class="form-label">Role</label>
+                            <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
                             <select class="form-select" id="role" name="role" required>
+                                <option value="">Select Role</option>
                                 <option value="Editor">Editor</option>
                                 <option value="Viewer">Viewer</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create User</button>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus me-1"></i>
+                                Create User
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary" onclick="resetForm()">
+                                <i class="fas fa-undo me-1"></i>
+                                Reset
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.profile-image-upload {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.profile-image-upload:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.profile-preview img {
+    transition: all 0.3s ease;
+}
+
+.profile-preview img:hover {
+    transform: scale(1.05);
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const profileImageInput = document.getElementById('profile_image');
+    const profilePreview = document.getElementById('profilePreview');
+
+    // Handle profile image selection
+    profileImageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            // Validate file
+            if (!validateImageFile(file)) {
+                return;
+            }
+
+            // Preview image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function validateImageFile(file) {
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        if (file.size > maxSize) {
+            alert('File size too large. Maximum size is 5MB.');
+            profileImageInput.value = '';
+            return false;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+            alert('Invalid file type. Please select a JPG, PNG, GIF, or WebP image.');
+            profileImageInput.value = '';
+            return false;
+        }
+
+        return true;
+    }
+
+    // Form validation
+    const form = document.getElementById('createUserForm');
+    form.addEventListener('submit', function(e) {
+        const password = document.getElementById('password').value;
+
+        if (password.length < 8) {
+            e.preventDefault();
+            alert('Password must be at least 8 characters long.');
+            return false;
+        }
+    });
+});
+
+function resetForm() {
+    document.getElementById('profilePreview').src = '/static/img/default-avatar.svg';
+    document.getElementById('profile_image').value = '';
+}
+</script>
 {% endblock %}

@@ -20,6 +20,7 @@ class JSONUser(UserMixin):
         self.username = user_data['username']
         self.password_hash = user_data['password']
         self.role = user_data['role']
+        self.profile_image_url = user_data.get('profile_image_url', None)
         self._permissions = None
     
     @property

@@ -1,0 +1,270 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Flask and Jinja2 Template Error Prevention and Troubleshooting
+
+This rule captures critical lessons learned from implementing navigation systems and permission-based UI controls in Flask applications.
+
+## **Template Variable Scoping Issues**
+
+### **Problem: 'loop' is undefined in Jinja2 macros**
+- **Error**: `jinja2.exceptions.UndefinedError: 'loop' is undefined`
+- **Cause**: Using `loop.index` or other loop variables inside macros without passing them as parameters
+- **Context**: Loop variables (`loop.index`, `loop.first`, etc.) are only available within the direct scope of a `{% for %}` loop
+
+**❌ DON'T: Use loop variables directly in macros**
+```html
+{% macro render_nav_item(item) %}
+    <a id="navDropdown{{ loop.index }}">  {# ERROR: loop not defined #}
+        {{ item.name }}
+    </a>
+{% endmacro %}
+
+{% for item in nav_items %}
+    {{ render_nav_item(item) }}  {# This will fail #}
+{% endfor %}
+```
+
+**✅ DO: Pass loop context as macro parameters**
+```html
+{% macro render_nav_item(item, loop_idx=None) %}
+    {% set dropdown_id = "navDropdown_" ~ (loop_idx if loop_idx is not none else item.name|replace(' ', '_')) %}
+    <a id="{{ dropdown_id }}">
+        {{ item.name }}
+    </a>
+{% endmacro %}
+
+{% for item in nav_items %}
+    {{ render_nav_item(item, loop.index) }}  {# Pass loop.index as parameter #}
+{% endfor %}
+```
+
+### **Problem: 'current_user' is undefined in template context**
+- **Error**: `jinja2.exceptions.UndefinedError: 'current_user' is undefined`
+- **Cause**: Macros may not have access to global template variables depending on rendering context
+
+**❌ DON'T: Assume global variables are always available**
+```html
+{% macro user_has_permission(permission_code) %}
+    {% if current_user.is_authenticated and current_user.has_permission(permission_code) %}
+        true
+    {% endif %}
+{% endmacro %}
+```
+
+**✅ DO: Add defensive checks for global variables**
+```html
+{% macro user_has_permission(permission_code) %}
+    {%- if current_user and current_user.is_authenticated and current_user.has_permission(permission_code) -%}
+        true
+    {%- else -%}
+        false
+    {%- endif -%}
+{% endmacro %}
+```
+
+## **Flask Route and URL Generation Issues**
+
+### **Problem: Navigation links returning 404 errors**
+- **Cause**: Mismatch between navigation URL configuration and actual Flask route function names
+- **Context**: `url_for()` requires exact function names, not arbitrary strings
+
+**❌ DON'T: Use non-existent or mismatched route names**
+```python
+# navigation.py
+{
+    'name': 'Reports',
+    'url': 'views.reports_dashboard',  # Function doesn't exist
+}
+
+# routes/views.py
+@views_bp.route('/reports')
+def reports():  # Actual function name
+    return render_template('reports.html')
+```
+
+**✅ DO: Match navigation URLs to actual route function names**
+```python
+# navigation.py
+{
+    'name': 'Reports',
+    'url': 'views.reports',  # Matches actual function name
+}
+
+# Always verify route names with:
+# flask routes | grep reports
+```
+
+### **Problem: Route parameters not handled in navigation**
+- **Cause**: Routes with parameters need special handling in navigation configuration
+
+**✅ DO: Handle route parameters correctly**
+```python
+{
+    'name': 'PPM Equipment',
+    'url': 'views.list_equipment',
+    'url_args': {'data_type': 'ppm'},  # Pass required parameters
+    'permission': 'equipment.view'
+}
+```
+
+## **Template File Structure and Organization**
+
+### **Problem: Duplicate macro definitions causing conflicts**
+- **Cause**: Multiple definitions of the same macro in a single file
+- **Fix**: Always remove duplicate content and maintain clean macro files
+
+**✅ DO: Organize macros logically and avoid duplication**
+```html
+{# templates/macros.html - Single source of truth for macros #}
+
+{# Permission checking macros #}
+{% macro user_has_permission(permission_code) %}...{% endmacro %}
+
+{# Navigation rendering macros #}
+{% macro render_nav_item(item, current_url='', loop_idx=None) %}...{% endmacro %}
+{% macro render_navigation(nav_items, current_url='') %}...{% endmacro %}
+
+{# UI control macros #}
+{% macro button_if_permitted(permission_code, text, url='#') %}...{% endmacro %}
+```
+
+## **Permission System Implementation**
+
+### **Problem: Permission checks in templates not working consistently**
+- **Cause**: Different permission checking patterns across templates
+
+**✅ DO: Use consistent permission checking patterns**
+```html
+{# Always use the same macro for permission checks #}
+{% if user_has_permission('equipment.edit') == 'true' %}
+    <a href="{{ url_for('views.edit_equipment', id=equipment.id) }}" class="btn btn-primary">Edit</a>
+{% endif %}
+
+{# Or use permission macros for common UI elements #}
+{{ button_if_permitted('equipment.edit', 'Edit', url_for('views.edit_equipment', id=equipment.id)) }}
+```
+
+## **Flask Development and Debugging**
+
+### **Problem: Template changes not reflected due to caching**
+- **Fix**: Always restart Flask in debug mode when template structure changes significantly
+
+**✅ DO: Restart Flask for template structure changes**
+```bash
+# Kill existing process
+taskkill /F /IM python.exe
+
+# Restart with debug mode
+python -m flask --app app.main run --debug --port 5001
+```
+
+### **Problem: Flask not starting due to syntax errors**
+- **Fix**: Always check console output for detailed error messages
+
+**✅ DO: Read console logs systematically**
+```bash
+# Check if Flask is running
+netstat -an | findstr :5001
+
+# Test if application responds
+curl -I http://localhost:5001/
+```
+
+## **Navigation System Implementation Best Practices**
+
+### **Navigation Data Structure**
+```python
+# app/navigation.py
+NAVIGATION_ITEMS = [
+    {
+        'name': 'Equipment',
+        'url': 'views.dashboard',  # Must match actual route function name
+        'icon': 'tools',
+        'permission': 'equipment.view',
+        'children': [
+            {
+                'name': 'PPM Equipment',
+                'url': 'views.list_equipment',
+                'url_args': {'data_type': 'ppm'},  # For parameterized routes
+                'icon': 'calendar-check',
+                'permission': 'equipment.view'
+            }
+        ]
+    }
+]
+```
+
+### **Template Integration**
+```html
+<!-- app/templates/base.html -->
+{% from 'macros.html' import render_navigation, user_has_permission %}
+
+<!-- Always import macros at the top -->
+<nav class="navbar">
+    {{ render_navigation(navigation_items, request.endpoint) }}
+</nav>
+```
+
+## **Error Prevention Checklist**
+
+### **Before Creating New Templates:**
+- [ ] Verify all referenced route names exist with `flask routes`
+- [ ] Check that all macros have proper parameter handling
+- [ ] Test permission checks with different user roles
+- [ ] Ensure all `loop` variables are passed as parameters to macros
+
+### **Before Committing Template Changes:**
+- [ ] Restart Flask and verify no template syntax errors
+- [ ] Test navigation links manually
+- [ ] Verify permission-based UI elements show/hide correctly
+- [ ] Check browser console for JavaScript errors
+
+### **When Debugging Template Errors:**
+1. **Read the full error traceback** - it shows exact file and line number
+2. **Check for variable scoping issues** - especially `loop` and `current_user`
+3. **Verify route names match function names** - use `flask routes` command
+4. **Look for duplicate macro definitions** - clean up the file structure
+5. **Restart Flask** - template caching can mask fixes
+
+## **Common Error Patterns and Fixes**
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `'loop' is undefined` | Using `loop.index` in macro | Pass `loop.index` as parameter |
+| `'current_user' is undefined` | Missing context check | Add `if current_user and` check |
+| `404 on navigation links` | Wrong route name | Match route function names exactly |
+| `Template not found` | Wrong template path | Verify template exists in correct directory |
+| `Macro already defined` | Duplicate macros | Remove duplicate definitions |
+
+## **Testing Strategy**
+
+```python
+# Always test templates with different user permission sets
+def test_navigation_rendering():
+    with app.test_client() as client:
+        # Test as admin user
+        with client.session_transaction() as sess:
+            sess['user_id'] = admin_user.id
+        response = client.get('/')
+        assert 'Admin Panel' in response.data.decode()
+        
+        # Test as regular user
+        with client.session_transaction() as sess:
+            sess['user_id'] = regular_user.id
+        response = client.get('/')
+        assert 'Admin Panel' not in response.data.decode()
+```
+
+## **Performance Considerations**
+
+- **Minimize permission checks in tight loops** - cache results when possible
+- **Use efficient template structure** - avoid nested macro calls in loops
+- **Consider client-side caching** - for navigation that doesn't change often
+
+---
+
+**Remember**: Template errors in Flask often cascade, fixing one error may reveal others. Always restart the development server after significant template changes and read error messages carefully.
+

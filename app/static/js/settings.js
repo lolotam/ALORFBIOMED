@@ -18,10 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const receiverEmail = document.getElementById('receiverEmail');
     const ccEmails = document.getElementById('ccEmails');
     
+    // Email scheduling elements
+    const dailySendTimeToggle = document.getElementById('dailySendTimeToggle');
+    const legacyIntervalToggle = document.getElementById('legacyIntervalToggle');
+    const emailSendTime = document.getElementById('emailSendTime');
+    const dailySendTimeSection = document.getElementById('dailySendTimeSection');
+    const legacyIntervalSection = document.getElementById('legacyIntervalSection');
+    
+    // Restore elements
+    const restoreFileInput = document.getElementById('restoreFileInput');
+    const fileDropZone = document.getElementById('fileDropZone');
+    const fileSelectedInfo = document.getElementById('fileSelectedInfo');
+    const selectedFileName = document.getElementById('selectedFileName');
+    const fileTypeBadge = document.getElementById('fileTypeBadge');
+    const restoreButton = document.getElementById('restoreButton');
+    
     // New buttons
     const saveReminderSettings = document.getElementById('saveReminderSettings');
     const saveEmailSettings = document.getElementById('saveEmailSettings');
     const sendTestEmail = document.getElementById('sendTestEmail');
+    const sendMessageNow = document.getElementById('sendMessageNow');
     const sendTestPush = document.getElementById('sendTestPush');
     const resetAllSettings = document.getElementById('resetAllSettings');
     
@@ -186,8 +202,28 @@ document.addEventListener('DOMContentLoaded', function () {
             // New email settings
             if (receiverEmail) receiverEmail.value = settings.recipient_email || '';
             if (ccEmails) ccEmails.value = settings.cc_emails || '';
-            
+
+            // Email scheduling settings
+            if (dailySendTimeToggle) dailySendTimeToggle.checked = !!settings.use_daily_send_time;
+            if (legacyIntervalToggle) legacyIntervalToggle.checked = !!settings.use_legacy_interval;
+
+            // Handle email send time with backward compatibility
+            let emailSendTimeValue = '09:00'; // default
+            if (settings.email_send_time) {
+                // New format: HH:MM string
+                emailSendTimeValue = settings.email_send_time;
+            } else if (settings.email_send_time_hour !== undefined) {
+                // Legacy format: convert hour integer to HH:MM string
+                const hour = settings.email_send_time_hour || 9;
+                const minute = settings.email_send_time_minute || 0;
+                emailSendTimeValue = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+            }
+            if (emailSendTime) emailSendTime.value = emailSendTimeValue;
+
             currentServerSettings = settings;
+
+            // Initialize scheduling toggles
+            initializeSchedulingToggles();
 
             if (window.pushNotificationManager) {
                 window.pushNotificationManager.initialize()
@@ -229,17 +265,50 @@ document.addEventListener('DOMContentLoaded', function () {
             
             setButtonLoading(saveSettingsButton, true);
 
-        // Get email send time from the form
+        // Get email send time from the form (keep as HH:MM string format)
         const emailSendTimeElement = document.getElementById('emailSendTime');
-        const emailSendTimeHour = emailSendTimeElement ? parseInt(emailSendTimeElement.value, 10) : 7;
+        const emailSendTimeValue = emailSendTimeElement ? emailSendTimeElement.value : '07:00';
+
+        // Get automatic reminders setting
+        const enableAutomaticRemindersElement = document.getElementById('enableAutomaticReminders');
+        const enableAutomaticRemindersValue = enableAutomaticRemindersElement ? enableAutomaticRemindersElement.checked : false;
+
+        // Get reminder timing settings
+        const reminder60DaysElement = document.getElementById('reminder60Days');
+        const reminder14DaysElement = document.getElementById('reminder14Days');
+        const reminder1DayElement = document.getElementById('reminder1Day');
+        const schedulerIntervalElement = document.getElementById('schedulerInterval');
+
+        // Get email scheduling settings
+        const dailySendTimeToggleElement = document.getElementById('dailySendTimeToggle');
+        const legacyIntervalToggleElement = document.getElementById('legacyIntervalToggle');
+
+        // Get CC emails setting
+        const ccEmailsElement = document.getElementById('ccEmails');
 
         const settingsData = {
             email_notifications_enabled: emailNotificationsToggle.checked,
             email_reminder_interval_minutes: parseInt(emailIntervalInput.value, 10),
-            email_send_time_hour: emailSendTimeHour,
+            email_send_time: emailSendTimeValue, // Save as HH:MM string, not just hour
             recipient_email: recipientEmailInput.value.trim(),
             push_notifications_enabled: pushNotificationsToggle.checked,
-            push_notification_interval_minutes: parseInt(pushIntervalInput.value, 10)
+            push_notification_interval_minutes: parseInt(pushIntervalInput.value, 10),
+
+            // Add automatic reminders setting
+            enable_automatic_reminders: enableAutomaticRemindersValue,
+
+            // Add reminder timing settings
+            reminder_timing_60_days: reminder60DaysElement ? reminder60DaysElement.checked : false,
+            reminder_timing_14_days: reminder14DaysElement ? reminder14DaysElement.checked : false,
+            reminder_timing_1_day: reminder1DayElement ? reminder1DayElement.checked : false,
+            scheduler_interval_hours: schedulerIntervalElement ? parseInt(schedulerIntervalElement.value, 10) : 24,
+
+            // Add email scheduling settings
+            use_daily_send_time: dailySendTimeToggleElement ? dailySendTimeToggleElement.checked : true,
+            use_legacy_interval: legacyIntervalToggleElement ? legacyIntervalToggleElement.checked : false,
+
+            // Add CC emails setting
+            cc_emails: ccEmailsElement ? ccEmailsElement.value.trim() : ''
         };
         console.log('Settings data to send:', settingsData);
 
@@ -363,7 +432,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const emailData = {
                 recipient_email: receiverEmail ? receiverEmail.value.trim() : '',
-                cc_emails: ccEmails ? ccEmails.value.trim() : ''
+                cc_emails: ccEmails ? ccEmails.value.trim() : '',
+                use_daily_send_time: dailySendTimeToggle ? dailySendTimeToggle.checked : true,
+                use_legacy_interval: legacyIntervalToggle ? legacyIntervalToggle.checked : false,
+                email_send_time: emailSendTime ? emailSendTime.value : '09:00'
             };
 
             // Basic email validation
@@ -493,6 +565,209 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // Send Message Now handler
+    if (sendMessageNow) {
+        sendMessageNow.addEventListener('click', async function(event) {
+            event.preventDefault();
+            
+            if (!confirm('This will send immediate maintenance reminder emails for all 4 priority levels (URGENT, HIGH, MEDIUM, LOW). Continue?')) {
+                return;
+            }
+            
+            setButtonLoading(sendMessageNow, true);
+
+            try {
+                const response = await fetch('/api/send-immediate-reminders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showToast('Immediate reminder emails sent successfully!', 'success');
+                    showAlert(`Successfully sent ${result.emails_sent || 0} reminder emails for equipment maintenance.`, 'success');
+                } else {
+                    showAlert(result.error || result.message || 'Failed to send immediate reminders.', 'danger');
+                }
+            } catch (error) {
+                console.error('Error sending immediate reminders:', error);
+                showAlert('Failed to send immediate reminders. Please try again.', 'danger');
+            } finally {
+                setButtonLoading(sendMessageNow, false);
+            }
+        });
+    }
+
+    // Daily Send Time / Legacy Interval toggle logic
+    function initializeSchedulingToggles() {
+        if (dailySendTimeToggle && legacyIntervalToggle) {
+            // Set initial state
+            updateSchedulingMode();
+            
+            dailySendTimeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    legacyIntervalToggle.checked = false;
+                }
+                updateSchedulingMode();
+            });
+            
+            legacyIntervalToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    dailySendTimeToggle.checked = false;
+                }
+                updateSchedulingMode();
+            });
+        }
+    }
+
+    function updateSchedulingMode() {
+        if (dailySendTimeSection && legacyIntervalSection) {
+            if (dailySendTimeToggle.checked) {
+                dailySendTimeSection.classList.remove('disabled');
+                legacyIntervalSection.classList.add('disabled');
+            } else if (legacyIntervalToggle.checked) {
+                dailySendTimeSection.classList.add('disabled');
+                legacyIntervalSection.classList.remove('disabled');
+            } else {
+                // If neither is checked, enable daily send time by default
+                dailySendTimeToggle.checked = true;
+                dailySendTimeSection.classList.remove('disabled');
+                legacyIntervalSection.classList.add('disabled');
+            }
+        }
+    }
+
+    // File upload and restore functionality
+    function initializeFileRestore() {
+        if (restoreFileInput && fileDropZone && fileSelectedInfo) {
+            // File input change handler
+            restoreFileInput.addEventListener('change', handleFileSelection);
+            
+            // Drag and drop handlers
+            fileDropZone.addEventListener('click', () => restoreFileInput.click());
+            fileDropZone.addEventListener('dragover', handleDragOver);
+            fileDropZone.addEventListener('dragleave', handleDragLeave);
+            fileDropZone.addEventListener('drop', handleFileDrop);
+            
+            // Restore button handler
+            if (restoreButton) {
+                restoreButton.addEventListener('click', handleRestore);
+            }
+        }
+    }
+
+    function handleFileSelection(event) {
+        const file = event.target.files[0];
+        if (file) {
+            displaySelectedFile(file);
+        }
+    }
+
+    function handleDragOver(event) {
+        event.preventDefault();
+        fileDropZone.classList.add('dragover');
+    }
+
+    function handleDragLeave(event) {
+        event.preventDefault();
+        fileDropZone.classList.remove('dragover');
+    }
+
+    function handleFileDrop(event) {
+        event.preventDefault();
+        fileDropZone.classList.remove('dragover');
+        
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            restoreFileInput.files = files;
+            displaySelectedFile(file);
+        }
+    }
+
+    function displaySelectedFile(file) {
+        if (selectedFileName && fileTypeBadge && fileSelectedInfo && restoreButton) {
+            selectedFileName.textContent = file.name;
+            
+            const isZip = file.name.toLowerCase().endsWith('.zip');
+            const isJson = file.name.toLowerCase().endsWith('.json');
+            
+            if (isZip) {
+                fileTypeBadge.textContent = 'FULL BACKUP';
+                fileTypeBadge.style.background = '#667eea';
+            } else if (isJson) {
+                fileTypeBadge.textContent = 'SETTINGS';
+                fileTypeBadge.style.background = '#38b2ac';
+            } else {
+                fileTypeBadge.textContent = 'UNKNOWN';
+                fileTypeBadge.style.background = '#e53e3e';
+            }
+            
+            fileSelectedInfo.style.display = 'flex';
+            restoreButton.disabled = !(isZip || isJson);
+            
+            if (!isZip && !isJson) {
+                showAlert('Please select a valid backup file (.zip for full backup or .json for settings backup).', 'warning');
+            }
+        }
+    }
+
+    async function handleRestore() {
+        const file = restoreFileInput.files[0];
+        if (!file) return;
+        
+        const isFullBackup = file.name.toLowerCase().endsWith('.zip');
+        const backupType = isFullBackup ? 'full application' : 'settings';
+        
+        if (!confirm(`This will restore the ${backupType} backup and may overwrite existing data. Are you sure you want to continue?`)) {
+            return;
+        }
+        
+        setButtonLoading(restoreButton, true);
+        
+        try {
+            const formData = new FormData();
+            formData.append('backup_file', file);
+            formData.append('backup_type', isFullBackup ? 'full' : 'settings');
+            
+            const response = await fetch('/api/restore-backup', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                showToast(`${backupType} backup restored successfully!`, 'success');
+                showAlert(`${backupType} backup has been restored successfully. ${result.message || ''}`, 'success');
+                
+                // Reset file selection
+                restoreFileInput.value = '';
+                fileSelectedInfo.style.display = 'none';
+                
+                // Reload settings if it was a settings backup
+                if (!isFullBackup) {
+                    setTimeout(() => location.reload(), 2000);
+                }
+            } else {
+                showAlert(result.error || `Failed to restore ${backupType} backup.`, 'danger');
+            }
+        } catch (error) {
+            console.error('Error restoring backup:', error);
+            showAlert(`Failed to restore ${backupType} backup. Please try again.`, 'danger');
+        } finally {
+            setButtonLoading(restoreButton, false);
+        }
+    }
+
+    // Initialize new functionality
+    initializeSchedulingToggles();
+    initializeFileRestore();
 
     // Email validation function
     function isValidEmail(email) {

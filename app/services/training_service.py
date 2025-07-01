@@ -114,7 +114,8 @@ def add_training(training_data: Dict[str, Any]) -> Optional[Training]:
             
         # Create the training record
         training = Training.from_dict(training_data)
-        trainings.append(training)
+        # Add to beginning of list (new records appear at top)
+        trainings.insert(0, training)
         
         if save_trainings(trainings):
             return training

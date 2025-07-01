@@ -1,0 +1,16 @@
+[
+    {
+        "id": "test-history-note-001",
+        "equipment_id": "SW3266#",
+        "equipment_type": "ocm",
+        "author_id": "admin",
+        "author_name": "admin",
+        "note_text": "Test history note for testing edit and delete functionality. This note was created to verify that the dropdown menu with edit and delete options appears correctly in the equipment history timeline.",
+        "created_at": "2025-06-29 17:47:00",
+        "updated_at": null,
+        "last_modified_by": null,
+        "last_modified_by_name": null,
+        "is_edited": false,
+        "attachments": []
+    }
+]

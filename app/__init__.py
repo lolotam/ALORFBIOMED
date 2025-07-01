@@ -120,6 +120,19 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
+    # Register template filters for URL-safe serial handling
+    from app.utils.url_utils import serial_to_url_safe, url_safe_to_serial
+
+    @app.template_filter('url_safe_serial')
+    def url_safe_serial_filter(serial):
+        """Convert serial number to URL-safe format for use in templates."""
+        return serial_to_url_safe(serial)
+
+    @app.template_filter('original_serial')
+    def original_serial_filter(url_safe_serial):
+        """Convert URL-safe serial back to original format for use in templates."""
+        return url_safe_to_serial(url_safe_serial)
+
     # Start the scheduler in a background thread if enabled
     # This will be called when Gunicorn workers are initialized.
     # The EmailService itself has a lock (_scheduler_running)

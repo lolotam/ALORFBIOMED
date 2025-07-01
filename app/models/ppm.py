@@ -40,6 +40,7 @@ class PPMEntry(BaseModel):
     PPM_Q_III: QuarterData
     PPM_Q_IV: QuarterData
     Status: Optional[Literal["Upcoming", "Overdue", "Maintained"]] = None
+    has_history: Optional[bool] = False  # Track if equipment has history notes
 
     @field_validator('Installation_Date', 'Warranty_End')
     @classmethod
@@ -135,3 +136,4 @@ class PPMEntryCreate(BaseModel):
     PPM_Q_III: QuarterData
     PPM_Q_IV: QuarterData
     Status: Optional[Literal["Upcoming", "Overdue", "Maintained"]] = None
+    has_history: Optional[bool] = False  # Track if equipment has history notes

@@ -98,12 +98,24 @@ document.addEventListener('DOMContentLoaded', function () {
             // which should have been managed by handlePushNotificationsToggle
             const finalPushEnabledState = pushNotificationsToggle.checked;
 
+            // Get email send time from the form (keep as HH:MM string format)
+            const emailSendTimeElement = document.getElementById('emailSendTime');
+            const emailSendTimeValue = emailSendTimeElement ? emailSendTimeElement.value : '07:00';
+
+            // Get automatic reminders setting
+            const enableAutomaticRemindersElement = document.getElementById('enableAutomaticReminders');
+            const enableAutomaticRemindersValue = enableAutomaticRemindersElement ? enableAutomaticRemindersElement.checked : false;
+
             const settingsData = {
                 email_notifications_enabled: emailNotificationsToggle.checked,
                 email_reminder_interval_minutes: emailIntervalValue,
+                email_send_time: emailSendTimeValue, // Save as HH:MM string, not just hour
                 recipient_email: recipientEmailInput.value.trim(),
                 push_notifications_enabled: finalPushEnabledState, // Use the toggle's current state
-                push_notification_interval_minutes: pushIntervalValue
+                push_notification_interval_minutes: pushIntervalValue,
+
+                // Add automatic reminders setting
+                enable_automatic_reminders: enableAutomaticRemindersValue
             };
             console.log('[DEBUG] Data to be sent:', settingsData);
 

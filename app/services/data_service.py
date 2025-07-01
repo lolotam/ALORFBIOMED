@@ -546,9 +546,9 @@ class DataService:
             # Ensure serial is unique
             DataService._ensure_unique_serial(all_data, validated_entry, data_type)
 
-            # Add to data
-            all_data.append(validated_entry)
-            logger.debug(f"Added entry to data. New total: {len(all_data)}")
+            # Add to data at the beginning (new records appear at top)
+            all_data.insert(0, validated_entry)
+            logger.debug(f"Added entry to beginning of data. New total: {len(all_data)}")
 
             # Save updated data
             DataService.save_data(all_data, data_type)
@@ -702,7 +702,7 @@ class DataService:
 
         Args:
             data_type: Type of data to search ('ppm' or 'ocm')
-            serial: Serial number to search for
+            serial: Serial number to search for (can be URL-safe or original format)
 
         Returns:
             Entry if found, None otherwise
@@ -712,17 +712,28 @@ class DataService:
             # Load all data
             logger.debug(f"Loading all {data_type} data to search for serial {serial}")
             data = DataService.load_data(data_type)
-            
-            # Find entry with matching serial
-            logger.debug(f"Searching for entry with serial {serial} in {len(data)} {data_type} entries")
+
+            # Try URL-safe serial lookup first
+            from app.utils.url_utils import find_equipment_by_url_safe_serial
+
+            logger.debug(f"Searching for entry with serial {serial} in {len(data)} {data_type} entries using URL-safe lookup")
+            found_entry = find_equipment_by_url_safe_serial(serial, data)
+
+            if found_entry:
+                logger.info(f"Found matching {data_type} entry for serial {serial} using URL-safe lookup")
+                logger.debug(f"Entry data: {found_entry}")
+                return found_entry
+
+            # Fallback to original direct matching for backward compatibility
+            logger.debug(f"URL-safe lookup failed, trying direct serial matching")
             for entry in data:
                 entry_serial = entry.get('Serial', entry.get('SERIAL'))  # Handle both field names
                 logger.debug(f"Comparing entry serial '{entry_serial}' with search serial '{serial}'")
                 if entry_serial == serial:
-                    logger.info(f"Found matching {data_type} entry for serial {serial}")
+                    logger.info(f"Found matching {data_type} entry for serial {serial} using direct match")
                     logger.debug(f"Entry data: {entry}")
                     return entry
-            
+
             logger.warning(f"No {data_type} entry found with serial {serial}")
             return None
 
@@ -732,15 +743,56 @@ class DataService:
 
     @staticmethod
     def get_all_entries(data_type: Literal['ppm', 'ocm']) -> List[Dict[str, Any]]:
-        """Get all entries.
+        """Get all entries with history flags and sorted by history status.
 
         Args:
             data_type: Type of data to get entries from ('ppm' or 'ocm')
 
         Returns:
-            List of all entries
+            List of all entries, sorted with equipment having history first
         """
-        return DataService.load_data(data_type)
+        entries = DataService.load_data(data_type)
+
+        # Update history flags for all entries
+        DataService._update_all_history_flags(entries, data_type)
+
+        # Sort entries: equipment with history first, then by NO (newest first)
+        entries.sort(key=lambda x: (not x.get('has_history', False), -(x.get('NO', 0))))
+
+        return entries
+
+    @staticmethod
+    def _update_all_history_flags(entries: List[Dict[str, Any]], data_type: str):
+        """Update has_history flags for all entries by checking history data.
+
+        Args:
+            entries: List of equipment entries to update
+            data_type: Type of data ('ppm' or 'ocm')
+        """
+        try:
+            # Import here to avoid circular imports
+            from app.services.history_service import HistoryService
+
+            # Load all history data once
+            history_data = HistoryService._load_history_data()
+
+            # Create a set of equipment IDs that have history
+            equipment_with_history = set()
+            for note in history_data:
+                if note.get('equipment_type') == data_type.lower():
+                    equipment_with_history.add(note.get('equipment_id'))
+
+            # Update has_history flag for each entry
+            serial_field = 'SERIAL' if data_type == 'ppm' else 'Serial'
+            for entry in entries:
+                equipment_id = entry.get(serial_field)
+                entry['has_history'] = equipment_id in equipment_with_history
+
+        except Exception as e:
+            logger.error(f"Error updating history flags: {e}")
+            # Set all to False if there's an error
+            for entry in entries:
+                entry['has_history'] = False
 
     @staticmethod
     def import_data(data_type: Literal['ppm', 'ocm'], file_stream: TextIO) -> Dict[str, Any]:

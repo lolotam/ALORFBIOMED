@@ -771,5 +771,3596 @@
     "description": "Accessed audit log page",
     "status": "Info",
     "details": {}
+  },
+  {
+    "id": 69,
+    "timestamp": "2025-06-27 16:46:55",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 70,
+    "timestamp": "2025-06-27 16:46:56",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 71,
+    "timestamp": "2025-06-27 16:46:56",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 72,
+    "timestamp": "2025-06-27 17:03:16",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_170316.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_170316.json",
+      "size_kb": 0.68,
+      "settings_count": 12
+    }
+  },
+  {
+    "id": 73,
+    "timestamp": "2025-06-27 17:16:10",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250627_171610.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171610.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 74,
+    "timestamp": "2025-06-27 17:16:14",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_171614.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171614.json",
+      "size_kb": 0.74,
+      "settings_count": 12
+    }
+  },
+  {
+    "id": 75,
+    "timestamp": "2025-06-27 17:18:10",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250627_171810.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171810.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 76,
+    "timestamp": "2025-06-27 17:18:15",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250627_171815.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171815.json",
+      "size_kb": 0.82,
+      "settings_count": 15
+    }
+  },
+  {
+    "id": 77,
+    "timestamp": "2025-06-27 21:06:42",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_171815.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171815.json"
+    }
+  },
+  {
+    "id": 78,
+    "timestamp": "2025-06-27 21:06:48",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250627_171810.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171810.zip"
+    }
+  },
+  {
+    "id": 79,
+    "timestamp": "2025-06-27 21:06:55",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_171614.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_171614.json"
+    }
+  },
+  {
+    "id": 80,
+    "timestamp": "2025-06-27 21:07:00",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250627_171610.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250627_171610.zip"
+    }
+  },
+  {
+    "id": 81,
+    "timestamp": "2025-06-27 21:07:05",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250627_170316.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250627_170316.json"
+    }
+  },
+  {
+    "id": 82,
+    "timestamp": "2025-06-27 23:56:50",
+    "event_type": "Backup Restored",
+    "performed_by": "User",
+    "description": "Full application backup restored successfully",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "restored_items": 16,
+      "previous_data_backup": "data_before_restore_20250627_235649"
+    }
+  },
+  {
+    "id": 83,
+    "timestamp": "2025-06-28 14:24:31",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to alorfbiomed@gmail.com",
+    "status": "Success",
+    "details": {
+      "recipient": "alorfbiomed@gmail.com",
+      "cc_emails": "lolotam@gmail.com",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 84,
+    "timestamp": "2025-06-28 14:35:20",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 20,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 85,
+    "timestamp": "2025-06-28 14:35:23",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250628_143523.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250628_143523.json",
+      "size_kb": 0.82,
+      "settings_count": 15
+    }
+  },
+  {
+    "id": 86,
+    "timestamp": "2025-06-28 14:35:32",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 87,
+    "timestamp": "2025-06-28 14:38:09",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to alorfbiomed@gmail.com",
+    "status": "Success",
+    "details": {
+      "recipient": "alorfbiomed@gmail.com",
+      "cc_emails": "lolotam@gmail.com",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 88,
+    "timestamp": "2025-06-28 14:45:51",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 89,
+    "timestamp": "2025-06-28 14:45:52",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 90,
+    "timestamp": "2025-06-28 14:45:52",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 91,
+    "timestamp": "2025-06-28 14:45:53",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 92,
+    "timestamp": "2025-06-28 15:50:46",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to test-invalid@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "test-invalid@example.com",
+      "cc_emails": "",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 93,
+    "timestamp": "2025-06-28 15:50:47",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to test-workflow@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "test-workflow@example.com",
+      "cc_emails": "",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 94,
+    "timestamp": "2025-06-28 15:53:28",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to comprehensive-test@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "comprehensive-test@example.com",
+      "cc_emails": "cc-comprehensive@example.com",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 95,
+    "timestamp": "2025-06-28 16:01:22",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to test-invalid@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "test-invalid@example.com",
+      "cc_emails": "",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 96,
+    "timestamp": "2025-06-28 16:01:23",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to test-workflow@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "test-workflow@example.com",
+      "cc_emails": "",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 97,
+    "timestamp": "2025-06-28 16:01:47",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to comprehensive-test@example.com",
+    "status": "Success",
+    "details": {
+      "recipient": "comprehensive-test@example.com",
+      "cc_emails": "cc-comprehensive@example.com",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 98,
+    "timestamp": "2025-06-28 16:02:30",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "comprehensive-test@example.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 99,
+    "timestamp": "2025-06-28 16:02:31",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "comprehensive-test@example.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 100,
+    "timestamp": "2025-06-28 16:02:31",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "comprehensive-test@example.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 101,
+    "timestamp": "2025-06-28 16:02:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "comprehensive-test@example.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 102,
+    "timestamp": "2025-06-28 16:04:55",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 103,
+    "timestamp": "2025-06-28 16:04:56",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 104,
+    "timestamp": "2025-06-28 16:04:57",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 105,
+    "timestamp": "2025-06-28 16:04:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 106,
+    "timestamp": "2025-06-28 16:11:04",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 107,
+    "timestamp": "2025-06-28 16:11:04",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 108,
+    "timestamp": "2025-06-28 16:11:05",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 109,
+    "timestamp": "2025-06-28 16:11:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 110,
+    "timestamp": "2025-06-28 16:16:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 111,
+    "timestamp": "2025-06-28 16:16:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 112,
+    "timestamp": "2025-06-28 16:16:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 113,
+    "timestamp": "2025-06-28 16:16:36",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 114,
+    "timestamp": "2025-06-28 16:16:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 115,
+    "timestamp": "2025-06-28 16:16:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 116,
+    "timestamp": "2025-06-28 16:16:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 117,
+    "timestamp": "2025-06-28 16:16:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 118,
+    "timestamp": "2025-06-28 16:18:30",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 119,
+    "timestamp": "2025-06-28 16:18:30",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 120,
+    "timestamp": "2025-06-28 16:18:31",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 121,
+    "timestamp": "2025-06-28 16:18:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 122,
+    "timestamp": "2025-06-28 16:18:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 123,
+    "timestamp": "2025-06-28 16:18:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 124,
+    "timestamp": "2025-06-28 16:18:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 125,
+    "timestamp": "2025-06-28 16:18:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 126,
+    "timestamp": "2025-06-28 16:19:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 127,
+    "timestamp": "2025-06-28 16:19:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 128,
+    "timestamp": "2025-06-28 16:19:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 129,
+    "timestamp": "2025-06-28 16:19:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 130,
+    "timestamp": "2025-06-28 16:19:36",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 131,
+    "timestamp": "2025-06-28 16:19:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 132,
+    "timestamp": "2025-06-28 16:19:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 133,
+    "timestamp": "2025-06-28 16:19:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 134,
+    "timestamp": "2025-06-28 16:19:39",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to alorfbiomed@gmail.com",
+    "status": "Success",
+    "details": {
+      "recipient": "alorfbiomed@gmail.com",
+      "cc_emails": "",
+      "sender": "dr.vet.waledmohamed@gmail.com"
+    }
+  },
+  {
+    "id": 135,
+    "timestamp": "2025-06-28 16:19:40",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 136,
+    "timestamp": "2025-06-28 16:19:40",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 137,
+    "timestamp": "2025-06-28 16:19:41",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 138,
+    "timestamp": "2025-06-28 16:19:42",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 139,
+    "timestamp": "2025-06-28 16:20:22",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 140,
+    "timestamp": "2025-06-28 16:20:23",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 141,
+    "timestamp": "2025-06-28 16:20:24",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 142,
+    "timestamp": "2025-06-28 16:20:24",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 143,
+    "timestamp": "2025-06-28 16:25:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 144,
+    "timestamp": "2025-06-28 16:25:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 145,
+    "timestamp": "2025-06-28 16:25:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 146,
+    "timestamp": "2025-06-28 16:25:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 147,
+    "timestamp": "2025-06-28 16:31:17",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 148,
+    "timestamp": "2025-06-28 16:31:18",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 149,
+    "timestamp": "2025-06-28 16:31:19",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 150,
+    "timestamp": "2025-06-28 16:31:19",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 151,
+    "timestamp": "2025-06-29 02:39:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 152,
+    "timestamp": "2025-06-29 02:39:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 153,
+    "timestamp": "2025-06-29 02:39:40",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 154,
+    "timestamp": "2025-06-29 02:39:41",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 155,
+    "timestamp": "2025-06-29 02:43:51",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 156,
+    "timestamp": "2025-06-29 02:43:51",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 157,
+    "timestamp": "2025-06-29 02:43:52",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 158,
+    "timestamp": "2025-06-29 02:43:53",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 159,
+    "timestamp": "2025-06-29 03:41:56",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 160,
+    "timestamp": "2025-06-29 03:41:57",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 161,
+    "timestamp": "2025-06-29 03:41:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 162,
+    "timestamp": "2025-06-29 03:41:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 163,
+    "timestamp": "2025-06-29 16:44:54",
+    "event_type": "Equipment History Added",
+    "performed_by": "testuser",
+    "description": "Added history note to PPM equipment TEST001",
+    "status": "Success",
+    "details": {
+      "equipment_id": "TEST001",
+      "equipment_type": "ppm",
+      "note_id": "e134339c-a8c9-4251-a7ff-67e0383f01af",
+      "note_length": 49
+    }
+  },
+  {
+    "id": 164,
+    "timestamp": "2025-06-29 16:44:54",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "System",
+    "description": "Deleted history note from PPM equipment TEST001",
+    "status": "Success",
+    "details": {
+      "equipment_id": "TEST001",
+      "equipment_type": "ppm",
+      "note_id": "e134339c-a8c9-4251-a7ff-67e0383f01af",
+      "attachments_deleted": 0
+    }
+  },
+  {
+    "id": 165,
+    "timestamp": "2025-06-29 16:44:54",
+    "event_type": "Equipment History Added",
+    "performed_by": "testuser",
+    "description": "Test history event",
+    "status": "Success",
+    "details": {
+      "test": true
+    }
+  },
+  {
+    "id": 166,
+    "timestamp": "2025-06-29 16:52:13",
+    "event_type": "Equipment History Added",
+    "performed_by": "test_user",
+    "description": "Added history note to PPM equipment TEST-FIX-001",
+    "status": "Success",
+    "details": {
+      "equipment_id": "TEST-FIX-001",
+      "equipment_type": "ppm",
+      "note_id": "70c6f9bb-1134-4933-8821-541003d204a4",
+      "note_length": 58
+    }
+  },
+  {
+    "id": 167,
+    "timestamp": "2025-06-29 16:52:13",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "System",
+    "description": "Deleted history note from PPM equipment TEST-FIX-001",
+    "status": "Success",
+    "details": {
+      "equipment_id": "TEST-FIX-001",
+      "equipment_type": "ppm",
+      "note_id": "70c6f9bb-1134-4933-8821-541003d204a4",
+      "attachments_deleted": 0
+    }
+  },
+  {
+    "id": 168,
+    "timestamp": "2025-06-29 17:20:57",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "Added history note to OCM equipment SW3266#",
+    "status": "Success",
+    "details": {
+      "equipment_id": "SW3266#",
+      "equipment_type": "ocm",
+      "note_id": "a7231391-3d83-49ae-8a5e-c954b55a163c",
+      "note_length": 11
+    }
+  },
+  {
+    "id": 169,
+    "timestamp": "2025-06-29 17:20:57",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 's-l1600.jpg' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "a7231391-3d83-49ae-8a5e-c954b55a163c",
+      "attachment_id": "0850913f-e392-403e-83e6-c248f3e96196",
+      "filename": "s-l1600.jpg",
+      "file_size": 4096
+    }
+  },
+  {
+    "id": 170,
+    "timestamp": "2025-06-29 17:20:57",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 'al_manar_clinic_invoice.pdf' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "a7231391-3d83-49ae-8a5e-c954b55a163c",
+      "attachment_id": "5167d765-86e9-455c-85d1-e46aeb00ec70",
+      "filename": "al_manar_clinic_invoice.pdf",
+      "file_size": 224668
+    }
+  },
+  {
+    "id": 171,
+    "timestamp": "2025-06-29 17:20:57",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "History Added OCM equipment: SW3266#",
+    "status": "Success",
+    "details": {
+      "equipment_type": "OCM",
+      "serial": "SW3266#",
+      "action": "History Added"
+    }
+  },
+  {
+    "id": 172,
+    "timestamp": "2025-06-29 19:49:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 173,
+    "timestamp": "2025-06-29 19:49:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 174,
+    "timestamp": "2025-06-29 19:49:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 175,
+    "timestamp": "2025-06-29 19:49:40",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 176,
+    "timestamp": "2025-06-29 19:57:01",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "Added history note to OCM equipment SW3266-hash",
+    "status": "Success",
+    "details": {
+      "equipment_id": "SW3266-hash",
+      "equipment_type": "ocm",
+      "note_id": "c63e3d1a-5997-49ff-ba1c-14224fbb4fd3",
+      "note_length": 29
+    }
+  },
+  {
+    "id": 177,
+    "timestamp": "2025-06-29 19:57:01",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment '1.jpg' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "c63e3d1a-5997-49ff-ba1c-14224fbb4fd3",
+      "attachment_id": "27aa96c2-9b51-47ef-9f79-644c32a32282",
+      "filename": "1.jpg",
+      "file_size": 28791
+    }
+  },
+  {
+    "id": 178,
+    "timestamp": "2025-06-29 19:57:01",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 'gata_cheats.docx' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "c63e3d1a-5997-49ff-ba1c-14224fbb4fd3",
+      "attachment_id": "f062cf6b-6727-483e-a38c-636dc5df4c54",
+      "filename": "gata_cheats.docx",
+      "file_size": 15998
+    }
+  },
+  {
+    "id": 179,
+    "timestamp": "2025-06-29 19:57:01",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "History Added OCM equipment: SW3266-hash",
+    "status": "Success",
+    "details": {
+      "equipment_type": "OCM",
+      "serial": "SW3266-hash",
+      "action": "History Added"
+    }
+  },
+  {
+    "id": 180,
+    "timestamp": "2025-06-29 20:02:59",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "System",
+    "description": "Deleted history note from OCM equipment SW3266-hash",
+    "status": "Success",
+    "details": {
+      "equipment_id": "SW3266-hash",
+      "equipment_type": "ocm",
+      "note_id": "c63e3d1a-5997-49ff-ba1c-14224fbb4fd3",
+      "attachments_deleted": 2
+    }
+  },
+  {
+    "id": 181,
+    "timestamp": "2025-06-29 20:02:59",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "admin",
+    "description": "History Deleted OCM equipment: SW3266-hash",
+    "status": "Success",
+    "details": {
+      "equipment_type": "OCM",
+      "serial": "SW3266-hash",
+      "action": "History Deleted"
+    }
+  },
+  {
+    "id": 182,
+    "timestamp": "2025-06-29 22:41:03",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "System",
+    "description": "Deleted history note from OCM equipment SW3266#",
+    "status": "Success",
+    "details": {
+      "equipment_id": "SW3266#",
+      "equipment_type": "ocm",
+      "note_id": "a7231391-3d83-49ae-8a5e-c954b55a163c",
+      "attachments_deleted": 2
+    }
+  },
+  {
+    "id": 183,
+    "timestamp": "2025-06-29 22:41:03",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "admin",
+    "description": "History Deleted OCM equipment: SW3266#",
+    "status": "Success",
+    "details": {
+      "equipment_type": "OCM",
+      "serial": "SW3266#",
+      "action": "History Deleted"
+    }
+  },
+  {
+    "id": 184,
+    "timestamp": "2025-06-29 22:47:46",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "Added history note to PPM equipment 111632045",
+    "status": "Success",
+    "details": {
+      "equipment_id": "111632045",
+      "equipment_type": "ppm",
+      "note_id": "ab0b75f1-74da-465c-8788-8e715cc7e708",
+      "note_length": 79
+    }
+  },
+  {
+    "id": 185,
+    "timestamp": "2025-06-29 22:47:46",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 'incident_related_medical_device.pdf' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "ab0b75f1-74da-465c-8788-8e715cc7e708",
+      "attachment_id": "a2641a88-38bc-4e75-b7aa-2ae5b5d54554",
+      "filename": "incident_related_medical_device.pdf",
+      "file_size": 2708815
+    }
+  },
+  {
+    "id": 186,
+    "timestamp": "2025-06-29 22:47:46",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "History Added PPM equipment: 111632045",
+    "status": "Success",
+    "details": {
+      "equipment_type": "PPM",
+      "serial": "111632045",
+      "action": "History Added"
+    }
+  },
+  {
+    "id": 187,
+    "timestamp": "2025-06-29 23:19:05",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 4 equipment maintenance tasks (1-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "a48aae63-1a63-491b-955e-bb30afc86218",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 188,
+    "timestamp": "2025-06-29 23:19:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 12 equipment maintenance tasks (7-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "f3356bfb-9b1f-428f-9085-e0d0ed898a48",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 189,
+    "timestamp": "2025-06-29 23:19:07",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 16 equipment maintenance tasks (15-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "e00e2666-cd8c-4c91-bd9e-4785acdd59d8",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 190,
+    "timestamp": "2025-06-29 23:19:07",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 30 equipment maintenance tasks (30-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "8c26d6da-2570-461a-8945-a4270cfb89d9",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 191,
+    "timestamp": "2025-06-29 23:20:57",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 4 equipment maintenance tasks (1-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "560daaa5-bf19-4fc6-8f32-1acd240eb1bc",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 192,
+    "timestamp": "2025-06-29 23:20:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 12 equipment maintenance tasks (7-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "47d89644-d639-4129-ba42-1960773b5deb",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 193,
+    "timestamp": "2025-06-29 23:20:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 16 equipment maintenance tasks (15-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "c58a5fcd-a4fd-4fc9-9abc-8fbbfc851dc0",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 194,
+    "timestamp": "2025-06-29 23:20:59",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Failed to send email reminder for 30 equipment maintenance tasks (30-day threshold)",
+    "status": "Failed",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "error_code": 401,
+      "error_response": {
+        "ErrorIdentifier": "3b9f3405-b334-48ad-a359-c7213996d057",
+        "StatusCode": 401,
+        "ErrorMessage": "API key authentication/authorization failure. You may be unauthorized to access the API or your API key may be expired. Visit API keys management section to check your keys."
+      }
+    }
+  },
+  {
+    "id": 195,
+    "timestamp": "2025-06-29 23:24:00",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 196,
+    "timestamp": "2025-06-29 23:24:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 197,
+    "timestamp": "2025-06-29 23:24:02",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 198,
+    "timestamp": "2025-06-29 23:24:02",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 199,
+    "timestamp": "2025-06-29 23:27:39",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "Added history note to OCM equipment 34234",
+    "status": "Success",
+    "details": {
+      "equipment_id": "34234",
+      "equipment_type": "ocm",
+      "note_id": "f12423f1-9294-4190-baab-6aea86ddb2c5",
+      "note_length": 17
+    }
+  },
+  {
+    "id": 200,
+    "timestamp": "2025-06-29 23:27:39",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 'incident_related_medical_device.pdf' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "f12423f1-9294-4190-baab-6aea86ddb2c5",
+      "attachment_id": "9c2cad76-ed70-4e7f-a249-5f78c0db8a6f",
+      "filename": "incident_related_medical_device.pdf",
+      "file_size": 2708815
+    }
+  },
+  {
+    "id": 201,
+    "timestamp": "2025-06-29 23:27:39",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "History Added OCM equipment: 34234",
+    "status": "Success",
+    "details": {
+      "equipment_type": "OCM",
+      "serial": "34234",
+      "action": "History Added"
+    }
+  },
+  {
+    "id": 202,
+    "timestamp": "2025-06-29 23:29:13",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 203,
+    "timestamp": "2025-06-30 00:11:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 204,
+    "timestamp": "2025-06-30 00:11:06",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 205,
+    "timestamp": "2025-06-30 00:11:07",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 206,
+    "timestamp": "2025-06-30 00:11:08",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 207,
+    "timestamp": "2025-06-30 02:44:28",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 208,
+    "timestamp": "2025-06-30 02:44:49",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 209,
+    "timestamp": "2025-06-30 02:44:50",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 210,
+    "timestamp": "2025-06-30 03:12:58",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 211,
+    "timestamp": "2025-06-30 03:12:59",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 212,
+    "timestamp": "2025-06-30 03:12:59",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 213,
+    "timestamp": "2025-06-30 03:13:00",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 214,
+    "timestamp": "2025-06-30 03:27:28",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250628_143523.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250628_143523.json"
+    }
+  },
+  {
+    "id": 215,
+    "timestamp": "2025-06-30 03:27:38",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 216,
+    "timestamp": "2025-06-30 03:27:38",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 217,
+    "timestamp": "2025-06-30 03:28:19",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 218,
+    "timestamp": "2025-06-30 03:28:19",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 219,
+    "timestamp": "2025-06-30 03:28:24",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250628_143523.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250628_143523.json"
+    }
+  },
+  {
+    "id": 220,
+    "timestamp": "2025-06-30 03:29:19",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 221,
+    "timestamp": "2025-06-30 03:29:20",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 222,
+    "timestamp": "2025-06-30 03:29:20",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 223,
+    "timestamp": "2025-06-30 03:29:21",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 224,
+    "timestamp": "2025-06-30 03:49:00",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 225,
+    "timestamp": "2025-06-30 03:49:22",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 226,
+    "timestamp": "2025-06-30 03:49:22",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 227,
+    "timestamp": "2025-06-30 03:49:22",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 228,
+    "timestamp": "2025-06-30 03:49:23",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 229,
+    "timestamp": "2025-06-30 03:49:23",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 230,
+    "timestamp": "2025-06-30 03:58:47",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 231,
+    "timestamp": "2025-06-30 03:59:09",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 232,
+    "timestamp": "2025-06-30 03:59:10",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 233,
+    "timestamp": "2025-06-30 04:00:13",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 234,
+    "timestamp": "2025-06-30 04:00:14",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 235,
+    "timestamp": "2025-06-30 04:00:15",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 236,
+    "timestamp": "2025-06-30 04:28:16",
+    "event_type": "Test Email",
+    "performed_by": "User",
+    "description": "Test email sent successfully to alorfbiomed@gmail.com",
+    "status": "Success",
+    "details": {
+      "recipient": "alorfbiomed@gmail.com",
+      "cc_emails": "lolotam@gmail.com, dr.vet.waleedtam@gmail.com",
+      "sender": "dr.vet.waleedtam@gmail.com"
+    }
+  },
+  {
+    "id": 237,
+    "timestamp": "2025-06-30 04:28:27",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 238,
+    "timestamp": "2025-06-30 04:28:28",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 239,
+    "timestamp": "2025-06-30 04:28:28",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 240,
+    "timestamp": "2025-06-30 04:40:02",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250630_044001.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_044001.zip",
+      "size_mb": 0.16,
+      "files_backed_up": 22,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 241,
+    "timestamp": "2025-06-30 04:40:09",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 242,
+    "timestamp": "2025-06-30 04:41:52",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json"
+    }
+  },
+  {
+    "id": 243,
+    "timestamp": "2025-06-30 04:41:56",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250630_044001.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_044001.zip"
+    }
+  },
+  {
+    "id": 244,
+    "timestamp": "2025-06-30 04:41:56",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250630_044001.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_044001.zip"
+    }
+  },
+  {
+    "id": 245,
+    "timestamp": "2025-06-30 04:44:05",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json"
+    }
+  },
+  {
+    "id": 246,
+    "timestamp": "2025-06-30 04:44:21",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 247,
+    "timestamp": "2025-06-30 04:44:22",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 248,
+    "timestamp": "2025-06-30 04:44:23",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 249,
+    "timestamp": "2025-06-30 04:44:52",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 250,
+    "timestamp": "2025-06-30 04:47:50",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 251,
+    "timestamp": "2025-06-30 04:47:55",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json"
+    }
+  },
+  {
+    "id": 252,
+    "timestamp": "2025-06-30 04:48:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 253,
+    "timestamp": "2025-06-30 04:48:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 254,
+    "timestamp": "2025-06-30 04:48:07",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 255,
+    "timestamp": "2025-06-30 04:48:25",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 256,
+    "timestamp": "2025-06-30 04:48:25",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 257,
+    "timestamp": "2025-06-30 04:48:27",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 258,
+    "timestamp": "2025-06-30 04:48:28",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 259,
+    "timestamp": "2025-06-30 04:50:19",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 260,
+    "timestamp": "2025-06-30 04:50:29",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 261,
+    "timestamp": "2025-06-30 04:52:18",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 262,
+    "timestamp": "2025-06-30 04:52:24",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json"
+    }
+  },
+  {
+    "id": 263,
+    "timestamp": "2025-06-30 04:52:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 264,
+    "timestamp": "2025-06-30 04:52:32",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 265,
+    "timestamp": "2025-06-30 04:52:33",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 266,
+    "timestamp": "2025-06-30 04:52:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 267,
+    "timestamp": "2025-06-30 04:52:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 268,
+    "timestamp": "2025-06-30 04:52:34",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 269,
+    "timestamp": "2025-06-30 04:52:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 270,
+    "timestamp": "2025-06-30 04:52:35",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 271,
+    "timestamp": "2025-06-30 04:52:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 272,
+    "timestamp": "2025-06-30 04:53:00",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_045300.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045300.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 273,
+    "timestamp": "2025-06-30 04:53:02",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 274,
+    "timestamp": "2025-06-30 04:53:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 275,
+    "timestamp": "2025-06-30 04:53:08",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045300.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045300.json"
+    }
+  },
+  {
+    "id": 276,
+    "timestamp": "2025-06-30 04:55:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 277,
+    "timestamp": "2025-06-30 04:55:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 278,
+    "timestamp": "2025-06-30 04:55:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 279,
+    "timestamp": "2025-06-30 04:55:40",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 280,
+    "timestamp": "2025-06-30 04:56:01",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045300.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045300.json"
+    }
+  },
+  {
+    "id": 281,
+    "timestamp": "2025-06-30 04:56:03",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 282,
+    "timestamp": "2025-06-30 04:56:12",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_045300.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045300.json"
+    }
+  },
+  {
+    "id": 283,
+    "timestamp": "2025-06-30 04:56:16",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_045616.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045616.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 284,
+    "timestamp": "2025-06-30 04:56:17",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_044452.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044452.json"
+    }
+  },
+  {
+    "id": 285,
+    "timestamp": "2025-06-30 04:56:21",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_045616.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045616.json"
+    }
+  },
+  {
+    "id": 286,
+    "timestamp": "2025-06-30 04:56:26",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_044009.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_044009.json"
+    }
+  },
+  {
+    "id": 287,
+    "timestamp": "2025-06-30 04:56:29",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250630_044001.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_044001.zip"
+    }
+  },
+  {
+    "id": 288,
+    "timestamp": "2025-06-30 04:57:23",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250630_045723.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_045723.zip",
+      "size_mb": 0.16,
+      "files_backed_up": 22,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 289,
+    "timestamp": "2025-06-30 04:57:26",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_045726.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045726.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 290,
+    "timestamp": "2025-06-30 04:57:49",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_045749.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045749.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 291,
+    "timestamp": "2025-06-30 05:00:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 292,
+    "timestamp": "2025-06-30 05:00:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 293,
+    "timestamp": "2025-06-30 05:01:27",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045749.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045749.json"
+    }
+  },
+  {
+    "id": 294,
+    "timestamp": "2025-06-30 05:01:29",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045726.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045726.json"
+    }
+  },
+  {
+    "id": 295,
+    "timestamp": "2025-06-30 05:03:10",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045749.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045749.json"
+    }
+  },
+  {
+    "id": 296,
+    "timestamp": "2025-06-30 05:03:12",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250630_045726.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045726.json"
+    }
+  },
+  {
+    "id": 297,
+    "timestamp": "2025-06-30 05:03:14",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250630_045723.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_045723.zip"
+    }
+  },
+  {
+    "id": 298,
+    "timestamp": "2025-06-30 05:03:14",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250630_045723.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_045723.zip"
+    }
+  },
+  {
+    "id": 299,
+    "timestamp": "2025-06-30 05:03:17",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250628_143523.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250628_143523.json"
+    }
+  },
+  {
+    "id": 300,
+    "timestamp": "2025-06-30 05:03:19",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 301,
+    "timestamp": "2025-06-30 05:03:19",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250628_143520.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250628_143520.zip"
+    }
+  },
+  {
+    "id": 302,
+    "timestamp": "2025-06-30 05:03:26",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_045749.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045749.json"
+    }
+  },
+  {
+    "id": 303,
+    "timestamp": "2025-06-30 05:03:31",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: settings_backup_20250630_045726.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_045726.json"
+    }
+  },
+  {
+    "id": 304,
+    "timestamp": "2025-06-30 05:03:34",
+    "event_type": "Backup Deleted",
+    "performed_by": "User",
+    "description": "Backup deleted: full_backup_20250630_045723.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250630_045723.zip"
+    }
+  },
+  {
+    "id": 305,
+    "timestamp": "2025-06-30 05:32:42",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 8
+    }
+  },
+  {
+    "id": 306,
+    "timestamp": "2025-06-30 05:34:12",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 8
+    }
+  },
+  {
+    "id": 307,
+    "timestamp": "2025-06-30 05:34:34",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_053434.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_053434.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 308,
+    "timestamp": "2025-06-30 05:35:26",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 8
+    }
+  },
+  {
+    "id": 309,
+    "timestamp": "2025-06-30 05:35:48",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_053548.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_053548.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 310,
+    "timestamp": "2025-06-30 05:35:50",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file via API: settings_backup_20250630_053548.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_053548.json"
+    }
+  },
+  {
+    "id": 311,
+    "timestamp": "2025-06-30 05:36:29",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 8
+    }
+  },
+  {
+    "id": 312,
+    "timestamp": "2025-06-30 05:36:50",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_053650.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_053650.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 313,
+    "timestamp": "2025-06-30 05:36:53",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file via API: settings_backup_20250630_053650.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_053650.json"
+    }
+  },
+  {
+    "id": 314,
+    "timestamp": "2025-06-30 07:32:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 315,
+    "timestamp": "2025-06-30 07:32:37",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 316,
+    "timestamp": "2025-06-30 07:32:38",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 317,
+    "timestamp": "2025-06-30 07:32:39",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "alorfbiomed@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 318,
+    "timestamp": "2025-06-30 12:13:15",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 8
+    }
+  },
+  {
+    "id": 319,
+    "timestamp": "2025-06-30 12:13:37",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250630_121337.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_121337.json",
+      "size_kb": 2.95,
+      "settings_count": 17
+    }
+  },
+  {
+    "id": 320,
+    "timestamp": "2025-06-30 12:13:39",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file via API: settings_backup_20250630_121337.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250630_121337.json"
+    }
+  },
+  {
+    "id": 321,
+    "timestamp": "2025-07-02 01:45:13",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 322,
+    "timestamp": "2025-07-02 01:45:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
+  },
+  {
+    "id": 323,
+    "timestamp": "2025-07-02 01:45:15",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
   }
 ]
