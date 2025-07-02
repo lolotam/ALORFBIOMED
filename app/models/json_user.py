@@ -49,12 +49,22 @@ class JSONUser(UserMixin):
         """Check if the provided password matches the stored hash."""
         logger.debug(f"[check_password] Checking password for {self.username}")
         
-        # For testing purposes, allow login with any non-empty password
-        if password and password.strip():
-            logger.warning(f"[check_password] Allowing login for {self.username} with any non-empty password for testing")
-            return True
+        if not password:
+            logger.debug(f"[check_password] Empty password provided for {self.username}")
+            return False
+        
+        try:
+            # Import here to avoid circular imports
+            from werkzeug.security import check_password_hash
             
-        return False
+            # Check if password matches the stored hash
+            is_valid = check_password_hash(self.password_hash, password)
+            logger.debug(f"[check_password] Password validation for {self.username}: {'SUCCESS' if is_valid else 'FAILED'}")
+            return is_valid
+            
+        except Exception as e:
+            logger.error(f"[check_password] Error checking password for {self.username}: {e}")
+            return False
     
     def has_permission(self, permission_name):
         """Check if the user has the specified permission."""

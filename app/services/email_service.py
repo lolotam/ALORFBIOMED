@@ -110,12 +110,16 @@ class EmailService:
                             except Exception as e:
                                 logger.error(f"Error during process_reminders call in scheduler loop: {str(e)}", exc_info=True)
                             
-                            # Sleep until next day's target time
-                            sleep_seconds = max(time_until_next + 86400, 3600)  # At least 1 hour, or until next day
-                            logger.info(f"Daily emails sent. Sleeping until next {target_hour:02d}:{target_minute:02d} ({sleep_seconds/3600:.1f} hours).")
+                            # Sleep for a reasonable time, but check settings more frequently
+                            # Instead of sleeping until next day, sleep for max 1 hour to check for setting changes
+                            sleep_seconds = min(3600, max(time_until_next + 3600, 900))  # Between 15 minutes and 1 hour
+                            logger.info(f"Daily emails sent. Next check in {sleep_seconds/60:.1f} minutes to allow for schedule changes.")
                         else:
-                            # Not time yet, sleep until closer to target time
-                            sleep_seconds = min(time_until_next - 60, 3600)  # Check again 1 minute before target time, or in 1 hour max
+                            # Not time yet, but check settings more frequently for time changes
+                            # Limit sleep to max 1 hour so we can detect schedule changes quickly
+                            max_sleep = 3600  # 1 hour maximum
+                            optimal_sleep = max(time_until_next - 60, 300)  # 1 minute before target, minimum 5 minutes
+                            sleep_seconds = min(optimal_sleep, max_sleep)
                             logger.info(f"Next email scheduled for {next_run.strftime('%Y-%m-%d %H:%M:%S')}. Sleeping for {sleep_seconds/60:.1f} minutes.")
                     
                     else:
@@ -131,7 +135,7 @@ class EmailService:
                         logger.info(f"Legacy interval mode: sleeping for {sleep_seconds/60:.1f} minutes until next check.")
                 else:
                     logger.info("Email notifications are DISABLED in settings. Skipping reminder processing.")
-                    sleep_seconds = 3600  # Check settings again in 1 hour
+                    sleep_seconds = 1800  # Check settings again in 30 minutes (more frequent for quick enable/disable changes)
 
                 await asyncio.sleep(sleep_seconds)
                 logger.debug("Scheduler awake after sleep.")

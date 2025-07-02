@@ -13,7 +13,7 @@
   "scheduler_interval_hours": 24,
   "enable_automatic_reminders": true,
   "cc_emails": "Alorfbiomed@gmail.com",
-  "automatic_backup_enabled": false,
+  "automatic_backup_enabled": true,
   "automatic_backup_interval_hours": 24,
   "users": [
     {

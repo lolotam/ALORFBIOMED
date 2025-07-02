@@ -4713,5 +4713,17 @@
     "description": "Accessed audit log page",
     "status": "Info",
     "details": {}
+  },
+  {
+    "id": 352,
+    "timestamp": "2025-07-02 03:49:46",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 24
+    }
   }
 ]
