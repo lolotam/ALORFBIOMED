@@ -795,6 +795,88 @@ class DataService:
                 entry['has_history'] = False
 
     @staticmethod
+    def get_entries_paginated(data_type: Literal['ppm', 'ocm'], page: int = 1, per_page: int = 100) -> Dict[str, Any]:
+        """Get paginated entries for the specified data type.
+
+        Args:
+            data_type: Type of data to retrieve ('ppm' or 'ocm')
+            page: Page number (1-based)
+            per_page: Number of entries per page
+
+        Returns:
+            Dictionary containing:
+            - 'entries': List of entries for the current page
+            - 'total': Total number of entries
+            - 'page': Current page number
+            - 'per_page': Entries per page
+            - 'total_pages': Total number of pages
+            - 'has_prev': Whether there's a previous page
+            - 'has_next': Whether there's a next page
+            - 'prev_page': Previous page number (None if no previous)
+            - 'next_page': Next page number (None if no next)
+        """
+        logger.debug(f"Getting paginated {data_type} entries - page {page}, per_page {per_page}")
+        
+        try:
+            # Get all data using the same logic as get_all_entries
+            entries = DataService.load_data(data_type)
+            
+            # Update history flags for all entries
+            DataService._update_all_history_flags(entries, data_type)
+            
+            # Sort entries: equipment with history first, then by NO (newest first)
+            entries.sort(key=lambda x: (not x.get('has_history', False), -(x.get('NO', 0))))
+            
+            total_entries = len(entries)
+            total_pages = max(1, (total_entries + per_page - 1) // per_page)  # Ceiling division
+            
+            # Ensure page is within valid range
+            page = max(1, min(page, total_pages))
+            
+            # Calculate start and end indices
+            start_idx = (page - 1) * per_page
+            end_idx = start_idx + per_page
+            
+            # Get entries for current page
+            page_entries = entries[start_idx:end_idx]
+            
+            # Calculate pagination info
+            has_prev = page > 1
+            has_next = page < total_pages
+            prev_page = page - 1 if has_prev else None
+            next_page = page + 1 if has_next else None
+            
+            pagination_info = {
+                'entries': page_entries,
+                'total': total_entries,
+                'page': page,
+                'per_page': per_page,
+                'total_pages': total_pages,
+                'has_prev': has_prev,
+                'has_next': has_next,
+                'prev_page': prev_page,
+                'next_page': next_page
+            }
+            
+            logger.debug(f"Successfully retrieved page {page}/{total_pages} with {len(page_entries)} {data_type} entries")
+            return pagination_info
+            
+        except Exception as e:
+            logger.error(f"Error getting paginated {data_type} entries: {str(e)}")
+            # Return empty pagination info on error
+            return {
+                'entries': [],
+                'total': 0,
+                'page': 1,
+                'per_page': per_page,
+                'total_pages': 1,
+                'has_prev': False,
+                'has_next': False,
+                'prev_page': None,
+                'next_page': None
+            }
+
+    @staticmethod
     def import_data(data_type: Literal['ppm', 'ocm'], file_stream: TextIO) -> Dict[str, Any]:
         """
         Bulk import data from a CSV file stream.

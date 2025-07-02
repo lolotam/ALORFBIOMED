@@ -4725,5 +4725,125 @@
       "automatic_backup_enabled": true,
       "automatic_backup_interval_hours": 24
     }
+  },
+  {
+    "id": 353,
+    "timestamp": "2025-07-02 05:29:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 354,
+    "timestamp": "2025-07-02 05:29:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 4 equipment maintenance tasks (1-day threshold, URGENT priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 1,
+      "priority_level": "URGENT",
+      "equipment_count": 4,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 355,
+    "timestamp": "2025-07-02 05:29:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 356,
+    "timestamp": "2025-07-02 05:29:01",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 12 equipment maintenance tasks (7-day threshold, HIGH priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 7,
+      "priority_level": "HIGH",
+      "equipment_count": 12,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 357,
+    "timestamp": "2025-07-02 05:29:02",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 358,
+    "timestamp": "2025-07-02 05:29:02",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 16 equipment maintenance tasks (15-day threshold, MEDIUM priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 15,
+      "priority_level": "MEDIUM",
+      "equipment_count": 16,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 359,
+    "timestamp": "2025-07-02 05:29:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
+  },
+  {
+    "id": 360,
+    "timestamp": "2025-07-02 05:29:03",
+    "event_type": "Reminder Sent",
+    "performed_by": "System",
+    "description": "Email reminder sent for 30 equipment maintenance tasks (30-day threshold, LOW priority)",
+    "status": "Success",
+    "details": {
+      "threshold_days": 30,
+      "priority_level": "LOW",
+      "equipment_count": 30,
+      "recipient": "lolotam@gmail.com",
+      "email_type": "threshold_reminder"
+    }
   }
 ]

@@ -79,7 +79,7 @@
   "daily_send_time_enabled": true,
   "legacy_interval_enabled": false,
   "email_send_time_minute": 38,
-  "email_send_time": "03:41",
+  "email_send_time": "05:30",
   "use_daily_send_time": true,
   "use_legacy_interval": false
 }

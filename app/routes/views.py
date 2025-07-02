@@ -204,15 +204,24 @@ def health_check():
 @views_bp.route('/equipment/<data_type>')
 @permission_required(['equipment_ppm_read', 'equipment_ocm_read'])
 def list_equipment(data_type):
-    """Display list of equipment (either PPM or OCM)."""
-    # if not session.get('is_admin'): # Replaced by decorator
-    #     return redirect(url_for('views.login'))
+    """Display paginated list of equipment (either PPM or OCM)."""
     if data_type not in ('ppm', 'ocm'):
         flash("Invalid equipment type specified.", "warning")
         return redirect(url_for('views.index'))
     
+    # Get page and per_page parameters from URL
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 100, type=int)
+    
+    # Validate per_page parameter
+    if per_page not in [50, 100, 200, 500]:
+        per_page = 100  # Default to 100 if invalid value
+    
     try:
-        equipment_data = DataService.get_all_entries(data_type)
+        # Get paginated data
+        pagination_info = DataService.get_entries_paginated(data_type, page=page, per_page=per_page)
+        equipment_data = pagination_info['entries']
+        
         if isinstance(equipment_data, dict):
             equipment_data = [equipment_data]
             
@@ -254,11 +263,29 @@ def list_equipment(data_type):
                             quarter_info['status'] = 'N/A'
                             quarter_info['status_class'] = 'secondary'
         
-        return render_template('equipment/list.html', equipment=equipment_data, data_type=data_type)
+        return render_template('equipment/list.html', 
+                             equipment=equipment_data, 
+                             data_type=data_type,
+                             pagination=pagination_info)
     except Exception as e:
         logger.error(f"Error loading {data_type} list: {str(e)}")
         flash(f"Error loading {data_type.upper()} equipment data.", "danger")
-        return render_template('equipment/list.html', equipment=[], data_type=data_type)
+        # Return empty pagination info on error
+        empty_pagination = {
+            'entries': [],
+            'total': 0,
+            'page': 1,
+            'per_page': per_page,
+            'total_pages': 1,
+            'has_prev': False,
+            'has_next': False,
+            'prev_page': None,
+            'next_page': None
+        }
+        return render_template('equipment/list.html', 
+                             equipment=[], 
+                             data_type=data_type,
+                             pagination=empty_pagination)
 
 @views_bp.route('/equipment/ppm/add', methods=['GET', 'POST'])
 @permission_required(['equipment_ppm_write'])
