@@ -494,17 +494,17 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         {% if data_type == 'ppm' %}
-                                            <a href="{{ url_for('views.edit_ppm_equipment', SERIAL=entry.SERIAL|url_safe_serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                            <a href="{{ url_for('views.edit_ppm_equipment', SERIAL=entry.SERIAL) }}" class="btn btn-sm btn-warning me-1">Edit</a>
                                         {% elif data_type == 'ocm' %}
-                                            <a href="{{ url_for('views.edit_ocm_equipment', Serial=entry.Serial|url_safe_serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                            <a href="{{ url_for('views.edit_ocm_equipment', Serial=entry.Serial) }}" class="btn btn-sm btn-warning me-1">Edit</a>
                                         {% endif %}
                                         {% if data_type == 'ppm' %}
-                                            <a href="{{ url_for('views.equipment_history', equipment_type='ppm', equipment_id=entry.SERIAL|url_safe_serial) }}"
+                                            <a href="{{ url_for('views.equipment_history', equipment_type='ppm', equipment_id=entry.SERIAL) }}"
                                                class="btn btn-sm btn-outline-secondary me-1" title="View History">
                                                 <i class="fas fa-history"></i>
                                             </a>
                                         {% elif data_type == 'ocm' %}
-                                            <a href="{{ url_for('views.equipment_history', equipment_type='ocm', equipment_id=entry.Serial|url_safe_serial) }}"
+                                            <a href="{{ url_for('views.equipment_history', equipment_type='ocm', equipment_id=entry.Serial) }}"
                                                class="btn btn-sm btn-outline-secondary me-1" title="View History">
                                                 <i class="fas fa-history"></i>
                                             </a>
