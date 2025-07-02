@@ -220,6 +220,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (emailSendTime) emailSendTime.value = emailSendTimeValue;
 
+            // Backup settings
+            if (automaticBackupToggle) automaticBackupToggle.checked = !!settings.automatic_backup_enabled;
+            if (backupInterval) backupInterval.value = settings.automatic_backup_interval_hours || 24;
+
             currentServerSettings = settings;
 
             // Initialize scheduling toggles
@@ -898,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             try {
-                const response = await fetch('/settings', {
+                const response = await fetch('/api/backup-settings', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -915,10 +919,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 const result = await response.json();
-
+                
                 if (response.ok) {
                     showToast('Backup settings saved successfully!', 'success');
                     showAlert('Backup settings saved successfully!', 'success');
+                    // Update current server settings
                     currentServerSettings = { ...currentServerSettings, ...backupData };
                 } else {
                     showAlert(result.error || result.message || 'Failed to save backup settings.', 'danger');

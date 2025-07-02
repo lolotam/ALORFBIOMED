@@ -1,7 +1,7 @@
 {
   "email_notifications_enabled": true,
   "email_reminder_interval_minutes": 60,
-  "recipient_email": "Alorfbiomed@gmail.com",
+  "recipient_email": "lolotam@gmail.com",
   "push_notifications_enabled": false,
   "push_notification_interval_minutes": 60,
   "email_send_time_hour": 3,
@@ -11,30 +11,15 @@
     "1_day_before": false
   },
   "scheduler_interval_hours": 24,
-  "enable_automatic_reminders": false,
-  "cc_emails": "",
+  "enable_automatic_reminders": true,
+  "cc_emails": "Alorfbiomed@gmail.com",
   "automatic_backup_enabled": false,
   "automatic_backup_interval_hours": 24,
   "users": [
     {
-      "username": "editor1",
-      "password": "editor",
-      "role": "Editor"
-    },
-    {
       "username": "admin",
-      "password": "$2b$12$Lx4X1W4T3X5Z6Y7A8B9C0u1v2w3x4y5z6A7B8C9D0E1F2G3H4I5J6K7L8",
+      "password": "pbkdf2:sha256:600000$PRPn88H1ijaWaJ14$4f30ec776a03728db5c793ebba0e29149903c43e37b18e710ecf6dd0553ecb25",
       "role": "Admin"
-    },
-    {
-      "username": "viewer1",
-      "password": "viewer",
-      "role": "Viewer"
-    },
-    {
-      "username": "editor2",
-      "password": "scrypt:32768:8:1$Hwf4db4X4tage9XT$ddacdd3484463d3b32f1b9eda19ce46a322c86056c53b23279dd8fd787c276aad26e8143f547206195c771ce708429bac3bb64b5ae272720d86b49afcf247ff7",
-      "role": "Editor"
     }
   ],
   "roles": {
@@ -94,8 +79,7 @@
   "daily_send_time_enabled": true,
   "legacy_interval_enabled": false,
   "email_send_time_minute": 38,
-  "email_send_time": "03:38",
+  "email_send_time": "03:41",
   "use_daily_send_time": true,
-  "use_legacy_interval": false,
-  "enable_automatic_reminders": true
+  "use_legacy_interval": false
 }
