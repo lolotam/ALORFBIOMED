@@ -127,6 +127,19 @@ document.addEventListener('DOMContentLoaded', function() {
             attachCheckboxEventListeners();
             updateBulkDeleteButton();
 
+            // Update row numbering for NO column
+            const rowsAfter = Array.from(tableBody.querySelectorAll('tr'));
+            let counter = 1;
+            rowsAfter.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const noCell = row.cells[1];
+                    if (noCell) {
+                        noCell.textContent = counter;
+                        counter += 1;
+                    }
+                }
+            });
+
         } catch (error) {
             console.error('Error in updateTable:', error);
         }
