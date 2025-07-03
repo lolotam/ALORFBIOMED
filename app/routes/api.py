@@ -166,7 +166,7 @@ def export_data(data_type):
 @api_bp.route("/import/<data_type>", methods=["POST"])
 @permission_required(["import_data"])
 def import_data(data_type):
-    """Import data from CSV."""
+    """Import data from CSV with robust encoding detection and handling."""
     if data_type not in ('ppm', 'ocm'):
         return jsonify({"error": "Invalid data type"}), 400
 
@@ -179,13 +179,37 @@ def import_data(data_type):
 
     if file and file.filename.endswith('.csv'):
         try:
-            # Wrap the file stream for text-mode processing
-            # file.stream is a SpooledTemporaryFile, which is binary.
-            # TextIOWrapper makes it behave like a text file.
-            file_stream = io.TextIOWrapper(file.stream, encoding='utf-8')
+            # Import encoding detection utility
+            from app.utils.encoding_utils import EncodingDetector
+            
+            logger.info(f"Starting import of {data_type} data from file: {file.filename}")
+            
+            # Use robust encoding detection to create text stream
+            file_stream, encoding_used, encoding_error = EncodingDetector.safe_read_csv_with_encoding(
+                file.stream, 
+                preferred_encoding=None  # Let auto-detection handle it
+            )
+            
+            if encoding_error:
+                logger.error(f"Encoding detection failed for file {file.filename}: {encoding_error}")
+                return jsonify({
+                    "error": f"Failed to read file due to encoding issues: {encoding_error}",
+                    "details": "The file may be corrupted or use an unsupported text encoding. Please ensure the file is saved in UTF-8 format.",
+                    "suggestions": [
+                        "Try saving the file as UTF-8 in Excel or your CSV editor",
+                        "Check if the file contains special characters that may cause encoding issues",
+                        "Ensure the file is not corrupted"
+                    ]
+                }), 400
+            
+            logger.info(f"Successfully detected and using encoding: {encoding_used} for file: {file.filename}")
 
-            # Call DataService.import_data directly with the stream
+            # Call DataService.import_data directly with the properly encoded stream
             import_results = DataService.import_data(data_type, file_stream)
+            
+            # Add encoding information to the results
+            import_results['encoding_used'] = encoding_used
+            import_results['file_name'] = file.filename
 
             # Check for errors in import_results to determine status code
             if import_results.get("errors") and (import_results.get("added_count", 0) == 0 and import_results.get("updated_count", 0) == 0) :
@@ -199,9 +223,41 @@ def import_data(data_type):
 
             return jsonify(import_results), status_code
 
+        except UnicodeDecodeError as e:
+            logger.error(f"Unicode encoding error importing {data_type} data from {file.filename}: {str(e)}")
+            return jsonify({
+                "error": f"File encoding error: Unable to read the file due to character encoding issues",
+                "details": f"The file contains characters that cannot be decoded. Error at position {e.start}: {str(e)}",
+                "suggestions": [
+                    "Save the file in UTF-8 encoding",
+                    "Remove or replace special characters in the file",
+                    "Use a text editor to check for hidden or problematic characters",
+                    "Try converting the file encoding using a tool like Notepad++ or Excel"
+                ],
+                "technical_details": str(e)
+            }), 400
         except Exception as e:
-            logger.error(f"Error importing {data_type} data: {str(e)}")
-            return jsonify({"error": f"Failed to import {data_type} data: {str(e)}", "details": str(e)}), 500
+            logger.error(f"Error importing {data_type} data from {file.filename}: {str(e)}", exc_info=True)
+            
+            # Check if it's an encoding-related error
+            error_str = str(e).lower()
+            if any(keyword in error_str for keyword in ['codec', 'decode', 'encoding', 'utf-8', 'unicode']):
+                return jsonify({
+                    "error": f"File encoding error: {str(e)}",
+                    "details": "The file appears to have encoding issues. This often happens with files created in different text encodings.",
+                    "suggestions": [
+                        "Try saving the file as UTF-8 in your spreadsheet application",
+                        "Check for special characters or symbols in your data",
+                        "Use 'Save As' and select UTF-8 encoding in Excel or LibreOffice"
+                    ],
+                    "file_name": file.filename
+                }), 400
+            else:
+                return jsonify({
+                    "error": f"Failed to import {data_type} data: {str(e)}", 
+                    "details": str(e),
+                    "file_name": file.filename
+                }), 500
     else:
         return jsonify({"error": "Invalid file type, only CSV allowed"}), 400
 
@@ -708,9 +764,33 @@ def import_auto():
                 temp_file_path = temp_file.name
             
             try:
-                # First, detect the CSV type
+                # First, detect the CSV type with encoding detection
                 import pandas as pd
-                df = pd.read_csv(temp_file_path, dtype=str)
+                from app.utils.encoding_utils import EncodingDetector
+                
+                # Detect encoding for the temp file
+                with open(temp_file_path, 'rb') as binary_file:
+                    encoding, confidence = EncodingDetector.detect_encoding(binary_file)
+                    logger.info(f"Auto-import detected encoding: {encoding} (confidence: {confidence:.2%})")
+                
+                # Read CSV with detected encoding
+                try:
+                    df = pd.read_csv(temp_file_path, dtype=str, encoding=encoding)
+                except UnicodeDecodeError:
+                    logger.warning(f"Encoding {encoding} failed, trying fallback encodings")
+                    # Try common encodings as fallback
+                    for fallback_encoding in EncodingDetector.COMMON_ENCODINGS:
+                        try:
+                            df = pd.read_csv(temp_file_path, dtype=str, encoding=fallback_encoding)
+                            logger.info(f"Successfully read file with fallback encoding: {fallback_encoding}")
+                            break
+                        except UnicodeDecodeError:
+                            continue
+                    else:
+                        # Last resort: use errors='replace'
+                        df = pd.read_csv(temp_file_path, dtype=str, encoding='utf-8', encoding_errors='replace')
+                        logger.warning("Using UTF-8 with error replacement for auto-import")
+                
                 detected_type = ImportExportService.detect_csv_type(df.columns.tolist())
                 
                 if detected_type == 'unknown':

@@ -55,11 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     let resultHtml = `<div class="alert alert-success">${data.message}</div>`;
-                    resultHtml += `<p>Type: ${data.type.toUpperCase()}</p>`;
-                    resultHtml += `<p>Total Rows: ${data.stats.total_rows}</p>`;
-                    resultHtml += `<p>Imported: ${data.stats.imported}</p>`;
-                    resultHtml += `<p>Skipped: ${data.stats.skipped}</p>`;
-                    resultHtml += `<p>Errors: ${data.stats.errors}</p>`;
+                    resultHtml += `<p><strong>File Type:</strong> ${data.type.toUpperCase()}</p>`;
+                    
+                    // Add encoding information if available
+                    if (data.encoding_used) {
+                        resultHtml += `<p><strong>File Encoding:</strong> ${data.encoding_used}</p>`;
+                    }
+                    if (data.file_name) {
+                        resultHtml += `<p><strong>File Name:</strong> ${data.file_name}</p>`;
+                    }
+                    
+                    resultHtml += `<p><strong>Total Rows:</strong> ${data.stats.total_rows}</p>`;
+                    resultHtml += `<p><strong>Imported:</strong> ${data.stats.imported}</p>`;
+                    resultHtml += `<p><strong>Updated:</strong> ${data.stats.updated || 0}</p>`;
+                    resultHtml += `<p><strong>Skipped:</strong> ${data.stats.skipped}</p>`;
+                    resultHtml += `<p><strong>Errors:</strong> ${data.stats.errors}</p>`;
                     
                     if (data.stats.skipped_details?.length > 0) {
                         resultHtml += `<h5>Skipped Details:</h5><ul>`;
@@ -79,7 +89,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     importResult.innerHTML = resultHtml;
                 } else {
-                    importResult.innerHTML = `<div class="alert alert-danger">${data.error || 'Import failed'}</div>`;
+                    // Enhanced error handling for encoding issues
+                    let errorHtml = `<div class="alert alert-danger">`;
+                    errorHtml += `<strong>Import Failed:</strong> ${data.error || 'Unknown error'}`;
+                    
+                    if (data.details) {
+                        errorHtml += `<br><small>${data.details}</small>`;
+                    }
+                    
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        errorHtml += `<hr><strong>Suggestions:</strong><ul>`;
+                        data.suggestions.forEach(suggestion => {
+                            errorHtml += `<li>${suggestion}</li>`;
+                        });
+                        errorHtml += `</ul>`;
+                    }
+                    
+                    if (data.file_name) {
+                        errorHtml += `<hr><small><strong>File:</strong> ${data.file_name}</small>`;
+                    }
+                    
+                    errorHtml += `</div>`;
+                    importResult.innerHTML = errorHtml;
                 }
             } catch (error) {
                 console.error('Error during import:', error);

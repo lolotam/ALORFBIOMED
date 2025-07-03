@@ -261,8 +261,32 @@ class ImportExportService:
             if not os.path.exists(file_path):
                 return False, f"File not found: {file_path}", {}
 
-            # Read CSV with dtype=str to prevent automatic type conversion that adds .0 to employee IDs
-            df = pd.read_csv(file_path, dtype=str)
+            # Read CSV with encoding detection to prevent encoding errors
+            from app.utils.encoding_utils import EncodingDetector
+            
+            # Detect file encoding
+            with open(file_path, 'rb') as binary_file:
+                encoding, confidence = EncodingDetector.detect_encoding(binary_file)
+                logger.info(f"ImportExportService detected encoding for {file_path}: {encoding} (confidence: {confidence:.2%})")
+            
+            # Read CSV with detected encoding and dtype=str to prevent automatic type conversion
+            try:
+                df = pd.read_csv(file_path, dtype=str, encoding=encoding)
+            except UnicodeDecodeError:
+                logger.warning(f"Encoding {encoding} failed for {file_path}, trying fallback encodings")
+                # Try common encodings as fallback
+                for fallback_encoding in EncodingDetector.COMMON_ENCODINGS:
+                    try:
+                        df = pd.read_csv(file_path, dtype=str, encoding=fallback_encoding)
+                        logger.info(f"Successfully read {file_path} with fallback encoding: {fallback_encoding}")
+                        break
+                    except UnicodeDecodeError:
+                        continue
+                else:
+                    # Last resort: use errors='replace'
+                    df = pd.read_csv(file_path, dtype=str, encoding='utf-8', encoding_errors='replace')
+                    logger.warning(f"Using UTF-8 with error replacement for {file_path}")
+            
             # Handle N/A values properly - replace NaN with empty string, but keep 'N/A' strings as 'N/A'
             df = df.fillna('')
             # Convert empty strings back to N/A for consistency

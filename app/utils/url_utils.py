@@ -67,6 +67,7 @@ def url_safe_to_serial(url_safe: str) -> str:
         'EU-2017-745' -> 'EU 2017/745'
         'ABC-DEF-hash123' -> 'ABC/DEF#123'
         'Normal123' -> 'Normal123'
+        'N-A-243' -> 'N-A 243'
     """
     if not url_safe:
         return url_safe
@@ -82,13 +83,19 @@ def url_safe_to_serial(url_safe: str) -> str:
     original = original.replace('-hash', '#')
 
     # Handle common patterns for space/slash restoration
-    # Pattern: "EU-2017-745" -> "EU 2017/745"
+    # But be more careful about when to convert hyphens to spaces vs slashes
     if '-' in original and not any(char in original for char in ['#', '+', '%', '&', '?']):
         # Check if this looks like a space/slash pattern
         parts = original.split('-')
+        
+        # Special case: Handle patterns like "N-A-243" -> "N-A 243"
+        # Only convert the last hyphen to space if it's followed by numbers
+        if len(parts) == 3 and parts[0].isalpha() and parts[1].isalpha() and parts[2].isdigit():
+            return f"{parts[0]}-{parts[1]} {parts[2]}"
+        
         if len(parts) >= 3:
-            # Try to detect common patterns
             # Pattern 1: "EU 2017/745" (space then slash)
+            # Look for: Letter-Number-Number pattern
             if parts[0].isalpha() and parts[1].isdigit() and parts[2].isdigit():
                 return f"{parts[0]} {parts[1]}/{parts[2]}"
             # Pattern 2: "ABC/DEF 123" (slash then space)

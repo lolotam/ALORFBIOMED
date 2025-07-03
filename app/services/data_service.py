@@ -462,18 +462,15 @@ class DataService:
             data: List of entries to reindex
             
         Returns:
-            List of reindexed entries
+            List of reindexed entries with sequential NO values (1, 2, 3, ...)
         """
-        logger.debug(f"Reindexing {len(data)} entries")
+        logger.debug(f"Reindexing {len(data)} entries with sequential NO values")
         for i, entry in enumerate(data, start=1):
             entry['NO'] = i
-            logger.debug(f"Set NO={i} for entry with Serial/SERIAL: {entry.get('Serial', entry.get('SERIAL'))}")
+            serial_key = 'SERIAL' if 'SERIAL' in entry else 'Serial'
+            logger.debug(f"Set NO={i} for entry with {serial_key}: {entry.get(serial_key)}")
+        logger.info(f"Successfully reindexed {len(data)} entries with NO values 1-{len(data)}")
         return data
-    def _reindex_entries(entries):
-        """Reindex entries after import or deletion."""
-        for idx, entry in enumerate(entries, start=1):
-            entry['NO'] = idx
-        return entries
 
     @staticmethod
     def add_entry(data_type: Literal['ppm', 'ocm'], entry: Dict[str, Any]) -> Dict[str, Any]:
@@ -1027,8 +1024,12 @@ class DataService:
                     errors.append(error_msg)
                     skipped_count += 1
 
-            # Save the updated data back to the JSON file
-            DataService.save_data(processed_data, data_type)
+            # Reindex all data to ensure sequential NO values (1, 2, 3, ...)
+            reindexed_data = DataService.reindex(processed_data)
+            logger.info(f"Reindexed {len(reindexed_data)} entries with sequential NO values after import")
+            
+            # Save the updated and reindexed data back to the JSON file
+            DataService.save_data(reindexed_data, data_type)
 
             logger.info(f"Import complete. Added: {added_count}, Updated: {updated_count}, Skipped: {skipped_count}")
             if errors:
@@ -1120,3 +1121,37 @@ class DataService:
         except Exception as e:
             logger.error(f"Error during PPM status update process: {str(e)}", exc_info=True)
             # Depending on application design, might want to raise this or handle more gracefully.
+
+    @staticmethod
+    def reindex_all_data(data_type: Literal['ppm', 'ocm']) -> bool:
+        """
+        Reindex all data for a specific data type to ensure sequential NO values.
+        
+        Args:
+            data_type: Type of data to reindex ('ppm' or 'ocm')
+            
+        Returns:
+            bool: True if reindexing was successful, False otherwise
+        """
+        logger.info(f"Starting reindex of all {data_type} data")
+        try:
+            # Load existing data
+            data = DataService.load_data(data_type)
+            logger.debug(f"Loaded {len(data)} {data_type} entries for reindexing")
+            
+            if not data:
+                logger.info(f"No {data_type} data found to reindex")
+                return True
+            
+            # Reindex all entries
+            reindexed_data = DataService.reindex(data)
+            
+            # Save the reindexed data
+            DataService.save_data(reindexed_data, data_type)
+            
+            logger.info(f"Successfully reindexed all {len(reindexed_data)} {data_type} entries with sequential NO values 1-{len(reindexed_data)}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error reindexing {data_type} data: {str(e)}", exc_info=True)
+            return False
