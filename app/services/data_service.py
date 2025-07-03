@@ -753,8 +753,8 @@ class DataService:
         # Update history flags for all entries
         DataService._update_all_history_flags(entries, data_type)
 
-        # Sort entries: equipment with history first, then by NO (newest first)
-        entries.sort(key=lambda x: (not x.get('has_history', False), -(x.get('NO', 0))))
+        # Sort entries: equipment with history first, then by NO (oldest first: 1, 2, 3...)
+        entries.sort(key=lambda x: (not x.get('has_history', False), x.get('NO', 0)))
 
         return entries
 
@@ -821,8 +821,8 @@ class DataService:
             # Update history flags for all entries
             DataService._update_all_history_flags(entries, data_type)
             
-            # Sort entries: equipment with history first, then by NO (newest first)
-            entries.sort(key=lambda x: (not x.get('has_history', False), -(x.get('NO', 0))))
+            # Sort entries: equipment with history first, then by NO (oldest first: 1, 2, 3...)
+            entries.sort(key=lambda x: (not x.get('has_history', False), x.get('NO', 0)))
             
             total_entries = len(entries)
             total_pages = max(1, (total_entries + per_page - 1) // per_page)  # Ceiling division

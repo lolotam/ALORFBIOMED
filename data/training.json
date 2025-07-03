@@ -102,10 +102,35 @@
         "id": "12",
         "employee_id": "3824",
         "name": "MS. AJITHA VARGHESE",
-        "department": "ORTHOPEDIC",
-        "machine_trainer_assignments": [],
-        "last_trained_date": "N/A",
-        "next_due_date": "N/A"
+        "department": "4A",
+        "machine_trainer_assignments": [
+            {
+                "machine": "CTG MACHINE",
+                "trainer": ""
+            },
+            {
+                "machine": "ECG MACHINE",
+                "trainer": ""
+            },
+            {
+                "machine": "PULSE OXIMETER",
+                "trainer": ""
+            },
+            {
+                "machine": "ULTRASOUND ECHO",
+                "trainer": ""
+            },
+            {
+                "machine": "VITAL SIGN MONITOR",
+                "trainer": ""
+            },
+            {
+                "machine": "WEIGHING SCALE",
+                "trainer": ""
+            }
+        ],
+        "last_trained_date": "03/07/2025",
+        "next_due_date": "25/07/2025"
     },
     {
         "id": "13",

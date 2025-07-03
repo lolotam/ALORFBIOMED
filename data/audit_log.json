@@ -4905,5 +4905,159 @@
       "recipient": "lolotam@gmail.com",
       "email_type": "threshold_reminder"
     }
+  },
+  {
+    "id": 365,
+    "timestamp": "2025-07-03 11:24:52",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "Added history note to PPM equipment 560034-EM18A05070007",
+    "status": "Success",
+    "details": {
+      "equipment_id": "560034-EM18A05070007",
+      "equipment_type": "ppm",
+      "note_id": "fd719ad4-6cfb-4375-93ac-b43c3956d8e5",
+      "note_length": 43
+    }
+  },
+  {
+    "id": 366,
+    "timestamp": "2025-07-03 11:24:52",
+    "event_type": "History Attachment Added",
+    "performed_by": "admin",
+    "description": "Added attachment 'Untitled.png' to history note",
+    "status": "Success",
+    "details": {
+      "note_id": "fd719ad4-6cfb-4375-93ac-b43c3956d8e5",
+      "attachment_id": "bec31d0f-49f8-4c5e-8d71-cdf4116dfbc7",
+      "filename": "Untitled.png",
+      "file_size": 3538
+    }
+  },
+  {
+    "id": 367,
+    "timestamp": "2025-07-03 11:24:52",
+    "event_type": "Equipment History Added",
+    "performed_by": "admin",
+    "description": "History Added PPM equipment: 560034-EM18A05070007",
+    "status": "Success",
+    "details": {
+      "equipment_type": "PPM",
+      "serial": "560034-EM18A05070007",
+      "action": "History Added"
+    }
+  },
+  {
+    "id": 368,
+    "timestamp": "2025-07-03 11:27:14",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "System",
+    "description": "Deleted history note from PPM equipment 560034-EM18A05070007",
+    "status": "Success",
+    "details": {
+      "equipment_id": "560034-EM18A05070007",
+      "equipment_type": "ppm",
+      "note_id": "fd719ad4-6cfb-4375-93ac-b43c3956d8e5",
+      "attachments_deleted": 1
+    }
+  },
+  {
+    "id": 369,
+    "timestamp": "2025-07-03 11:27:14",
+    "event_type": "Equipment History Deleted",
+    "performed_by": "admin",
+    "description": "History Deleted PPM equipment: 560034-EM18A05070007",
+    "status": "Success",
+    "details": {
+      "equipment_type": "PPM",
+      "serial": "560034-EM18A05070007",
+      "action": "History Deleted"
+    }
+  },
+  {
+    "id": 370,
+    "timestamp": "2025-07-03 11:29:08",
+    "event_type": "Setting Changed",
+    "performed_by": "User",
+    "description": "Backup settings updated via API",
+    "status": "Success",
+    "details": {
+      "automatic_backup_enabled": true,
+      "automatic_backup_interval_hours": 24
+    }
+  },
+  {
+    "id": 371,
+    "timestamp": "2025-07-03 11:29:16",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Full application backup created: full_backup_20250703_112916.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250703_112916.zip",
+      "size_mb": 0.15,
+      "files_backed_up": 22,
+      "compression_level": 9
+    }
+  },
+  {
+    "id": 372,
+    "timestamp": "2025-07-03 11:29:21",
+    "event_type": "Backup Created",
+    "performed_by": "System",
+    "description": "Settings backup created: settings_backup_20250703_112921.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250703_112921.json",
+      "size_kb": 2.61,
+      "settings_count": 20
+    }
+  },
+  {
+    "id": 373,
+    "timestamp": "2025-07-03 11:29:27",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: settings_backup_20250703_112921.json",
+    "status": "Success",
+    "details": {
+      "backup_type": "settings",
+      "filename": "settings_backup_20250703_112921.json"
+    }
+  },
+  {
+    "id": 374,
+    "timestamp": "2025-07-03 11:29:30",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250703_112916.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250703_112916.zip"
+    }
+  },
+  {
+    "id": 375,
+    "timestamp": "2025-07-03 11:29:30",
+    "event_type": "Data Export",
+    "performed_by": "User",
+    "description": "Downloaded backup file: full_backup_20250703_112916.zip",
+    "status": "Success",
+    "details": {
+      "backup_type": "full",
+      "filename": "full_backup_20250703_112916.zip"
+    }
+  },
+  {
+    "id": 376,
+    "timestamp": "2025-07-03 11:29:55",
+    "event_type": "User Action",
+    "performed_by": "User",
+    "description": "Accessed audit log page",
+    "status": "Info",
+    "details": {}
   }
 ]
